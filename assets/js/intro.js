@@ -1,7 +1,12 @@
-/* Intro loader (home page, once per session).
+/* Intro loader (home page).
    A white Right Team pill sits on the gradient sheet; service words ride a wavy
    ribbon out from behind it, the last one ("LEADS") settles with the pill as a
    tag, then everything dissolves into the hero sheet underneath.
+
+   When it plays (the gate is the inline script in index.html <head>):
+   - once per visit across ALL tabs: skipped for 30 minutes after it last started
+     in any tab (localStorage), and for the rest of this tab's session;
+   - never with prefers-reduced-motion, or when arriving on a #hash link.
    Add ?intro=1 to the URL to replay it. */
 (() => {
   const root = document.documentElement;
@@ -23,11 +28,21 @@
   const finish = () => {
     if (finished) return;
     finished = true;
-    try { sessionStorage.setItem("rt-intro", "1"); } catch (e) {}
+    markSeen();
+    clearTimeout(safety);
     root.classList.remove("intro-on");
     intro.remove();
+    // older iOS can still scroll the page behind a fixed overlay; land on the hero
+    if (window.scrollY > 0) window.scrollTo(0, 0);
     resolveDone();
   };
+  // Mark at START, not end, so a second tab opened mid-intro doesn't replay it.
+  const markSeen = () => {
+    try { sessionStorage.setItem("rt-intro", "1"); localStorage.setItem("rt-intro-at", String(Date.now())); } catch (e) {}
+  };
+  let safety = 0;
+  // block touch scrolling behind the overlay (Lenis only handles the wheel)
+  intro.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
   if (!window.gsap) { finish(); return; }
 
   const svg = intro.querySelector(".intro__svg");
@@ -93,9 +108,32 @@
   intro.addEventListener("click", (e) => { if (!e.target.closest(".intro__skip")) skip(); });
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !finished) skip(); });
 
-  // start once the display font is ready (or after 900ms at most)
-  Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 900))])
-    .then(() => { draw(); tl.play(); });
-  // never trap the visitor behind the intro
-  setTimeout(() => !finished && skip(), 9000);
+  // Start only when (a) the heavy display weight has loaded, so the words don't
+  // swap fonts mid-flight, and (b) the tab is visible — a tab opened in the
+  // background waits and plays when the visitor actually looks at it.
+  const fontReady = document.fonts && document.fonts.load
+    ? document.fonts.load('800 148px "Bricolage Grotesque"').catch(() => {})
+    : Promise.resolve();
+  let started = false;
+  const start = () => {
+    if (started || finished) return;
+    started = true;
+    markSeen();
+    draw();
+    tl.play();
+    armSafety(9000);
+  };
+  // never trap the visitor: cap the intro at 9s of *visible* time
+  const armSafety = (ms) => {
+    clearTimeout(safety);
+    safety = setTimeout(() => { if (finished) return; document.hidden ? armSafety(1500) : skip(); }, ms);
+  };
+  const whenVisible = () => {
+    if (!document.hidden) return start();
+    const onVis = () => { if (!document.hidden) { document.removeEventListener("visibilitychange", onVis); start(); } };
+    document.addEventListener("visibilitychange", onVis);
+  };
+  Promise.race([fontReady, new Promise((r) => setTimeout(r, 1200))]).then(whenVisible);
+  // back/forward cache: if the page comes back mid-intro, just finish it
+  addEventListener("pageshow", (e) => { if (e.persisted && !finished) skip(); });
 })();

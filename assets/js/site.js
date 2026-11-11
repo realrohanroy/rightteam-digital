@@ -157,7 +157,9 @@
     window.RT_lenis = lenis;
     if (doc.classList.contains("intro-on")) lenis.stop();
     lenis.on("scroll", (e) => { onScroll(e.scroll); hasGSAP && ScrollTrigger.update(); });
-    if (hasGSAP) { gsap.ticker.add((t) => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
+    // Keep GSAP's default lag smoothing: with lagSmoothing(0) a tab that was hidden
+    // jumps every running timeline (intro, hero) straight to its end when shown again.
+    if (hasGSAP) gsap.ticker.add((t) => lenis.raf(t * 1000));
     else { const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
     $$('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
       const t = $(a.getAttribute("href")); if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -90 }); }
@@ -273,13 +275,20 @@
   $$("[data-avatars]").forEach((el) => { el.innerHTML = (RT.creatorsAvatars || []).map((s) => `<img src="${esc(s)}" alt="" loading="lazy">`).join(""); });
 
   /* ---------- Hero: load sequence + lead toasts ---------- */
+  const introDone = window.RT_introDone || Promise.resolve();
+  // late web-font swaps change section heights; keep pinned/scrubbed triggers accurate
+  if (hasGSAP && document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
   const hero = $(".hero");
   if (hero && hasGSAP && !reduce) {
     const tl = gsap.timeline({ paused: true, defaults: { ease: "power4.out" } });
-    (window.RT_introDone || Promise.resolve()).then(() => { lenis && lenis.start(); tl.play(); });
+    introDone.then(() => { lenis && lenis.start(); tl.play(); ScrollTrigger.refresh(); });
     tl.from(".hero__line > span", { yPercent: 110, duration: 1.1, stagger: 0.09 })
       .from(".hero__copy .lede, .hero__copy .btn-row", { opacity: 0, y: 16, duration: 0.8, stagger: 0.08 }, "-=0.7")
-      .from(".hero__reels .reel-col", { opacity: 0, y: 60, duration: 1.2, stagger: 0.12 }, "-=1")
+      // Reveal the reel columns with a clip wipe, never a translate: moving the column
+      // adds to the CSS marquee inside it, so the strips looked ~5x faster for a second.
+      .fromTo(".hero__reels .reel-col",
+        { clipPath: "inset(100% 0% 0% 0% round 26px)", opacity: 0 },
+        { clipPath: "inset(0% 0% 0% 0% round 26px)", opacity: 1, duration: 1.1, stagger: 0.12, ease: "power3.inOut", clearProps: "clipPath" }, "-=1")
       .from(".hero__rail .orb, .hero__rail-plus", { scale: 0, duration: 0.6, stagger: 0.08, ease: "back.out(2)" }, "-=0.9")
       .from(".hero__foot > *", { opacity: 0, duration: 0.6 }, "-=0.5");
   }
@@ -297,10 +306,25 @@
       toast.innerHTML = `<span class="orb orb--sm">${icon(ic)}</span><div><b>${t}</b><span>${s}</span></div>`;
       if (hasGSAP && !reduce) gsap.fromTo(toast, { opacity: 0, y: 14, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.6)" });
     };
-    show();
-    if (!reduce) setInterval(() => {
-      if (hasGSAP) gsap.to(toast, { opacity: 0, y: -10, duration: 0.35, onComplete: show }); else show();
-    }, 3600);
+    // One timer at a time, rescheduled after each swap, and paused in hidden tabs.
+    // (A setInterval kept queueing fades while the tab was hidden, then fired them
+    // all at once on return, flickering through several messages.)
+    let timer = 0;
+    const next = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (document.hidden) return; // resumed by visibilitychange
+        if (hasGSAP) { gsap.killTweensOf(toast); gsap.to(toast, { opacity: 0, y: -10, duration: 0.35, onComplete: () => { show(); next(); } }); }
+        else { show(); next(); }
+      }, 3600);
+    };
+    if (hasGSAP && !reduce) gsap.set(toast, { opacity: 0 });
+    introDone.then(() => setTimeout(() => {
+      show();
+      if (reduce) return;
+      next();
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) next(); });
+    }, reduce ? 0 : 1400));
   }
 
   /* ---------- Statement: words light up, marker draws ---------- */

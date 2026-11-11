@@ -27,3 +27,7 @@ python -m http.server 5510
 - GSAP + ScrollTrigger (cdnjs), Lenis smooth scroll (unpkg), Three.js 0.160 (jsdelivr, `assets/js/funnel.js`).
 - Respects `prefers-reduced-motion` (no pinning, static funnel, no marquee).
 - Header, footer, icons, reels and work cards are rendered by `assets/js/site.js`.
+
+## Cache busting
+CSS/JS links carry `?v=N`. After changing any file in `assets/css` or `assets/js`, bump N in every `.html` file so returning visitors don't run stale code:
+`sed -i 's/?v=2"/?v=3"/g' *.html`

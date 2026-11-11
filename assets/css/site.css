@@ -158,7 +158,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .orb--sm { width: 36px; height: 36px; font-size: 16px; }
 
 /* ---------- Intro loader (home, once per session) ---------- */
-.intro { position: fixed; inset: 0; z-index: 90; background: var(--canvas); padding: var(--frame); }
+.intro { position: fixed; inset: 0; z-index: 90; background: var(--canvas); padding: var(--frame); touch-action: none; overscroll-behavior: contain; }
 html.intro-skip .intro { display: none; }
 html.intro-on, html.intro-on body { overflow: hidden; }
 .intro__sheet { position: relative; height: 100%; border-radius: var(--r-sheet); background: var(--sheet); overflow: hidden; display: grid; place-items: center; cursor: pointer; }
