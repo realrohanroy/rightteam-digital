@@ -155,6 +155,7 @@
   if (!reduce && window.Lenis) {
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     window.RT_lenis = lenis;
+    if (doc.classList.contains("intro-on")) lenis.stop();
     lenis.on("scroll", (e) => { onScroll(e.scroll); hasGSAP && ScrollTrigger.update(); });
     if (hasGSAP) { gsap.ticker.add((t) => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
     else { const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
@@ -274,7 +275,8 @@
   /* ---------- Hero: load sequence + lead toasts ---------- */
   const hero = $(".hero");
   if (hero && hasGSAP && !reduce) {
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    const tl = gsap.timeline({ paused: true, defaults: { ease: "power4.out" } });
+    (window.RT_introDone || Promise.resolve()).then(() => { lenis && lenis.start(); tl.play(); });
     tl.from(".hero__line > span", { yPercent: 110, duration: 1.1, stagger: 0.09 })
       .from(".hero__copy .lede, .hero__copy .btn-row", { opacity: 0, y: 16, duration: 0.8, stagger: 0.08 }, "-=0.7")
       .from(".hero__reels .reel-col", { opacity: 0, y: 60, duration: 1.2, stagger: 0.12 }, "-=1")

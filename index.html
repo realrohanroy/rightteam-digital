@@ -13,11 +13,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..600&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
+  <script>try{if(sessionStorage.getItem("rt-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-skip")}catch(e){}</script>
   <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
 </head>
 <body data-page="home">
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__sheet">
+    <div class="intro__grad"></div>
+    <svg class="intro__svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
+      <defs><path id="introWave" d="M-900 200L1900 200"/></defs>
+      <text class="intro__word" dominant-baseline="central" text-anchor="middle"><textPath href="#introWave">REELS</textPath></text>
+      <text class="intro__word" dominant-baseline="central" text-anchor="middle"><textPath href="#introWave">META ADS</textPath></text>
+      <text class="intro__word" dominant-baseline="central" text-anchor="middle"><textPath href="#introWave">CREATORS</textPath></text>
+      <text class="intro__word" dominant-baseline="central" text-anchor="middle"><textPath href="#introWave">SEARCH</textPath></text>
+      <text class="intro__word intro__word--final" dominant-baseline="central" text-anchor="middle"><textPath href="#introWave">LEADS</textPath></text>
+    </svg>
+    <div class="intro__pill"><img src="assets/img/rt-logo.svg" alt="" width="36" height="36"><span>Right Team <small>Digital</small></span></div>
+    <button class="intro__skip" type="button">Skip intro</button>
+  </div>
+</div>
 <main id="main" class="frame">
 
   <!-- HERO -->
@@ -273,6 +289,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/intro.js"></script>
 <script src="assets/js/content.js"></script>
 <script src="assets/js/site.js"></script>
 <script type="module" src="assets/js/funnel.js"></script>
