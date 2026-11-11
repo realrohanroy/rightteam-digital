@@ -327,6 +327,47 @@
     }, reduce ? 0 : 1400));
   }
 
+  /* ---------- Service rows: the reference "benefits" choreography ----------
+     Scrubbed to scroll. Each row starts as just its outcome card ("We're here to…")
+     in the centre, with the info card tucked behind it, blurred. Then the outcome
+     slides to its column, the info card slides out from behind it and sharpens, and
+     the white row frame fades in. Vertical version of the same move on mobile. */
+  const svcRows = $$(".svc");
+  if (svcRows.length && hasGSAP && !reduce) {
+    const shellFrom = { backgroundColor: "rgba(255,255,255,0)", boxShadow: "0 1px 2px rgba(15,33,64,0), 0 0 0 1px rgba(15,33,64,0)" };
+    const shellTo = { backgroundColor: "rgba(255,255,255,1)", boxShadow: "0 1px 2px rgba(15,33,64,0.05), 0 0 0 1px rgba(15,33,64,0.1)" };
+    // layout centres via offset* so transforms already applied don't skew the maths
+    const cx = (el) => el.offsetLeft + el.offsetWidth / 2;
+    const cy = (el) => el.offsetTop + el.offsetHeight / 2;
+    const build = (axis) => () => {
+      svcRows.forEach((row) => {
+        const info = $(".svc__info", row), out = $(".svc__outcome", row);
+        // where the outcome card waits in phase 1, as an offset from its own place:
+        // desktop = centre of the row; mobile = pulled up over the info card
+        const outPark = () => (axis === "x" ? cx(row) - cx(out) : -(out.offsetTop - info.offsetTop) * 0.55);
+        // the info card hides directly behind that parked outcome card
+        const infoPark = () => (axis === "x" ? cx(row) - cx(info) : cy(out) + outPark() - cy(info));
+        const tl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: { trigger: row, start: "top 95%", end: axis === "x" ? "top 42%" : "top 30%", scrub: 0.7, invalidateOnRefresh: true },
+        });
+        const outStart = axis === "x" ? { x: outPark, y: 70 } : { y: () => outPark() + 60 };
+        const outParked = axis === "x" ? { x: outPark, y: 0 } : { y: outPark };
+        const infoParked = { [axis]: infoPark, opacity: 0, scale: 0.9, filter: "blur(10px)" };
+        // 1. the outcome card rises in on its own, centred, info hidden behind it
+        tl.fromTo(out, { ...outStart, opacity: 0, scale: 0.94 }, { ...outParked, opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }, 0)
+          .fromTo(info, infoParked, { ...infoParked, duration: 0.3 }, 0)
+          // 2. they part: outcome to its column, info out from behind and into focus
+          .to(out, { [axis]: 0, duration: 0.7, ease: "power2.inOut" }, 0.3)
+          .to(info, { [axis]: 0, opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power2.inOut" }, 0.3)
+          .fromTo(row, shellFrom, { ...shellTo, duration: 0.45 }, 0.55);
+      });
+    };
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 861px)", build("x"));
+    mm.add("(max-width: 860px)", build("y"));
+  }
+
   /* ---------- Statement: words light up, marker draws ---------- */
   const st = $(".statement p");
   if (st) {

@@ -180,8 +180,14 @@ function init() {
       pin: stage,
       scrub: true,
       anticipatePin: 1,
+      // This module runs after site.js has created the triggers below this
+      // section. Refresh this pin first so its 3-screen spacer is counted in
+      // their start positions, otherwise they fire ~3 screens too early.
+      refreshPriority: 1,
       onUpdate: (self) => { target = self.progress; },
     });
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
   }
   setStep(target);
 
