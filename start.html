@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start a Project — Right Team Digital</title>
+  <meta name="description" content="Share your brief with Right Team Digital. Tell us what you're planning and we'll reply with questions or a scope and quote.">
+  <meta name="theme-color" content="#f7f8f5">
+  <link rel="icon" href="assets/img/rt-logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..600&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="start">
+<main id="main" class="frame">
+  <section class="sheet page-hero">
+    <div class="wrap form-wrap">
+      <div style="display:grid;gap:22px;align-content:start">
+        <h1 class="display h-lg" id="formTitle">What are you working on?</h1>
+        <p class="lede">Tell us about your business, your audience and what you'd like to achieve. We reply within one working day with questions or a scope and quote.</p>
+        <div class="report__rows" style="max-width:380px">
+          <div class="report__row"><span>1. We read your brief</span><b>Day 1</b></div>
+          <div class="report__row"><span>2. A short call to fill gaps</span><b>Day 2–3</b></div>
+          <div class="report__row"><span>3. Scope &amp; quote, no obligation</span><b>Day 3–5</b></div>
+        </div>
+      </div>
+
+      <form class="brief-form" id="briefForm" novalidate>
+        <div class="field-row">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required><span class="form-error">Enter your name so we know who to reply to.</span></div>
+          <div class="field"><label for="f-biz">Business or brand name</label><input id="f-biz" name="business" autocomplete="organization"></div>
+        </div>
+        <div class="field"><label for="f-contact">How can we reach you?</label><span class="hint">Email or phone number</span><input id="f-contact" name="contact" autocomplete="email" required><span class="form-error">Enter an email address or a phone number with at least 7 digits.</span></div>
+        <fieldset class="field">
+          <legend>What do you need?</legend>
+          <div class="choice-grid">
+            <input type="radio" name="service" id="s1" value="lead-generation" checked><label for="s1">Lead Generation</label>
+            <input type="radio" name="service" id="s2" value="reels-video"><label for="s2">Reels &amp; Video</label>
+            <input type="radio" name="service" id="s3" value="social-creators"><label for="s3">Social &amp; Creators</label>
+            <input type="radio" name="service" id="s4" value="search-web"><label for="s4">Search &amp; Websites</label>
+            <input type="radio" name="service" id="s5" value="package"><label for="s5">Complete package</label>
+            <input type="radio" name="service" id="s6" value="help-me-choose"><label for="s6">Help me choose</label>
+            <input type="radio" name="service" id="s7" value="network"><label for="s7">I'm a creator / podcaster</label>
+          </div>
+        </fieldset>
+        <div class="field"><label for="f-brief">What are you planning, and what would you like it to achieve?</label><textarea id="f-brief" name="brief" required></textarea><span class="form-error">Add a line or two about what you're planning.</span></div>
+        <div class="field-row">
+          <div class="field"><label for="f-link">Website or Instagram link</label><input id="f-link" name="link" type="url" inputmode="url" placeholder="https://"></div>
+          <div class="field"><label for="f-budget">Approximate monthly budget</label>
+            <select id="f-budget" name="budget"><option value="">Not sure yet</option><option>Under ₹25,000</option><option>₹25,000 – ₹75,000</option><option>₹75,000 – ₹2,00,000</option><option>Above ₹2,00,000</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="f-date">Target start date</label><input id="f-date" name="start" type="date"></div>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        <button class="btn btn--ink" type="submit" style="justify-self:start">Send My Brief <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        <p class="small" style="margin:0">We only use these details to reply to your brief. See our <a href="privacy.html" style="text-decoration:underline">privacy policy</a>.</p>
+      </form>
+    </div>
+  </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
