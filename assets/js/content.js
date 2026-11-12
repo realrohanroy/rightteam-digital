@@ -22,6 +22,9 @@ window.RT = {
     // Paste a Formspree / Getform / your API URL to receive briefs directly.
     // Left empty, "Send My Brief" opens the visitor's email app with the brief filled in.
     formEndpoint: "",
+    // Footer status ("At our desks" / "After hours"). India time, 24h clock,
+    // days: 0 = Sunday … 6 = Saturday. TODO confirm your real office hours.
+    hours: { tz: "Asia/Kolkata", open: 10, close: 19, days: [1, 2, 3, 4, 5, 6] },
   },
 
   reels: [

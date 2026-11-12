@@ -85,32 +85,68 @@
   document.body.insertAdjacentHTML("afterbegin", header);
 
   const S = RT.site || {};
+  /* Footer — "the name is made of our work".
+     Dark closing sheet: live office status, one big ask with a magnetic orb,
+     contact you can copy in one tap, and a giant RIGHT TEAM wordmark whose
+     letters are windows onto the reels in content.js, panning slowly through. */
+  const posters = (RT.reels || []).map((r) => r.poster).filter(Boolean);
+  const TILE = 236, STEP = 248;
+  const tiles = posters.concat(posters).map((p, i) =>
+    `<image href="${esc(p)}" x="${i * STEP}" y="-10" width="${TILE}" height="380" preserveAspectRatio="xMidYMid slice"/>`).join("");
+  const markText = (attrs) => `<text x="800" y="262" text-anchor="middle" textLength="1584" lengthAdjust="spacingAndGlyphs"
+      font-family="Bricolage Grotesque, Manrope, sans-serif" font-weight="600" font-size="312" ${attrs}>Right Team</text>`;
   const footer = `
-  <footer class="sheet sheet--white site-footer">
+  <footer class="sheet sheet--dark site-footer" style="--strip:${posters.length * STEP}px">
     <div class="wrap">
-      <div class="footer__top">
-        <div class="footer__brand">
-          <a class="brand" href="index.html"><img src="assets/img/rt-logo.svg" alt="" width="38" height="38"><span>Right Team <small>Digital</small></span></a>
-          <p>The digital marketing arm of ${esc(S.company || "Right Team Private Limited")}. Lead generation first, with reels, social and creators doing the heavy lifting.</p>
-          <a class="btn btn--ink btn--small" href="start.html">Share Your Brief <span class="btn__dot">${icon("arrow")}</span></a>
+      <div class="footer__bar">
+        <p class="footer__status"><span class="footer__dot" aria-hidden="true"></span><span data-ftime>India</span><span class="footer__state" data-fstate>Replies within one working day</span></p>
+        <button class="footer__totop" type="button" data-totop>Back to top <span class="footer__totop-icon">${icon("arrow")}</span></button>
+      </div>
+
+      <div class="footer__cta">
+        <h2 class="display footer__title">Got a brief?<br>Let's fill your calendar.</h2>
+        <div class="footer__orb-zone">
+          <a class="footer__orb" href="start.html"><span class="footer__orb-label">Start a<br>project</span><span class="footer__orb-icon">${icon("arrow")}</span></a>
         </div>
-        <div><h4>Services</h4><ul>${SERVICES.map((s) => `<li><a href="services.html#${s.id}">${s.name}</a></li>`).join("")}</ul></div>
-        <div><h4>Company</h4><ul>
+      </div>
+
+      <div class="footer__contact">
+        ${S.email ? `<div class="footer__mail"><a href="mailto:${esc(S.email)}">${esc(S.email)}</a><button type="button" class="footer__copy" data-copy="${esc(S.email)}" aria-label="Copy email address"><span data-copy-label>Copy</span></button></div>` : ""}
+        <div class="footer__social">
+          ${S.whatsapp ? `<a class="pill" href="https://wa.me/${esc(S.whatsapp)}" target="_blank" rel="noopener">${icon("chat")} WhatsApp</a>` : ""}
+          <a class="pill" href="${esc(S.instagram || "#")}" target="_blank" rel="noopener">${icon("insta")} Instagram</a>
+          <a class="pill" href="${esc(S.linkedin || "#")}" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer">
+        <div><h3>Services</h3><ul>${SERVICES.map((s) => `<li><a href="services.html#${s.id}">${s.name}</a></li>`).join("")}</ul></div>
+        <div><h3>Company</h3><ul>
           <li><a href="work.html">Our Work</a></li><li><a href="about.html">About</a></li>
           <li><a href="start.html">Contact</a></li><li><a href="start.html?service=network">Join Our Network</a></li>
         </ul></div>
-        <div><h4>Follow</h4><ul>
-          <li><a href="${esc(S.instagram || "#")}" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="${esc(S.linkedin || "#")}" target="_blank" rel="noopener">LinkedIn</a></li>
-          ${S.email ? `<li><a href="mailto:${esc(S.email)}">${esc(S.email)}</a></li>` : ""}
-          ${S.whatsapp ? `<li><a href="https://wa.me/${esc(S.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a></li>` : ""}
+        <div><h3>Small print</h3><ul>
+          <li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms</a></li>
+          <li><a href="${esc(S.mainSite || "#")}">Right Team Private Limited</a></li>
         </ul></div>
-      </div>
-      <p class="footer__big" aria-hidden="true">Right <span>Team</span></p>
-      <div class="footer__bottom">
-        <span>© ${new Date().getFullYear()} ${esc(S.company || "Right Team Private Limited")}</span>
-        <nav aria-label="Legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="${esc(S.mainSite || "#")}">rightteam.in</a></nav>
-      </div>
+      </nav>
+    </div>
+
+    <div class="footer__mark" aria-hidden="true">
+      <svg viewBox="0 0 1600 350" preserveAspectRatio="xMidYMid meet" focusable="false">
+        <defs><clipPath id="rtMarkClip">${markText("")}</clipPath></defs>
+        <g clip-path="url(#rtMarkClip)">
+          <rect width="1600" height="350" fill="#16457a"/>
+          <g class="footer__strip">${tiles}</g>
+          <rect class="footer__tint" width="1600" height="350" fill="#0b2e56"/>
+        </g>
+        ${markText('class="footer__mark-line" fill="none"')}
+      </svg>
+    </div>
+
+    <div class="wrap footer__bottom">
+      <span>© ${new Date().getFullYear()} ${esc(S.company || "Right Team Private Limited")}</span>
+      <span>The letters above are cut from our latest reels.</span>
     </div>
   </footer>
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Reel player">
@@ -273,6 +309,59 @@
 
   /* avatars */
   $$("[data-avatars]").forEach((el) => { el.innerHTML = (RT.creatorsAvatars || []).map((s) => `<img src="${esc(s)}" alt="" loading="lazy">`).join(""); });
+
+  /* ---------- Footer behaviour ---------- */
+  {
+    // live office status (time in India + open/closed from RT.site.hours)
+    const H = Object.assign({ tz: "Asia/Kolkata", open: 10, close: 19, days: [1, 2, 3, 4, 5, 6] }, S.hours || {});
+    const status = $(".footer__status"), tEl = $("[data-ftime]"), sEl = $("[data-fstate]");
+    const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const tick = () => {
+      try {
+        const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: H.tz, hour: "2-digit", minute: "2-digit", weekday: "short", hour12: false })
+          .formatToParts(new Date()).map((x) => [x.type, x.value]));
+        const hour = +p.hour % 24, open = H.days.includes(DAYS.indexOf(p.weekday)) && hour >= H.open && hour < H.close;
+        tEl.textContent = `${p.hour}:${p.minute} in India`;
+        sEl.textContent = open ? "At our desks · replies today" : "After hours · replies next working day";
+        status.classList.toggle("is-open", open);
+      } catch (e) { /* keep the static fallback text */ }
+    };
+    if (status) { tick(); setInterval(tick, 30000); }
+
+    // one-tap copy email
+    $$("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
+      const label = $("[data-copy-label]", b);
+      try { await navigator.clipboard.writeText(b.dataset.copy); label.textContent = "Copied"; }
+      catch (e) { label.textContent = "Selected"; const a = b.previousElementSibling; const r = document.createRange(); r.selectNodeContents(a); getSelection().removeAllRanges(); getSelection().addRange(r); }
+      b.classList.add("is-done");
+      setTimeout(() => { label.textContent = "Copy"; b.classList.remove("is-done"); }, 2200);
+    }));
+
+    // back to top
+    $$("[data-totop]").forEach((b) => b.addEventListener("click", () => {
+      lenis ? lenis.scrollTo(0, { duration: 1.4 }) : scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      setTimeout(() => { const h = $(".brand"); h && h.focus({ preventScroll: true }); }, reduce ? 0 : 1400);
+    }));
+
+    // magnetic orb (fine pointers only; on touch it's a plain button)
+    const orb = $(".footer__orb");
+    if (orb && hasGSAP && !reduce && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      const zone = orb.parentElement, label = $(".footer__orb-label", orb);
+      const ox = gsap.quickTo(orb, "x", { duration: 0.6, ease: "power3" }), oy = gsap.quickTo(orb, "y", { duration: 0.6, ease: "power3" });
+      const lx = gsap.quickTo(label, "x", { duration: 0.6, ease: "power3" }), ly = gsap.quickTo(label, "y", { duration: 0.6, ease: "power3" });
+      zone.addEventListener("pointermove", (e) => {
+        const r = zone.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        ox(dx * 0.35); oy(dy * 0.35); lx(dx * 0.12); ly(dy * 0.12);
+      });
+      zone.addEventListener("pointerleave", () => { ox(0); oy(0); lx(0); ly(0); });
+    }
+
+    // the one footer moment: the wordmark rises into place
+    const mark = $(".footer__mark svg");
+    if (mark && hasGSAP && !reduce) {
+      gsap.from(mark, { yPercent: 38, duration: 1.3, ease: "power4.out", scrollTrigger: { trigger: ".footer__mark", start: "top 98%", once: true } });
+    }
+  }
 
   /* ---------- Hero: load sequence + lead toasts ---------- */
   const introDone = window.RT_introDone || Promise.resolve();

@@ -70,19 +70,27 @@
 
   const tl = gsap.timeline({ paused: true, onComplete: finish });
   const flyers = offsets.slice(0, -1);
-  const gap = 0.26;
-  const tLast = 0.6 + flyers.length * gap + 0.25;
+  // Each word: glide in (IN), drift slowly through the centre where it can be
+  // read (READ), glide out (OUT). GAP = IN + READ, so exactly one word sits in
+  // the centre at a time while the next is entering and the last is leaving.
+  // (the next word starts exactly as the previous begins to leave; its fast ease-in
+  // entry and the fast ease-in exit keep the two at least ~30% of the path apart)
+  const IN = 0.55, READ = 0.75, OUT = 0.4, GAP = IN + READ, T0 = 0.55;
+  const tLast = T0 + flyers.length * GAP;
 
   tl.from(pill, { scale: 0, rotate: -10, duration: 0.6, ease: "back.out(2.2)" }, 0.1)
-    .to(wave, { A: 72, duration: 1.2, ease: "sine.inOut", onUpdate: draw }, 0.35)
-    .to(wave, { phase: Math.PI * 2.4, duration: tLast + 0.9, ease: "none", onUpdate: draw }, 0.35)
-    .to(pill, { rotate: -5, scaleX: 1.07, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.6);
+    .to(wave, { A: 52, duration: 1.2, ease: "sine.inOut", onUpdate: draw }, 0.35)
+    .to(wave, { phase: Math.PI * 2.2, duration: tLast + 0.9, ease: "none", onUpdate: draw }, 0.35)
+    .to(pill, { rotate: -4, scaleX: 1.06, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.6);
 
-  // words fly through behind the pill, squashing as they pass the bend
+  // words ride through behind the pill: squashed while moving fast, upright while readable
   flyers.forEach((tp, i) => {
-    const at = 0.6 + i * gap;
-    tl.fromTo(tp, { attr: { startOffset: "96%" } }, { attr: { startOffset: "4%" }, duration: 1.15, ease: "power1.inOut" }, at)
-      .fromTo(words[i], { scaleY: 0.55, skewX: -18 }, { scaleY: 1, skewX: 0, duration: 0.55, ease: "sine.out", yoyo: true, repeat: 1, transformOrigin: "50% 50%" }, at);
+    const at = T0 + i * GAP, w = words[i];
+    tl.fromTo(tp, { attr: { startOffset: "92%" } }, { attr: { startOffset: "57%" }, duration: IN, ease: "power3.out" }, at)
+      .to(tp, { attr: { startOffset: "43%" }, duration: READ, ease: "none" }, at + IN)
+      .to(tp, { attr: { startOffset: "8%" }, duration: OUT, ease: "power3.in" }, at + IN + READ)
+      .fromTo(w, { scaleY: 0.6, skewX: -14, transformOrigin: "50% 50%" }, { scaleY: 1, skewX: 0, duration: IN, ease: "power2.out" }, at)
+      .to(w, { scaleY: 0.6, skewX: 14, duration: OUT, ease: "power2.in" }, at + IN + READ);
   });
 
   // the last word settles in the middle, the pill becomes its tag
@@ -91,7 +99,7 @@
     const s = svg.getBoundingClientRect().width / 1000;
     return { x: -(b.width * s) / 2 + pill.offsetWidth * 0.42, y: -(b.height * s) / 2 - pill.offsetHeight * 0.1 };
   };
-  tl.fromTo(lastOffset, { attr: { startOffset: "96%" } }, { attr: { startOffset: "50%" }, duration: 1, ease: "power3.out" }, tLast)
+  tl.fromTo(lastOffset, { attr: { startOffset: "86%" } }, { attr: { startOffset: "50%" }, duration: 1, ease: "power3.out" }, tLast - 0.15)
     .to(wave, { A: 16, duration: 0.9, ease: "power2.out", onUpdate: draw }, tLast + 0.2)
     .to(pill, { x: () => tagPos().x, y: () => tagPos().y, rotate: -8, scale: 0.92, duration: 0.7, ease: "power3.out" }, tLast + 0.35)
     // hold, then the word slides back behind the pill and the gradient dissolves
@@ -103,6 +111,7 @@
     .to(pill, { scale: 0.6, opacity: 0, duration: 0.4, ease: "power2.in" }, "out+=0.6")
     .to(intro, { opacity: 0, duration: 0.35, ease: "none" }, "out+=0.95");
 
+  window.__rtIntro = tl; // handy for scrubbing in devtools: __rtIntro.pause().time(2)
   const skip = () => tl.progress(1);
   intro.querySelector(".intro__skip").addEventListener("click", skip);
   intro.addEventListener("click", (e) => { if (!e.target.closest(".intro__skip")) skip(); });
@@ -121,9 +130,9 @@
     markSeen();
     draw();
     tl.play();
-    armSafety(9000);
+    armSafety(11000);
   };
-  // never trap the visitor: cap the intro at 9s of *visible* time
+  // never trap the visitor: cap the intro at 11s of *visible* time
   const armSafety = (ms) => {
     clearTimeout(safety);
     safety = setTimeout(() => { if (finished) return; document.hidden ? armSafety(1500) : skip(); }, ms);
