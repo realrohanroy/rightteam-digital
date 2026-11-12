@@ -2,8 +2,9 @@
    EDIT THIS FILE to put your own reels, work and contact details on the site.
    - Anything with `sample: true` shows a small "Sample" tag on the page.
      Replace it with your real item and delete `sample: true`.
-   - Reels: drop your .mp4 files in /assets/reels/ and set `video`.
-     `poster` is the still shown before playing (a frame from the reel works).
+   - Reels: see the `reels` list below (Instagram links + saved covers).
+     If you ever export a reel as .mp4, put it in /assets/reels/ and set
+     `video` — it then plays from your own site instead of Instagram.
    - Only publish numbers you can verify (views, leads, cost per lead).
    ========================================================================== */
 
@@ -27,16 +28,32 @@ window.RT = {
     hours: { tz: "Asia/Kolkata", open: 10, close: 19, days: [1, 2, 3, 4, 5, 6] },
   },
 
+  /* Real reels. `ig` is the Instagram reel code (the part after /reel/ in the
+     link): clicking a reel plays it in Instagram's official embed. `poster` is
+     the cover saved in /assets/reels/. Order = order on the site; the first
+     few fill the hero columns. Add `views: "1.2M"` only with a real number.
+     To add one: save its cover as assets/reels/<code>.jpg and add a line. */
   reels: [
-    { title: "Café launch hook", category: "Food & café", poster: u("1695408246612-584543865997"), video: "", link: "", views: "", sample: true },
-    { title: "Founder talks to camera", category: "Personal brand", poster: u("1759393852314-59dc00faeed3"), video: "", link: "", views: "", sample: true },
-    { title: "Product demo in 20 seconds", category: "D2C product", poster: u("1630797160668-2164d9518103"), video: "", link: "", views: "", sample: true },
-    { title: "Behind the shoot", category: "Brand film", poster: u("1759393851741-674ee71fb498"), video: "", link: "", views: "", sample: true },
-    { title: "Shop walkthrough", category: "Retail", poster: u("1695391396401-5fbb4bedafc1"), video: "", link: "", views: "", sample: true },
-    { title: "Podcast clip", category: "Minicast", poster: u("1590602847861-f357a9332bbc"), video: "", link: "", views: "", sample: true },
-    { title: "Street-style creator reel", category: "Creator collab", poster: u("1543525469-65b61cc2bc06"), video: "", link: "", views: "", sample: true },
-    { title: "Owner's story", category: "Local business", poster: u("1761370571806-886404629697"), video: "", link: "", views: "", sample: true },
-  ],
+    { ig: "DfZdYdFuCL2", account: "smeexperts", title: "Dhanteras greeting", category: "Festive · Hindi" },
+    { ig: "De9id8tuCez", account: "smeexperts", title: "Live from IIF 2026, Gandhinagar", category: "Event coverage" },
+    { ig: "DeWoH46uf99", account: "smeexperts", title: "Navratri funding offer", category: "Festive · Gujarati" },
+    { ig: "DPltXX-AGp7", account: "smeexperts", title: "Why register your trademark", category: "Explainer" },
+    { ig: "DeBxOYdB4wh", account: "right.team", title: "Navratri, the corporate way", category: "Team culture" },
+    { ig: "DPgg_gAABGO", account: "smeexperts", title: "Incorporation in one step", category: "Explainer" },
+    { ig: "DXN4BkfzTP9", account: "udyammanch", title: "Webinar invite", category: "Event promo" },
+    { ig: "DcToTLjxpWu", account: "right.team", title: "This office is nothing without us", category: "Office humour" },
+    { ig: "CnACQiFAuJW", account: "farmingsolutionsindia", title: "Shade net & polyhouse setup", category: "Agri business" },
+    { ig: "CmmF20-AAEY", account: "farmingsolutionsindia", title: "Tractor day on the farm", category: "Agri business" },
+    { ig: "CPnsmDtHp_Q", account: "farmingsolutionsindia", title: "Seed to plant in 3 days", category: "Agri how-to" },
+    { ig: "Cf1SkDtJx0G", account: "farmingsolutionsindia", title: "Veni, vidi, vici", category: "Trend reel" },
+    { ig: "CNSZCalnIF7", account: "farmingsolutionsindia", title: "What is vermiwash?", category: "Agri explainer" },
+  ].map((r) => ({
+    poster: `assets/reels/${r.ig}.jpg`,
+    link: `https://www.instagram.com/reel/${r.ig}/`,
+    video: "",
+    views: "",
+    ...r,
+  })),
 
   work: [
     {

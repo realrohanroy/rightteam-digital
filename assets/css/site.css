@@ -566,6 +566,10 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 .lightbox__box { position: relative; width: min(420px, 100%); aspect-ratio: 9 / 16; max-height: 88svh; border-radius: 28px; overflow: hidden; background: #000; transform: scale(.94); transition: transform .45s var(--ease); }
 .lightbox.is-open .lightbox__box { transform: none; }
 .lightbox__box video, .lightbox__box img { width: 100%; height: 100%; object-fit: cover; }
+.lightbox__box--ig { width: min(400px, 94vw); height: min(760px, calc(90svh - 56px)); margin-top: 56px; aspect-ratio: auto; max-height: none; overflow: visible; background: #fff center / cover no-repeat; }
+.lightbox__box--ig iframe { position: relative; width: 100%; height: 100%; border: 0; display: block; border-radius: 28px; background: transparent; }
+/* close sits just above the player so it never covers Instagram's own controls */
+.lightbox__box--ig .lightbox__close { top: -54px; right: 0; box-shadow: 0 6px 18px rgba(15, 33, 64, 0.25); }
 .lightbox__close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 18px; cursor: pointer; }
 .lightbox__note { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 

@@ -17,7 +17,7 @@ python -m http.server 5510
 | `privacy.html`, `terms.html` | Short drafts — review before launch |
 
 ## Before launch — edit `assets/js/content.js`
-1. **Reels**: put your `.mp4` files in `assets/reels/`, set `video`, `poster`, `link` (Instagram URL) and `views` (only real numbers). Remove `sample: true`.
+1. **Reels**: done — 13 Instagram reels are listed in `content.js` (`ig` = the code after `/reel/`). Covers live in `assets/reels/<code>.jpg`; clicking a reel plays Instagram's official embed. To add one, save its cover there and add a line. Add `views` only with real numbers.
 2. **Work**: replace sample case studies with real ones; fill `outcome` and `timeframe` only with verified results.
 3. **Contact**: confirm `email`, add `whatsapp`, `instagram`, `linkedin`, `mainSite`.
 4. **Form**: set `formEndpoint` (e.g. Formspree) so briefs arrive directly. Without it the form opens the visitor's email app.

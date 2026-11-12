@@ -223,7 +223,7 @@
         ${r.sample ? '<span class="sample-flag">Sample</span>' : r.views ? `<span class="pill pill--dark">${esc(r.views)} views</span>` : ""}
       </div>
       <div class="reel__bottom">
-        ${hero ? `<span class="pill pill--dark">${esc(r.title)}</span>` : `<div class="reel__meta"><b>${esc(r.title)}</b>${esc(r.category)}</div>`}
+        ${hero ? `<span class="pill pill--dark">${esc(r.title)}</span>` : `<div class="reel__meta"><b>${esc(r.title)}</b>${r.account ? "@" + esc(r.account) : esc(r.category)}</div>`}
         <span class="reel__play">${icon("play", "icon--fill")}</span>
       </div>
     </article>`;
@@ -260,7 +260,15 @@
   const openLightbox = (i) => {
     const r = RT.reels[i]; if (!r) return;
     lastFocus = document.activeElement;
-    lbBox.innerHTML = `
+    // Instagram reels play in Instagram's official embed (cover shows while it loads);
+    // a self-hosted `video` takes priority if one is ever added.
+    const useIg = !r.video && r.ig;
+    lbBox.classList.toggle("lightbox__box--ig", !!useIg);
+    lbBox.style.backgroundImage = useIg ? `url("${r.poster}")` : "";
+    lbBox.innerHTML = useIg ? `
+      <button class="lightbox__close" aria-label="Close">${icon("x")}</button>
+      <iframe src="https://www.instagram.com/reel/${encodeURIComponent(r.ig)}/embed/" title="${esc(r.title)} — Instagram reel by @${esc(r.account || "")}"
+        allow="autoplay; encrypted-media; picture-in-picture; clipboard-write" allowfullscreen loading="eager"></iframe>` : `
       <button class="lightbox__close" aria-label="Close">${icon("x")}</button>
       ${r.video ? `<video src="${esc(r.video)}" poster="${esc(r.poster)}" controls autoplay playsinline></video>` : `<img src="${esc(r.poster)}" alt="">`}
       <div class="lightbox__note">
