@@ -390,8 +390,10 @@
     const applyRate = () => stripAnims.forEach((a) => { a.playbackRate = strip.rate; });
     function pushStrips() {
       gsap.killTweensOf(strip);
-      strip.rate = 12; applyRate();
-      gsap.to(strip, { rate: 1, duration: 2.6, ease: "power2.out", onUpdate: applyRate, onComplete: applyRate });
+      strip.rate = 11; applyRate();
+      // hold the shove for a beat, then shed speed gradually over ~2.7s (sine.inOut
+      // keeps it fast for longer than an ease-out, which dumps most speed instantly)
+      gsap.to(strip, { rate: 1, duration: 2.7, delay: 0.45, ease: "sine.inOut", onUpdate: applyRate, onComplete: applyRate });
     }
     tl.from(".hero__line > span", { yPercent: 110, duration: 1.1, stagger: 0.09 })
       .from(".hero__copy .lede, .hero__copy .btn-row", { opacity: 0, y: 16, duration: 0.8, stagger: 0.08 }, "-=0.7")
