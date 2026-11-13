@@ -11,7 +11,14 @@
     const h = new Date().getHours();
     doc.dataset.daypart = h >= 5 && h < 11 ? "morning" : h >= 11 && h < 17 ? "afternoon" : h >= 17 && h < 20 ? "evening" : "night";
   };
-  setDaypart(); setInterval(setDaypart, 5 * 60 * 1000);
+  // greeting above the footer ask (filled once the footer exists; see paintGreeting)
+  const GREET = { morning: ["sunrise", "Good morning"], afternoon: ["sun", "Good afternoon"], evening: ["sunset", "Good evening"], night: ["moon", "Working late?"] };
+  const paintGreeting = () => {
+    const g = document.querySelector("[data-fgreet]"); if (!g || !window.RTicon) return;
+    const [ic, text] = GREET[doc.dataset.daypart] || GREET.afternoon;
+    if (g.dataset.part !== doc.dataset.daypart) { g.dataset.part = doc.dataset.daypart; g.innerHTML = window.RTicon(ic) + text; }
+  };
+  setDaypart(); setInterval(() => { setDaypart(); paintGreeting(); }, 5 * 60 * 1000);
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = (s = "") => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -108,7 +115,10 @@
       </div>
 
       <div class="footer__cta">
-        <h2 class="display footer__title">Got a brief?<br>Let's fill your calendar.</h2>
+        <div>
+          <p class="footer__greet" data-fgreet></p>
+          <h2 class="display footer__title">Got a brief?<br>Let's fill your calendar.</h2>
+        </div>
         <div class="footer__orb-zone">
           <a class="footer__orb" href="start.html"><span class="footer__orb-label">Start a<br>project</span><span class="footer__orb-icon">${icon("arrow")}</span></a>
         </div>
@@ -151,6 +161,7 @@
   </div>`;
   const frame = $(".frame");
   (frame || document.body).insertAdjacentHTML("beforeend", footer);
+  paintGreeting();
 
   /* dropdown */
   const svcBtn = $("#svcBtn"), svcMenu = $("#svcMenu");
