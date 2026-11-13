@@ -5,6 +5,13 @@
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   doc.classList.add("js");
   if (reduce) doc.classList.add("no-motion");
+  // Part of the visitor's day (their local clock) → tints the brand highlight.
+  // Re-checked every few minutes so a page left open moves with the day.
+  const setDaypart = () => {
+    const h = new Date().getHours();
+    doc.dataset.daypart = h >= 5 && h < 11 ? "morning" : h >= 11 && h < 17 ? "afternoon" : h >= 17 && h < 20 ? "evening" : "night";
+  };
+  setDaypart(); setInterval(setDaypart, 5 * 60 * 1000);
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = (s = "") => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -32,6 +39,10 @@
     "funnel": '<path d="M3 4.5h18l-7 8.2V19l-4 1.5v-7.8z"/>',
     "spark": '<path d="M12 3.5 13.9 9l5.6 1.9-5.6 1.9L12 18.5l-1.9-5.7L4.5 10.9 10.1 9z"/>',
     "pen": '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+    "sun": '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/>',
+    "sunrise": '<path d="M5 17a7 7 0 0 1 14 0"/><path d="M2.5 20.5h19M12 3v5M8.5 6.5 12 3l3.5 3.5M4.2 11.2l1.4 1.4M19.8 11.2l-1.4 1.4"/>',
+    "sunset": '<path d="M5 17a7 7 0 0 1 14 0"/><path d="M2.5 20.5h19M12 9V3M8.5 5.5 12 9l3.5-3.5M4.2 11.2l1.4 1.4M19.8 11.2l-1.4 1.4"/>',
+    "moon": '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
   };
   const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden="true">${Object.entries(ICONS)
     .map(([k, v]) => `<symbol id="i-${k}" viewBox="0 0 24 24">${v}</symbol>`).join("")}</svg>`;
@@ -92,7 +103,7 @@
   <footer class="sheet sheet--dark site-footer">
     <div class="wrap">
       <div class="footer__bar">
-        <p class="footer__status"><span class="footer__dot" aria-hidden="true"></span><span data-ftime>India</span><span class="footer__state" data-fstate>Replies within one working day</span></p>
+        <p class="footer__status"><span class="footer__dot" aria-hidden="true" data-ficon></span><span data-ftime>India</span><span class="footer__state" data-fstate>Replies within one working day</span></p>
         <button class="footer__totop" type="button" data-totop>Back to top <span class="footer__totop-icon">${icon("arrow")}</span></button>
       </div>
 
@@ -308,15 +319,29 @@
   {
     // live office status (time in India + open/closed from RT.site.hours)
     const H = Object.assign({ tz: "Asia/Kolkata", open: 10, close: 19, days: [1, 2, 3, 4, 5, 6] }, S.hours || {});
-    const status = $(".footer__status"), tEl = $("[data-ftime]"), sEl = $("[data-fstate]");
+    const status = $(".footer__status"), tEl = $("[data-ftime]"), sEl = $("[data-fstate]"), iEl = $("[data-ficon]");
     const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const tick = () => {
       try {
         const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: H.tz, hour: "2-digit", minute: "2-digit", weekday: "short", hour12: false })
           .formatToParts(new Date()).map((x) => [x.type, x.value]));
-        const hour = +p.hour % 24, open = H.days.includes(DAYS.indexOf(p.weekday)) && hour >= H.open && hour < H.close;
+        const hour = +p.hour % 24, day = DAYS.indexOf(p.weekday);
+        const workday = (d) => H.days.includes(((d % 7) + 7) % 7);
+        const open = workday(day) && hour >= H.open && hour < H.close;
+        const pad = (h) => String(h).padStart(2, "0") + ":00";
+        // the next working day, named when it isn't simply "tomorrow"
+        let n = 1; while (n < 7 && !workday(day + n)) n++;
+        const nextDay = n === 1 ? "tomorrow" : ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][(day + n) % 7];
+        let state;
+        if (open) state = hour >= H.close - 1 ? "At our desks · last hour today" : "At our desks · replies today";
+        else if (workday(day) && hour < H.open) state = `Opens at ${pad(H.open)} · replies today`;
+        else if (!workday(day)) state = `Closed today · replies ${nextDay}`;
+        else state = `Signed off for the day · replies ${nextDay}`;
+        // icon follows India's part of the day
+        const ic = hour >= 5 && hour < 10 ? "sunrise" : hour >= 10 && hour < 17 ? "sun" : hour >= 17 && hour < 20 ? "sunset" : "moon";
+        if (iEl && iEl.dataset.ic !== ic) { iEl.dataset.ic = ic; iEl.innerHTML = icon(ic); }
         tEl.textContent = `${p.hour}:${p.minute} in India`;
-        sEl.textContent = open ? "At our desks · replies today" : "After hours · replies next working day";
+        sEl.textContent = state;
         status.classList.toggle("is-open", open);
       } catch (e) { /* keep the static fallback text */ }
     };
