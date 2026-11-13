@@ -55,9 +55,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero__line > span { display: inline-block; }
 .hero__line--rot > span { white-space: nowrap; }
 /* rotating service word: a clipped slot; JS tweens its width so "that" glides along */
-.rotator { position: relative; display: inline-block; vertical-align: bottom; overflow: hidden; padding: 0 0.04em 0.12em; margin: 0 -0.04em -0.12em; }
+.rotator { position: relative; display: inline-block; vertical-align: bottom; overflow: hidden; padding: 0 0.1em 0.12em; margin: 0 0 -0.12em -0.06em; }
+/* highlighter swipe behind the changing word (brand marker; text stays navy for contrast) */
+.rotator::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0.2em; height: 0.46em; border-radius: 0.14em; background: var(--marker); z-index: -1; }
+.rotator { isolation: isolate; }
 .rotator__word { display: inline-block; white-space: nowrap; }
-.rotator__word--in { position: absolute; left: 0.04em; top: 0; }
+.rotator__word--in { position: absolute; left: 0.1em; top: 0; }
 .engine__stage { border-radius: var(--r-sheet); overflow: hidden; background: var(--brand); }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 10px; z-index: 100; }
 .skip:focus { left: 16px; }
