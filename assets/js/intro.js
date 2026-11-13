@@ -75,12 +75,12 @@
   // the centre at a time while the next is entering and the last is leaving.
   // (the next word starts exactly as the previous begins to leave; its fast ease-in
   // entry and the fast ease-in exit keep the two at least ~30% of the path apart)
-  const IN = 0.55, READ = 0.75, OUT = 0.4, GAP = IN + READ, T0 = 0.55;
+  const IN = 0.4, READ = 0.5, OUT = 0.3, GAP = IN + READ, T0 = 0.4;
   const tLast = T0 + flyers.length * GAP;
 
   tl.from(pill, { scale: 0, rotate: -10, duration: 0.6, ease: "back.out(2.2)" }, 0.1)
-    .to(wave, { A: 52, duration: 1.2, ease: "sine.inOut", onUpdate: draw }, 0.35)
-    .to(wave, { phase: Math.PI * 2.2, duration: tLast + 0.9, ease: "none", onUpdate: draw }, 0.35)
+    .to(wave, { A: 52, duration: 0.9, ease: "sine.inOut", onUpdate: draw }, 0.25)
+    .to(wave, { phase: Math.PI * 2.2, duration: tLast + 0.6, ease: "none", onUpdate: draw }, 0.25)
     .to(pill, { rotate: -4, scaleX: 1.06, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.6);
 
   // words ride through behind the pill: squashed while moving fast, upright while readable
@@ -99,17 +99,17 @@
     const s = svg.getBoundingClientRect().width / 1000;
     return { x: -(b.width * s) / 2 + pill.offsetWidth * 0.42, y: -(b.height * s) / 2 - pill.offsetHeight * 0.1 };
   };
-  tl.fromTo(lastOffset, { attr: { startOffset: "86%" } }, { attr: { startOffset: "50%" }, duration: 1, ease: "power3.out" }, tLast - 0.15)
-    .to(wave, { A: 16, duration: 0.9, ease: "power2.out", onUpdate: draw }, tLast + 0.2)
-    .to(pill, { x: () => tagPos().x, y: () => tagPos().y, rotate: -8, scale: 0.92, duration: 0.7, ease: "power3.out" }, tLast + 0.35)
+  tl.fromTo(lastOffset, { attr: { startOffset: "86%" } }, { attr: { startOffset: "50%" }, duration: 0.75, ease: "power3.out" }, tLast - 0.1)
+    .to(wave, { A: 16, duration: 0.7, ease: "power2.out", onUpdate: draw }, tLast + 0.1)
+    .to(pill, { x: () => tagPos().x, y: () => tagPos().y, rotate: -8, scale: 0.92, duration: 0.55, ease: "power3.out" }, tLast + 0.2)
     // hold, then the word slides back behind the pill and the gradient dissolves
-    .addLabel("out", "+=0.45")
-    .to(pill, { x: 0, y: 0, rotate: 0, scale: 1, duration: 0.5, ease: "power3.inOut" }, "out")
-    .to(wave, { A: 60, duration: 0.5, ease: "power2.in", onUpdate: draw }, "out")
-    .to(last, { scaleX: 0.08, scaleY: 0.3, opacity: 0, duration: 0.5, ease: "power3.in", transformOrigin: "50% 50%" }, "out+=0.05")
-    .to(grad, { opacity: 0, duration: 0.6, ease: "power2.inOut" }, "out+=0.45")
-    .to(pill, { scale: 0.6, opacity: 0, duration: 0.4, ease: "power2.in" }, "out+=0.6")
-    .to(intro, { opacity: 0, duration: 0.35, ease: "none" }, "out+=0.95");
+    .addLabel("out", "+=0.3")
+    .to(pill, { x: 0, y: 0, rotate: 0, scale: 1, duration: 0.4, ease: "power3.inOut" }, "out")
+    .to(wave, { A: 60, duration: 0.4, ease: "power2.in", onUpdate: draw }, "out")
+    .to(last, { scaleX: 0.08, scaleY: 0.3, opacity: 0, duration: 0.4, ease: "power3.in", transformOrigin: "50% 50%" }, "out+=0.05")
+    .to(grad, { opacity: 0, duration: 0.5, ease: "power2.inOut" }, "out+=0.3")
+    .to(pill, { scale: 0.6, opacity: 0, duration: 0.35, ease: "power2.in" }, "out+=0.4")
+    .to(intro, { opacity: 0, duration: 0.3, ease: "none" }, "out+=0.7");
 
   window.__rtIntro = tl; // handy for scrubbing in devtools: __rtIntro.pause().time(2)
   const skip = () => tl.progress(1);

@@ -378,7 +378,18 @@
   const hero = $(".hero");
   if (hero && hasGSAP && !reduce) {
     const tl = gsap.timeline({ paused: true, defaults: { ease: "power4.out" } });
-    introDone.then(() => { lenis && lenis.start(); tl.play(); ScrollTrigger.refresh(); });
+    introDone.then(() => { lenis && lenis.start(); tl.play(); ScrollTrigger.refresh(); pushStrips(); });
+    // Landing "shove": the reel strips start fast in their own directions (up / down)
+    // and coast down to their normal pace, like they were pushed. Drives the CSS
+    // marquee's own clock (playbackRate), so position stays continuous — no jumps.
+    function pushStrips() {
+      const anims = $$(".hero__reels .reel-col__track").map((t) => t.getAnimations()[0]).filter(Boolean);
+      if (!anims.length) return;
+      const s = { rate: 9 };
+      const apply = () => anims.forEach((a) => { a.playbackRate = s.rate; });
+      apply();
+      gsap.to(s, { rate: 1, duration: 2.2, delay: 0.15, ease: "power3.out", onUpdate: apply, onComplete: apply });
+    }
     tl.from(".hero__line > span", { yPercent: 110, duration: 1.1, stagger: 0.09 })
       .from(".hero__copy .lede, .hero__copy .btn-row", { opacity: 0, y: 16, duration: 0.8, stagger: 0.08 }, "-=0.7")
       // Reveal the reel columns with a clip wipe, never a translate: moving the column
