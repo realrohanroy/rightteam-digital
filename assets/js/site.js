@@ -378,25 +378,31 @@
   const hero = $(".hero");
   if (hero && hasGSAP && !reduce) {
     const tl = gsap.timeline({ paused: true, defaults: { ease: "power4.out" } });
-    introDone.then(() => { lenis && lenis.start(); tl.play(); ScrollTrigger.refresh(); pushStrips(); });
-    // Landing "shove": the reel strips start fast in their own directions (up / down)
-    // and coast down to their normal pace, like they were pushed. Drives the CSS
-    // marquee's own clock (playbackRate), so position stays continuous — no jumps.
+    introDone.then(() => { lenis && lenis.start(); tl.play(); ScrollTrigger.refresh(); });
+    // Landing "shove": the reel strips sit still until they are revealed, then get
+    // pushed hard in their own directions (up / down) and coast down to their normal
+    // pace. Drives the CSS marquee's own clock (playbackRate) so there are no jumps.
+    // It is fired FROM the timeline as the columns wipe in — firing it on intro end
+    // spent the fast part while the columns were still clipped out of view.
+    const stripAnims = $$(".hero__reels .reel-col__track").map((t) => t.getAnimations()[0]).filter(Boolean);
+    stripAnims.forEach((a) => { a.playbackRate = 0; });
+    const strip = { rate: 0 };
+    const applyRate = () => stripAnims.forEach((a) => { a.playbackRate = strip.rate; });
     function pushStrips() {
-      const anims = $$(".hero__reels .reel-col__track").map((t) => t.getAnimations()[0]).filter(Boolean);
-      if (!anims.length) return;
-      const s = { rate: 9 };
-      const apply = () => anims.forEach((a) => { a.playbackRate = s.rate; });
-      apply();
-      gsap.to(s, { rate: 1, duration: 2.2, delay: 0.15, ease: "power3.out", onUpdate: apply, onComplete: apply });
+      gsap.killTweensOf(strip);
+      strip.rate = 12; applyRate();
+      gsap.to(strip, { rate: 1, duration: 2.6, ease: "power2.out", onUpdate: applyRate, onComplete: applyRate });
     }
     tl.from(".hero__line > span", { yPercent: 110, duration: 1.1, stagger: 0.09 })
       .from(".hero__copy .lede, .hero__copy .btn-row", { opacity: 0, y: 16, duration: 0.8, stagger: 0.08 }, "-=0.7")
       // Reveal the reel columns with a clip wipe, never a translate: moving the column
       // adds to the CSS marquee inside it, so the strips looked ~5x faster for a second.
+      .addLabel("strips", "-=1")
       .fromTo(".hero__reels .reel-col",
         { clipPath: "inset(100% 0% 0% 0% round 26px)", opacity: 0 },
-        { clipPath: "inset(0% 0% 0% 0% round 26px)", opacity: 1, duration: 1.1, stagger: 0.12, ease: "power3.inOut", clearProps: "clipPath" }, "-=1")
+        { clipPath: "inset(0% 0% 0% 0% round 26px)", opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out", clearProps: "clipPath" }, "strips")
+      // push once the columns are about half revealed, so the fast part is seen
+      .call(pushStrips, null, "strips+=0.3")
       .from(".hero__rail .orb, .hero__rail-plus", { scale: 0, duration: 0.6, stagger: 0.08, ease: "back.out(2)" }, "-=0.9")
       .from(".hero__foot > *", { opacity: 0, duration: 0.6 }, "-=0.5");
   }
