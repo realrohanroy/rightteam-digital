@@ -407,16 +407,24 @@
       .from(".hero__foot > *", { opacity: 0, duration: 0.6 }, "-=0.5")
       .call(() => rotateHeroWord(), null, "+=1.2");
   }
-  /* Hero word: Leads → Reels → Ads → Searches → Followers → Leads, then stops.
-     One pass only (moving content over 5s should stop, WCAG 2.2.2) and it lands on
-     the core offer. Screen readers get the full sentence from the .sr-only copy. */
+  /* Hero word: Leads → Reels → Ads → Searches → Followers → … on a continuous loop.
+     Pauses while the visitor hovers or focuses the headline, while the hero is off
+     screen, and in hidden tabs (gives a way to stop the motion; saves work).
+     Screen readers get the full sentence from the .sr-only copy; reduced motion
+     keeps "Leads". */
   function rotateHeroWord() {
     const slot = $(".rotator");
     if (!slot || reduce || !hasGSAP) return;
-    const words = slot.dataset.words.split(",").concat(slot.dataset.words.split(",")[0]);
-    let i = 0;
+    const words = slot.dataset.words.split(",");
+    const head = slot.closest("h1");
+    let i = 0, timer = null, paused = false, onScreen = true, busy = false;
+    const HOLD = 1.6;
+    const canRun = () => !paused && onScreen && !document.hidden;
+    const schedule = () => { timer && timer.kill(); timer = gsap.delayedCall(HOLD, () => (canRun() ? step() : (timer = null))); };
+    const resume = () => { if (canRun() && !timer && !busy) schedule(); };
     const step = () => {
-      if (++i >= words.length) { slot.style.width = ""; return; }
+      timer = null; busy = true;
+      i = (i + 1) % words.length;
       const cur = $(".rotator__word", slot);
       const next = document.createElement("span");
       next.className = "rotator__word rotator__word--in";
@@ -424,12 +432,20 @@
       slot.appendChild(next);
       const pad = parseFloat(getComputedStyle(slot).paddingLeft) * 2;
       const from = slot.getBoundingClientRect().width, to = next.getBoundingClientRect().width + pad;
-      gsap.timeline({ onComplete: () => { cur.remove(); next.classList.remove("rotator__word--in"); gsap.delayedCall(i === words.length - 1 ? 0 : 1.5, step); } })
+      gsap.timeline({ onComplete: () => { cur.remove(); next.classList.remove("rotator__word--in"); busy = false; if (canRun()) schedule(); } })
         .fromTo(slot, { width: from }, { width: to, duration: 0.6, ease: "power3.inOut" }, 0)
         .to(cur, { yPercent: -105, opacity: 0, filter: "blur(6px)", duration: 0.45, ease: "power3.in" }, 0)
         .fromTo(next, { yPercent: 105, opacity: 0, filter: "blur(6px)" }, { yPercent: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, 0.2);
     };
-    gsap.delayedCall(0.4, step);
+    const pause = () => { paused = true; timer && timer.kill(); timer = null; };
+    const unpause = () => { paused = false; resume(); };
+    head.addEventListener("pointerenter", pause);
+    head.addEventListener("pointerleave", unpause);
+    head.addEventListener("focusin", pause);
+    head.addEventListener("focusout", unpause);
+    document.addEventListener("visibilitychange", resume);
+    new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; resume(); }).observe(slot);
+    timer = gsap.delayedCall(0.4, () => (canRun() ? step() : (timer = null)));
   }
   const toast = $("#leadToast");
   if (toast) {
