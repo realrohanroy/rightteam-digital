@@ -404,7 +404,32 @@
       // push once the columns are about half revealed, so the fast part is seen
       .call(pushStrips, null, "strips+=0.3")
       .from(".hero__rail .orb, .hero__rail-plus", { scale: 0, duration: 0.6, stagger: 0.08, ease: "back.out(2)" }, "-=0.9")
-      .from(".hero__foot > *", { opacity: 0, duration: 0.6 }, "-=0.5");
+      .from(".hero__foot > *", { opacity: 0, duration: 0.6 }, "-=0.5")
+      .call(() => rotateHeroWord(), null, "+=1.2");
+  }
+  /* Hero word: Leads → Reels → Ads → Searches → Followers → Leads, then stops.
+     One pass only (moving content over 5s should stop, WCAG 2.2.2) and it lands on
+     the core offer. Screen readers get the full sentence from the .sr-only copy. */
+  function rotateHeroWord() {
+    const slot = $(".rotator");
+    if (!slot || reduce || !hasGSAP) return;
+    const words = slot.dataset.words.split(",").concat(slot.dataset.words.split(",")[0]);
+    let i = 0;
+    const step = () => {
+      if (++i >= words.length) { slot.style.width = ""; return; }
+      const cur = $(".rotator__word", slot);
+      const next = document.createElement("span");
+      next.className = "rotator__word rotator__word--in";
+      next.textContent = words[i];
+      slot.appendChild(next);
+      const pad = parseFloat(getComputedStyle(slot).paddingLeft) * 2;
+      const from = slot.getBoundingClientRect().width, to = next.getBoundingClientRect().width + pad;
+      gsap.timeline({ onComplete: () => { cur.remove(); next.classList.remove("rotator__word--in"); gsap.delayedCall(i === words.length - 1 ? 0 : 1.5, step); } })
+        .fromTo(slot, { width: from }, { width: to, duration: 0.6, ease: "power3.inOut" }, 0)
+        .to(cur, { yPercent: -105, opacity: 0, filter: "blur(6px)", duration: 0.45, ease: "power3.in" }, 0)
+        .fromTo(next, { yPercent: 105, opacity: 0, filter: "blur(6px)" }, { yPercent: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, 0.2);
+    };
+    gsap.delayedCall(0.4, step);
   }
   const toast = $("#leadToast");
   if (toast) {
