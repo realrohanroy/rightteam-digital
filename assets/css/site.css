@@ -548,25 +548,30 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 .footer__links a { display: inline-block; padding: 4px 0; color: #eaf1fb; transition: color .2s, transform .3s var(--ease); }
 .footer__links a:hover { color: var(--lime); transform: translateX(4px); }
 
-/* the wordmark: letters are windows onto the reels */
-.footer__mark { margin: clamp(16px, 3vw, 40px) calc(var(--gutter) * -0.55) 0; overflow: hidden; }
-.footer__mark svg { width: 100%; height: auto; overflow: visible; }
-.footer__strip { animation: fStrip 70s linear infinite; }
-@keyframes fStrip { to { transform: translateX(calc(var(--strip) * -1)); } }
-.footer__tint { opacity: 0.42; transition: opacity .6s var(--ease); }
-.footer__mark:hover .footer__tint { opacity: 0; }
-.footer__mark-line { stroke: rgba(212, 243, 107, 0.55); stroke-width: 1.4; }
-
+/* the wordmark: big left-aligned name, RT logo on the right */
+.footer__mark { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-top: clamp(28px, 4vw, 56px); overflow: hidden; }
+.footer__mark-text {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.045em; line-height: 0.82;
+  font-size: clamp(3.6rem, 15vw, 15.5rem); color: #eaf1fb; white-space: nowrap; padding-bottom: 0.06em;
+}
+.footer__mark-logo {
+  width: clamp(64px, 11vw, 176px); height: auto; flex: none; border-radius: 50%; margin-bottom: 0.4vw;
+  box-shadow: 0 0 0 2px rgba(234, 241, 251, 0.85), 0 0 0 10px rgba(212, 243, 107, 0.12);
+}
 .footer__bottom { display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; width: 100%; padding-top: 16px; font-size: 0.82rem; color: var(--f-soft); }
 
+@media (max-width: 640px) {
+  .footer__mark { gap: 12px; }
+  .footer__mark-text { font-size: 12.4vw; }
+  .footer__mark-logo { width: 13vw; }
+}
 @media (max-width: 760px) {
   .footer__cta { grid-template-columns: 1fr; }
   .footer__orb-zone { justify-self: start; }
   .footer__links { grid-template-columns: 1fr 1fr; }
   .footer__links > div:last-child { grid-column: 1 / -1; }
-  .footer__mark { margin-inline: calc(var(--gutter) * -0.4); }
 }
-@media (prefers-reduced-motion: reduce) { .footer__strip, .footer__status.is-open .footer__dot { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .footer__status.is-open .footer__dot { animation: none; } }
 
 /* ---------- Lightbox ---------- */
 .lightbox { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; background: rgba(10, 22, 44, 0.72); backdrop-filter: blur(10px); opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; padding: 20px; }

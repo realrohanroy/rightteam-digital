@@ -85,18 +85,11 @@
   document.body.insertAdjacentHTML("afterbegin", header);
 
   const S = RT.site || {};
-  /* Footer — "the name is made of our work".
-     Dark closing sheet: live office status, one big ask with a magnetic orb,
-     contact you can copy in one tap, and a giant RIGHT TEAM wordmark whose
-     letters are windows onto the reels in content.js, panning slowly through. */
-  const posters = (RT.reels || []).map((r) => r.poster).filter(Boolean);
-  const TILE = 236, STEP = 248;
-  const tiles = posters.concat(posters).map((p, i) =>
-    `<image href="${esc(p)}" x="${i * STEP}" y="-10" width="${TILE}" height="380" preserveAspectRatio="xMidYMid slice"/>`).join("");
-  const markText = (attrs) => `<text x="800" y="262" text-anchor="middle" textLength="1584" lengthAdjust="spacingAndGlyphs"
-      font-family="Bricolage Grotesque, Manrope, sans-serif" font-weight="600" font-size="312" ${attrs}>Right Team</text>`;
+  /* Footer: dark closing sheet — live office status, one big ask with a magnetic
+     orb, contact you can copy in one tap, link grid, and a giant left-aligned
+     "Right Team" wordmark with the RT logo on the right. */
   const footer = `
-  <footer class="sheet sheet--dark site-footer" style="--strip:${posters.length * STEP}px">
+  <footer class="sheet sheet--dark site-footer">
     <div class="wrap">
       <div class="footer__bar">
         <p class="footer__status"><span class="footer__dot" aria-hidden="true"></span><span data-ftime>India</span><span class="footer__state" data-fstate>Replies within one working day</span></p>
@@ -132,21 +125,14 @@
       </nav>
     </div>
 
-    <div class="footer__mark" aria-hidden="true">
-      <svg viewBox="0 0 1600 350" preserveAspectRatio="xMidYMid meet" focusable="false">
-        <defs><clipPath id="rtMarkClip">${markText("")}</clipPath></defs>
-        <g clip-path="url(#rtMarkClip)">
-          <rect width="1600" height="350" fill="#16457a"/>
-          <g class="footer__strip">${tiles}</g>
-          <rect class="footer__tint" width="1600" height="350" fill="#0b2e56"/>
-        </g>
-        ${markText('class="footer__mark-line" fill="none"')}
-      </svg>
+    <div class="wrap footer__mark" aria-hidden="true">
+      <span class="footer__mark-text">Right Team</span>
+      <img class="footer__mark-logo" src="assets/img/rt-logo.svg" alt="" width="180" height="180">
     </div>
 
     <div class="wrap footer__bottom">
       <span>© ${new Date().getFullYear()} ${esc(S.company || "Right Team Private Limited")}</span>
-      <span>The letters above are cut from our latest reels.</span>
+      <span>Lead generation, reels &amp; creators · India</span>
     </div>
   </footer>
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Reel player">
@@ -365,9 +351,9 @@
     }
 
     // the one footer moment: the wordmark rises into place
-    const mark = $(".footer__mark svg");
+    const mark = $(".footer__mark");
     if (mark && hasGSAP && !reduce) {
-      gsap.from(mark, { yPercent: 38, duration: 1.3, ease: "power4.out", scrollTrigger: { trigger: ".footer__mark", start: "top 98%", once: true } });
+      gsap.from(mark.children, { yPercent: 105, duration: 1.2, stagger: 0.12, ease: "power4.out", scrollTrigger: { trigger: mark, start: "top 98%", once: true } });
     }
   }
 
