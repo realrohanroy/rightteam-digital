@@ -549,7 +549,9 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 .footer__links a:hover { color: var(--lime); transform: translateX(4px); }
 
 /* the wordmark: big left-aligned name, RT logo on the right */
-.footer__mark { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-top: clamp(28px, 4vw, 56px); overflow: hidden; }
+.footer__mark { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-top: clamp(28px, 4vw, 56px); overflow: hidden;
+  /* room for the logo's 10px outer ring, which overflow:hidden would otherwise trim */
+  padding: 14px 14px 0; margin-inline: -14px; }
 .footer__mark-text {
   font-family: var(--font-display); font-weight: 600; letter-spacing: -0.045em; line-height: 0.82;
   font-size: clamp(3.6rem, 15vw, 15.5rem); color: #eaf1fb; white-space: nowrap; padding-bottom: 0.06em;
