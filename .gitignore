@@ -3,3 +3,7 @@
 Thumbs.db
 node_modules/
 *.log
+
+# creator form exports contain contact details - never commit
+*.csv
+*.xlsx

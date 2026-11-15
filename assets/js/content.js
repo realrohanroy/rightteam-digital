@@ -114,36 +114,5 @@ window.RT = {
   ],
 };
 
-/* ==========================================================================
-   CREATORS — the network shown on creators.html.
-   EVERY ENTRY BELOW IS A SAMPLE (stock photo + made-up stats) and shows a
-   "Sample" tag. Replace with your onboarded creators and delete `sample: true`.
-   followers / avgViews are plain numbers; eng = engagement rate in %.
-   audience: share of women (%), the biggest age band, the top city.
-   ========================================================================== */
-window.RT.creators = [
-  ["ananya.cooks", "Ananya Rao", "Pune", ["Food"], ["Marathi", "Hindi", "English"], ["Instagram", "YouTube"], 86000, 5.8, 32000, "1533128361669-69c065857a13", "Weeknight Maharashtrian recipes in under 20 minutes.", [64, "25–34", "Pune"]],
-  ["meera.styles", "Meera Iyer", "Chennai", ["Fashion"], ["Tamil", "English"], ["Instagram"], 214000, 3.9, 61000, "1463335361701-e90f4c5045d0", "Everyday ethnic wear styled three ways.", [78, "18–24", "Chennai"]],
-  ["kavyashah.finance", "Kavya Shah", "Ahmedabad", ["Finance"], ["Gujarati", "Hindi"], ["Instagram", "YouTube"], 132000, 4.6, 48000, "1789500381106-ba13068a6520", "Money basics for small-business families.", [52, "25–34", "Ahmedabad"]],
-  ["ishita.weaves", "Ishita Banerjee", "Kolkata", ["Fashion", "DIY"], ["Bengali", "English"], ["Instagram"], 48000, 7.1, 22000, "1793024981458-3b3773613794", "Handloom finds and the weavers behind them.", [81, "25–34", "Kolkata"]],
-  ["riya.reviews", "Riya Kulkarni", "Mumbai", ["Tech"], ["Hindi", "Marathi", "English"], ["Instagram", "YouTube"], 390000, 3.2, 140000, "1759840278326-73f26ae8c5c7", "Honest gadget reviews under ₹30,000.", [41, "18–24", "Mumbai"]],
-  ["poojatravels", "Pooja Nair", "Kochi", ["Travel"], ["Malayalam", "English"], ["Instagram"], 76000, 5.2, 29000, "1774437890454-634d48db52c8", "Slow travel across Kerala and the south.", [58, "25–34", "Kochi"]],
-  ["aaji.kitchen", "Lata Aaji", "Nashik", ["Food"], ["Marathi"], ["Instagram", "YouTube"], 610000, 6.4, 260000, "1713078582993-fdd86b1a2c1f", "Grandma's recipes, exactly as she makes them.", [69, "35–44", "Pune"]],
-  ["sneha.fit", "Sneha Gupta", "Delhi", ["Fitness"], ["Hindi", "English"], ["Instagram"], 158000, 4.1, 55000, "1759840278471-462cf3fcebd3", "Home workouts for busy working women.", [83, "25–34", "Delhi"]],
-  ["arjun.builds", "Arjun Menon", "Bengaluru", ["Business"], ["English", "Kannada"], ["Instagram", "YouTube"], 95000, 4.9, 38000, "1670110531916-41045e83cb0a", "Founder stories and how they got their first 100 customers.", [34, "25–34", "Bengaluru"]],
-  ["rohit.techtalk", "Rohit Verma", "Hyderabad", ["Tech"], ["Telugu", "Hindi"], ["YouTube", "Instagram"], 270000, 3.6, 95000, "1724225618359-a1d2763326f9", "Apps and AI tools explained in Telugu.", [29, "18–24", "Hyderabad"]],
-  ["karthik.frames", "Karthik S", "Chennai", ["Travel"], ["Tamil"], ["Instagram"], 64000, 6.0, 27000, "1667382136327-5f78dc5cf835", "Street photography and hidden food spots.", [37, "25–34", "Chennai"]],
-  ["sahil.farmstories", "Sahil Pawar", "Satara", ["Agri"], ["Marathi", "Hindi"], ["Instagram", "YouTube"], 42000, 8.3, 21000, "1727278465739-b3b5266e18de", "Modern farming that actually pays.", [18, "25–34", "Satara"]],
-  ["dev.unfiltered", "Dev Malhotra", "Delhi", ["Lifestyle", "Comedy"], ["Hindi"], ["Instagram"], 520000, 4.4, 210000, "1712425718085-cdd2b2298669", "Everyday Delhi life, played for laughs.", [46, "18–24", "Delhi"]],
-  ["imran.biryani", "Imran Qureshi", "Lucknow", ["Food"], ["Hindi", "Urdu"], ["Instagram", "YouTube"], 180000, 5.0, 74000, "1701721865389-9935778b40e3", "Awadhi kitchens and the families who run them.", [44, "25–34", "Lucknow"]],
-  ["dada.speaks", "Harish Dada", "Indore", ["Business"], ["Hindi"], ["Instagram"], 28000, 9.1, 15000, "1596604820148-da737958af16", "Forty years of trading wisdom, one reel at a time.", [31, "35–44", "Indore"]],
-  ["nikhil.money", "Nikhil Joshi", "Pune", ["Finance"], ["Marathi", "Hindi", "English"], ["Instagram", "YouTube"], 118000, 4.7, 43000, "1576948609819-638f90b85b1b", "Tax, SIPs and insurance without the jargon.", [38, "25–34", "Pune"]],
-  ["tanvi.makes", "Tanvi Desai", "Surat", ["DIY", "Lifestyle"], ["Gujarati", "Hindi"], ["Instagram"], 22000, 9.4, 12000, "1610014331379-f2a27bde2b66", "Home decor on a small budget.", [86, "25–34", "Surat"]],
-  ["aditya.vlogs", "Aditya Rane", "Mumbai", ["Lifestyle"], ["Hindi", "Marathi"], ["Instagram", "YouTube"], 305000, 3.8, 118000, "1695391396401-5fbb4bedafc1", "Small-shop owners and the stories behind their counters.", [40, "18–24", "Mumbai"]],
-].map(([handle, name, city, niches, langs, platforms, followers, eng, avgViews, photo, bio, [women, age, topCity]], i) => ({
-  handle, name, city, niches, langs, platforms, followers, eng, avgViews, bio,
-  photo: u(photo, 600, 760), avatar: u(photo, 120, 120),
-  audience: { women, age, topCity },
-  tint: ["#c9f0dc", "#e1d8ff", "#ffeab0", "#cfe7ff", "#ffd9c7", "#e6f7a8"][i % 6],
-  sample: true,
-}));
+/* Creators for creators.html live in assets/js/creators-data.js
+   (generated from the registration form by tools/creators_from_form.py). */

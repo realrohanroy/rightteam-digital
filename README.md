@@ -34,5 +34,15 @@ CSS/JS links carry `?v=N`. After changing any file in `assets/css` or `assets/js
 `sed -i 's/?v=2"/?v=3"/g' *.html`
 
 ## Creators (creators.html)
-All creators live in `RT.creators` at the end of `assets/js/content.js`. **Every current entry is a sample** (stock photo, made-up stats, shows a "Sample" tag). Replace with your onboarded creators: handle, name, city, niches, languages, platforms, followers, engagement %, average views, photo, one-line bio and audience (share of women, biggest age band, top city). Remove `sample: true` once real.
-Filters (niche, language, city, audience size, platform) are generated from that data automatically and mirrored in the URL, e.g. `creators.html?niche=Food&lang=Marathi`.
+Creators come from the registration form export. To refresh after new sign-ups:
+
+```bash
+python -I tools/creators_from_form.py "path/to/Form responses 1.csv"
+```
+
+This writes `assets/js/creators-data.js` with **public fields only** (no email, phone, WhatsApp, date of birth, gender, rates or insight screenshots) and lists only creators with 1,000+ followers on Instagram or YouTube. Never commit the CSV (`*.csv` is git-ignored).
+
+- **Photos**: put files in `assets/creators/` and set `"photo": "assets/creators/<handle>.jpg"` for that creator (until then an initials avatar is shown).
+- **Consent**: the form's checkbox covers being contacted, not being publicly listed. Add a "Show me on the Right Team creator page" checkbox (or get each creator's OK) before going live.
+- Filters, counts and the hero all build themselves from the data; filtered views are shareable via the URL (e.g. `creators.html?niche=Food&travel=Travels+for+campaigns`).
+
