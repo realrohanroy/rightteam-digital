@@ -13,7 +13,8 @@ python -m http.server 5510
 | `services.html` | All four services as chapters (`#lead-generation`, `#reels-video`, `#social-creators`, `#search-web`) + "What are you planning?" packages (`#planning`) |
 | `work.html` | Reels strip + filterable case studies |
 | `about.html` | About + how we work |
-| `start.html` | Enquiry form. Pre-selects from `?service=…` or `?goal=…` |
+| `creators.html` | Find a Creator: Discover hero, filterable creator directory, profile drawer, shortlist tray → enquiry form |
+| `start.html` | Enquiry form. Pre-selects from `?service=…`, `?goal=…` or `?creators=handle1,handle2` |
 | `privacy.html`, `terms.html` | Short drafts — review before launch |
 
 ## Before launch — edit `assets/js/content.js`
@@ -31,3 +32,7 @@ python -m http.server 5510
 ## Cache busting
 CSS/JS links carry `?v=N`. After changing any file in `assets/css` or `assets/js`, bump N in every `.html` file so returning visitors don't run stale code:
 `sed -i 's/?v=2"/?v=3"/g' *.html`
+
+## Creators (creators.html)
+All creators live in `RT.creators` at the end of `assets/js/content.js`. **Every current entry is a sample** (stock photo, made-up stats, shows a "Sample" tag). Replace with your onboarded creators: handle, name, city, niches, languages, platforms, followers, engagement %, average views, photo, one-line bio and audience (share of women, biggest age band, top city). Remove `sample: true` once real.
+Filters (niche, language, city, audience size, platform) are generated from that data automatically and mirrored in the URL, e.g. `creators.html?niche=Food&lang=Marathi`.

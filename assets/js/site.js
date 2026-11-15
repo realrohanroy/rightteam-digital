@@ -97,6 +97,7 @@
       <a href="services.html#planning"><b>Complete packages</b><small>Pick a goal, we suggest the scope</small></a>
     </details>
     <a href="work.html">Our Work</a>
+    <a href="creators.html">Find a Creator</a>
     <a href="about.html">About</a>
     <a class="btn btn--ink" href="start.html">Start a Project <span class="btn__dot">${icon("arrow")}</span></a>
   </div>`;
@@ -137,7 +138,7 @@
         <div><h3>Services</h3><ul>${SERVICES.map((s) => `<li><a href="services.html#${s.id}">${s.name}</a></li>`).join("")}</ul></div>
         <div><h3>Company</h3><ul>
           <li><a href="work.html">Our Work</a></li><li><a href="about.html">About</a></li>
-          <li><a href="start.html">Contact</a></li><li><a href="start.html?service=network">Join Our Network</a></li>
+          <li><a href="creators.html">Find a Creator</a></li><li><a href="start.html">Contact</a></li><li><a href="start.html?service=network">Join Our Network</a></li>
         </ul></div>
         <div><h3>Small print</h3><ul>
           <li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms</a></li>
@@ -587,6 +588,13 @@
   if (form) {
     const q = new URLSearchParams(location.search);
     const svc = q.get("service"), goal = q.get("goal");
+    // shortlist sent from creators.html: ?creators=handle1,handle2
+    const picked = (q.get("creators") || "").split(",").map((h) => h.trim()).filter((h) => /^[\w.]{2,40}$/.test(h));
+    if (picked.length && form.elements.brief && !form.elements.brief.value) {
+      form.elements.brief.value = `Creators I'd like to work with: ${picked.map((h) => "@" + h).join(", ")}
+
+About my campaign: `;
+    }
     if (svc) { const r = form.querySelector(`input[name="service"][value="${CSS.escape(svc)}"]`); if (r) r.checked = true; }
     if (goal) {
       const g = form.querySelector(`input[name="service"][value="package"]`); if (g) g.checked = true;
