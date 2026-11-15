@@ -148,7 +148,7 @@
     </div>
 
     <div class="wrap footer__mark" aria-hidden="true">
-      <span class="footer__mark-text">Right Team</span>
+      <span class="footer__mark-text"><span class="fm-slot" data-words="Right,Leads,Reels,Media,Edit,Video,Ads,Brand,Growth"><span class="fm-word">Right</span></span> Team</span>
       <img class="footer__mark-logo" src="assets/img/rt-logo.svg" alt="" width="180" height="180">
     </div>
 
@@ -385,6 +385,41 @@
         ox(dx * 0.35); oy(dy * 0.35); lx(dx * 0.12); ly(dy * 0.12);
       });
       zone.addEventListener("pointerleave", () => { ox(0); oy(0); lx(0); ly(0); });
+    }
+
+    // "____ Team": the first word rolls through the team's crafts; "Team" never moves.
+    // The slot is fixed to the widest word and words sit right-aligned against "Team".
+    const slot = $(".fm-slot");
+    if (slot) {
+      const words = slot.dataset.words.split(",");
+      const fit = () => {
+        const probe = document.createElement("span");
+        probe.className = "fm-word fm-probe"; slot.appendChild(probe);
+        const w = Math.max(...words.map((x) => { probe.textContent = x; return probe.getBoundingClientRect().width; }));
+        probe.remove(); slot.style.width = Math.ceil(w) + "px";
+      };
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+      addEventListener("resize", fit);
+      if (hasGSAP && !reduce) {
+        let i = 0, timer = null, onScreen = false, hovering = false;
+        const run = () => onScreen && !hovering && !document.hidden;
+        const schedule = () => { timer && timer.kill(); timer = gsap.delayedCall(1.7, () => { timer = null; if (run()) step(); }); };
+        const step = () => {
+          i = (i + 1) % words.length;
+          const cur = $(".fm-word:not(.fm-word--in)", slot);
+          const next = document.createElement("span");
+          next.className = "fm-word fm-word--in"; next.textContent = words[i];
+          slot.appendChild(next);
+          gsap.timeline({ onComplete: () => { cur.remove(); next.classList.remove("fm-word--in"); if (run()) schedule(); } })
+            .to(cur, { yPercent: -100, opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power3.in" }, 0)
+            .fromTo(next, { yPercent: 100, opacity: 0, filter: "blur(8px)" }, { yPercent: 0, opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 0.22);
+        };
+        const mk = $(".footer__mark");
+        mk.addEventListener("pointerenter", () => { hovering = true; timer && timer.kill(); timer = null; });
+        mk.addEventListener("pointerleave", () => { hovering = false; if (run() && !timer) schedule(); });
+        document.addEventListener("visibilitychange", () => { if (run() && !timer) schedule(); });
+        new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; if (run() && !timer) schedule(); }).observe(slot);
+      }
     }
 
     // the one footer moment: the wordmark rises into place

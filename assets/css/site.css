@@ -572,7 +572,7 @@ html.intro-on, html.intro-on body { overflow: hidden; }
   padding: 14px 14px 0; margin-inline: -14px; }
 .footer__mark-text {
   font-family: var(--font-display); font-weight: 600; letter-spacing: -0.045em; line-height: 0.82;
-  font-size: clamp(3.6rem, 15vw, 15.5rem); color: #eaf1fb; white-space: nowrap; padding-bottom: 0.06em;
+  font-size: clamp(3.4rem, 13vw, 13.5rem); color: #eaf1fb; white-space: nowrap; padding-bottom: 0.06em;
 }
 .footer__mark-logo {
   width: clamp(64px, 11vw, 176px); height: auto; flex: none; border-radius: 50%; margin-bottom: 0.4vw;
@@ -913,3 +913,10 @@ body.has-tray .frame { padding-bottom: 96px; }
   .world__label span { display: none; }
 }
 .world__label.is-left { translate: calc(-100% - 20px) 0; }
+
+/* footer wordmark: rotating first word, fixed slot so "Team" never moves */
+.fm-slot { position: relative; display: inline-block; vertical-align: bottom; text-align: right; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.fm-word { display: inline-block; white-space: nowrap; }
+.fm-word--in { position: absolute; right: 0; top: 0; }
+.fm-probe { position: absolute; visibility: hidden; right: 0; top: 0; }
+
