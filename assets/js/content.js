@@ -116,3 +116,19 @@ window.RT = {
 
 /* Creators for creators.html live in assets/js/creators-data.js
    (generated from the registration form by tools/creators_from_form.py). */
+
+/* International presence map (home page). Arcs fly from `origin` to each place
+   in this order as you scroll. `confirm: true` = placeholder location: replace
+   with where you really work (only list places you can stand behind). */
+window.RT.presence = {
+  origin: { city: "Ahmedabad", country: "India", lat: 23.02, lon: 72.57, note: "Head office" },
+  places: [
+    { city: "Dubai", country: "UAE", lat: 25.2, lon: 55.27 },
+    { city: "Nairobi", country: "Kenya", lat: -1.29, lon: 36.82 },
+    { city: "Lagos", country: "Nigeria", lat: 6.52, lon: 3.38, confirm: true },
+    { city: "London", country: "UK", lat: 51.5, lon: -0.13, confirm: true },
+    { city: "Singapore", country: "Singapore", lat: 1.35, lon: 103.82, confirm: true },
+    { city: "New York", country: "USA", lat: 40.71, lon: -74.0, confirm: true },
+  ],
+};
+

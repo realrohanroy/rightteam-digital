@@ -7,3 +7,6 @@ node_modules/
 # creator form exports contain contact details - never commit
 *.csv
 *.xlsx
+
+# Parallax local debug artifacts
+.parallax/
