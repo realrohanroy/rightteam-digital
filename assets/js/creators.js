@@ -94,7 +94,11 @@
     views: (a, b) => viewsRank(b.avgViews) - viewsRank(a.avgViews) || b.reach - a.reach,
   };
   // creators with a profile photo always come first; the chosen sort applies within each group
-  const results = () => ALL.filter((c) => matches(c)).sort((a, b) => (!!b.photo - !!a.photo) || (SORTS[state.sort] || SORTS.reach)(a, b));
+  // pinned to the top row in the default view (sort by reach)
+  const PINNED = ["shreya_vjvargiya", "chinmaychaudhariiii"];
+  const pin = (c) => { const i = PINNED.indexOf(c.handle); return i < 0 ? 99 : i; };
+  const results = () => ALL.filter((c) => matches(c)).sort((a, b) => (!!b.photo - !!a.photo)
+    || ((state.sort || "reach") === "reach" ? pin(a) - pin(b) : 0) || (SORTS[state.sort] || SORTS.reach)(a, b));
   const countFor = (k, v) => ALL.filter((c) => matches(c, k) && inFacet(c, k, v)).length;
   const labelOf = (k, v) => (k === "size" ? SIZES.find((s) => s.id === v).label : v);
 
@@ -288,6 +292,11 @@
        ["card", 83, 34, 3], ["card", 3, 64, 2], ["chip", 24, 82, 2], ["chip", 86, 87, 1], ["card", 68, 72, 1], ["chip", 88, 66, 2]];
   // faces first: creators with a photo fill the floating hero before initials
   const HERO = ALL.filter((c) => c.photo).concat(ALL.filter((c) => !c.photo));
+  // hand-picked swaps for the floating hero: [shown creator, replacement]
+  [["vijjufilms_", "shuttered_smiles"], ["moinnn_24", "shreya_vjvargiya"]].forEach(([out, inn]) => {
+    const a = HERO.findIndex((c) => c.handle === out), b = HERO.findIndex((c) => c.handle === inn);
+    if (a > -1 && b > -1) [HERO[a], HERO[b]] = [HERO[b], HERO[a]];
+  });
   stage.innerHTML = SLOTS.map(([type, x, y, d], i) => {
     const c = HERO[i % HERO.length];
     const inner = type === "card"
