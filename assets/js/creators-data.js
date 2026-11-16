@@ -45,8 +45,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/Dffj87CTsun/",
    "https://www.instagram.com/reel/Dflp6dFNe1p/"
   ],
-  "photo": "assets/creators/amdavadi_crowd.jpg",
-  "avatar": "assets/creators/amdavadi_crowd-sq.jpg"
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "umesh.hun",
