@@ -45,7 +45,59 @@ window.RT.creators = [
    "https://www.instagram.com/reel/Dffj87CTsun/",
    "https://www.instagram.com/reel/Dflp6dFNe1p/"
   ],
-  "photo": ""
+  "photo": "assets/creators/amdavadi_crowd.jpg",
+  "avatar": "assets/creators/amdavadi_crowd-sq.jpg"
+ },
+ {
+  "handle": "umesh.hun",
+  "name": "Umesh Hun",
+  "city": "Surat",
+  "state": "Gujarat",
+  "langs": [
+   "Gujarati"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Travel",
+   "Business",
+   "Health & Fitness",
+   "Comedy",
+   "Parenting",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC",
+   "Podcasts",
+   "YouTube videos"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 211000,
+  "yt": 18000,
+  "ytLink": "https://youtube.com/@umeshhun",
+  "avgViews": "100K+",
+  "audienceIn": "Gujarat",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "",
+  "bio": "Motivation,podcast host,fashion",
+  "style": "kuch bhi bana sakta hu",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "chatoraankit",
@@ -89,7 +141,8 @@ window.RT.creators = [
   "bio": "India’s first only disabled food blogger making you drool at night",
   "style": "I am food vlogger making reels around street food, cafe, restaurant",
   "reels": [],
-  "photo": ""
+  "photo": "assets/creators/chatoraankit.jpg",
+  "avatar": "assets/creators/chatoraankit-sq.jpg"
  },
  {
   "handle": "ahmedabadcityboy",
@@ -128,7 +181,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DfZgwIOoyEF/"
   ],
-  "photo": ""
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "chinmaychaudhariiii",
@@ -187,7 +241,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DVdiLBNiA4U/",
    "https://www.instagram.com/reel/DWjYh8ZiVnh/"
   ],
-  "photo": ""
+  "photo": "assets/creators/chinmaychaudhariiii.jpg",
+  "avatar": "assets/creators/chinmaychaudhariiii-sq.jpg"
  },
  {
   "handle": "moinnn_24",
@@ -237,7 +292,8 @@ window.RT.creators = [
    "https://www.youtube.com/shorts/KfhhXkqw0ho/",
    "https://www.youtube.com/shorts/vd8uRzzttvM/"
   ],
-  "photo": ""
+  "photo": "assets/creators/moinnn_24.jpg",
+  "avatar": "assets/creators/moinnn_24-sq.jpg"
  },
  {
   "handle": "nish_mukherjee",
@@ -292,7 +348,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DO5yRqFjBVj/",
    "https://www.instagram.com/reel/C4ImpuYtxKe/"
   ],
-  "photo": ""
+  "photo": "assets/creators/nish_mukherjee.jpg",
+  "avatar": "assets/creators/nish_mukherjee-sq.jpg"
  },
  {
   "handle": "realadityabhavsar",
@@ -332,7 +389,61 @@ window.RT.creators = [
   "bio": "Content Creator, food & travel blogger.",
   "style": "Create relatable, useful reels.",
   "reels": [],
-  "photo": ""
+  "photo": "assets/creators/realadityabhavsar.jpg",
+  "avatar": "assets/creators/realadityabhavsar-sq.jpg"
+ },
+ {
+  "handle": "prabhakar.joshi.official",
+  "name": "Prabhakar Joshi",
+  "city": "Indore",
+  "state": "Madhya Pradesh",
+  "langs": [
+   "Hindi",
+   "English"
+  ],
+  "niches": [
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC",
+   "Podcasts",
+   "YouTube videos",
+   "Blogging",
+   "Shoots & edits"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 76000,
+  "yt": 34000,
+  "ytLink": "https://youtube.com/@prabhakar.joshi.official",
+  "avgViews": "10K–50K",
+  "audienceIn": "Metro cities",
+  "setup": "Own shoot & edit setup",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "Honda, Ashok leyland, MMV, AV Madhuram Sandwich, Phone King, TVS, etc",
+  "bio": "I am a social media marketer as well creator",
+  "style": "I am a vlogger and i like to travel & explore the different side of places",
+  "reels": [
+   "https://www.instagram.com/reel/Db572NSypcA/",
+   "https://www.instagram.com/reel/DYqtkfrMZEE/",
+   "https://www.instagram.com/reel/DL927ZRSYHU/"
+  ],
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "akash_trapper",
@@ -377,7 +488,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/Dc1LY2AClHV/",
    "https://www.instagram.com/reel/Dak2WnLicZS/"
   ],
-  "photo": ""
+  "photo": "assets/creators/akash_trapper.jpg",
+  "avatar": "assets/creators/akash_trapper-sq.jpg"
  },
  {
   "handle": "bhvn_rwl",
@@ -422,7 +534,8 @@ window.RT.creators = [
    "https://www.instagram.com/p/DfmsRcfCC5b/",
    "https://www.instagram.com/p/DdwPqyBpz_O/"
   ],
-  "photo": ""
+  "photo": "assets/creators/bhvn_rwl.jpg",
+  "avatar": "assets/creators/bhvn_rwl-sq.jpg"
  },
  {
   "handle": "editwith.vansh",
@@ -466,7 +579,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DeyWpqWodPr/"
   ],
-  "photo": ""
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "harsh__menghani",
@@ -516,7 +630,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DZhP_C7AIGJ/",
    "https://www.instagram.com/reel/Dd6K-n3gbRp/"
   ],
-  "photo": ""
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "vijjufilms_",
@@ -561,7 +676,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DIeFK5syyuD/"
   ],
-  "photo": ""
+  "photo": "assets/creators/vijjufilms_.jpg",
+  "avatar": "assets/creators/vijjufilms_-sq.jpg"
  },
  {
   "handle": "sp_1414_",
@@ -607,7 +723,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DeauRTiJ8ga/"
   ],
-  "photo": ""
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "aryans__710",
@@ -648,7 +765,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DfhyLn9SANI/"
   ],
-  "photo": ""
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "shuttered_smiles",
@@ -696,7 +814,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DdgK7t-x2Mv/",
    "https://www.instagram.com/reel/DdyfcagJVE6/"
   ],
-  "photo": ""
+  "photo": "assets/creators/shuttered_smiles.jpg",
+  "avatar": "assets/creators/shuttered_smiles-sq.jpg"
  },
  {
   "handle": "bhavya_homoeopathy",
@@ -740,7 +859,63 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DdyR1beOHxJ/",
    "https://www.instagram.com/reel/DemD1CCRMZm/"
   ],
-  "photo": ""
+  "photo": "assets/creators/bhavya_homoeopathy.jpg",
+  "avatar": "assets/creators/bhavya_homoeopathy-sq.jpg"
+ },
+ {
+  "handle": "byharshmotwani",
+  "name": "Harsh Motwani",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English",
+   "Sindhi"
+  ],
+  "niches": [
+   "Lifestyle",
+   "Travel",
+   "Tech",
+   "Business",
+   "Health & Fitness",
+   "Comedy",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC",
+   "Shoots & edits",
+   "AI content"
+  ],
+  "platforms": [
+   "Instagram"
+  ],
+  "followers": 4000,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "5K–10K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "Weekly",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "Worked with a lot of brands\n- one resort from jawai\n- fashion brand in Ahmedabad - Aangan Boutique \n- Grace Coffee\n- food pages like Ahmedabad served\n- many more",
+  "bio": "I am Harsh Motwani - a creative head, creating lifestyle, travel, marketing and business content. I am also building my marketing portfolio by freelancing with brands based in Ahmedabad. Using claude pro day to day and e",
+  "style": "I know what works around me. I have a porche audience base especially from Ahmedabad and i create POV content, events covered, places i have travelled and a lot of vlogging and talking to people and cinematic too",
+  "reels": [
+   "https://www.instagram.com/reel/DdVgMafhEQ3/",
+   "https://www.instagram.com/reel/DZ4J3KFhAsc/",
+   "https://www.instagram.com/reel/DbNGGaSNXub/"
+  ],
+  "photo": "assets/creators/byharshmotwani.jpg",
+  "avatar": "assets/creators/byharshmotwani-sq.jpg"
  },
  {
   "handle": "vivaan_m_tiwari_",
@@ -785,7 +960,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DVyQRa2EV-s/",
    "https://www.instagram.com/reel/DUqppr1k7Nd/"
   ],
-  "photo": ""
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "shubh_mevada._",
@@ -828,7 +1004,47 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DfSz9tszYMV/"
   ],
-  "photo": ""
+  "photo": "assets/creators/shubh_mevada._.jpg",
+  "avatar": "assets/creators/shubh_mevada._-sq.jpg"
+ },
+ {
+  "handle": "_avani_patel1513",
+  "name": "Avani Panchotiya",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle"
+  ],
+  "roles": [
+   "AI content"
+  ],
+  "platforms": [
+   "Instagram",
+   "Snapchat"
+  ],
+  "followers": 2600,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "",
+  "audienceIn": "Gujarat",
+  "setup": "",
+  "posts": "Weekly",
+  "travels": false,
+  "collabs": [],
+  "brands": "solar panel",
+  "bio": "My content style is creative, unique, and visually appealing. I love exploring new ideas, experimenting with trends, and turning simple moments into engaging content with a fresh and innovative touch.",
+  "style": "",
+  "reels": [
+   "https://www.instagram.com/p/DcKpyPECKyP/",
+   "https://www.instagram.com/p/DeItvHbDBwa/"
+  ],
+  "photo": "assets/creators/_avani_patel1513.jpg",
+  "avatar": "assets/creators/_avani_patel1513-sq.jpg"
  },
  {
   "handle": "_mitaliihansraj_",
@@ -879,7 +1095,105 @@ window.RT.creators = [
    "https://www.instagram.com/reel/Dbm7iEyhVoq/",
    "https://www.instagram.com/reel/Db-fF36OjYs/"
   ],
-  "photo": ""
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "mehtamaitri06",
+  "name": "Maitri Mehta",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English",
+   "Marathi"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Travel"
+  ],
+  "roles": [
+   "YouTube videos",
+   "Shoots & edits"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 1703,
+  "yt": 84,
+  "ytLink": "https://youtube.com/@maitrimehta02",
+  "avgViews": "5K–10K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "",
+  "bio": "Very practical",
+  "style": "I am multi talanted person but just explor my instragram initially",
+  "reels": [
+   "https://www.instagram.com/reel/DfboBWcOteU/",
+   "https://www.instagram.com/reel/De_125UhN0r/",
+   "https://www.instagram.com/reel/Debjbx4OVqI/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "shreya_vjvargiya",
+  "name": "Shreya Vijay",
+  "city": "Jodhpur",
+  "state": "Rajasthan",
+  "langs": [
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram"
+  ],
+  "followers": 1500,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "1K–5K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "Daily",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "Garnier \nMeeoow \nMahavir oil",
+  "bio": "I am doctor by profession",
+  "style": "I make makeup tutorials , i do brand collaborations",
+  "reels": [
+   "https://www.instagram.com/p/DdEfH1ZDyjr/",
+   "https://www.instagram.com/reel/C8W3PJ2yVMJ/",
+   "https://www.instagram.com/reel/DdwX5l0zyx1/"
+  ],
+  "photo": "assets/creators/shreya_vjvargiya.jpg",
+  "avatar": "assets/creators/shreya_vjvargiya-sq.jpg"
  },
  {
   "handle": "viveknath_18",
@@ -922,7 +1236,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/Dd8BL6xNsOS/",
    "https://www.instagram.com/reel/DbS8VPZNNdR/"
   ],
-  "photo": ""
+  "photo": "assets/creators/viveknath_18.jpg",
+  "avatar": "assets/creators/viveknath_18-sq.jpg"
  },
  {
   "handle": "dipsistudio",
@@ -963,6 +1278,7 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DaXarGVzSEw/",
    "https://www.instagram.com/reel/DeUOJSwoCFt/"
   ],
-  "photo": ""
+  "photo": "assets/creators/dipsistudio.jpg",
+  "avatar": "assets/creators/dipsistudio-sq.jpg"
  }
 ];

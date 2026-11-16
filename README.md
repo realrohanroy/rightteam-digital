@@ -42,7 +42,12 @@ python -I tools/creators_from_form.py "path/to/Form responses 1.csv"
 
 This writes `assets/js/creators-data.js` with **public fields only** (no email, phone, WhatsApp, date of birth, gender, rates or insight screenshots) and lists only creators with 1,000+ followers on Instagram or YouTube. Never commit the CSV (`*.csv` is git-ignored).
 
-- **Photos**: put files in `assets/creators/` and set `"photo": "assets/creators/<handle>.jpg"` for that creator (until then an initials avatar is shown).
+- **Photos**: in Google Forms → Responses → "Upload Your Profile Photo" → *View folder* → select all → Download (one zip). Extract it, then:
+  ```bash
+  python -I tools/creator_photos.py "path/to/extracted/folder"
+  python -I tools/creators_from_form.py "path/to/Form responses.csv"
+  ```
+  `tools/creator_photo_map.json` maps each Instagram handle to the uploader name in the Drive file name; add new creators there. Photos are face-cropped, compressed and stripped of EXIF/GPS. Screenshots, PDFs and videos are skipped (initials shown instead).
 - **Consent**: the form's checkbox covers being contacted, not being publicly listed. Add a "Show me on the Right Team creator page" checkbox (or get each creator's OK) before going live.
 - Filters, counts and the hero all build themselves from the data; filtered views are shareable via the URL (e.g. `creators.html?niche=Food&travel=Travels+for+campaigns`).
 

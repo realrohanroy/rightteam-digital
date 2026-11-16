@@ -31,8 +31,9 @@
   const byHandle = Object.fromEntries(ALL.map((c) => [c.handle, c]));
   const viewsRank = (v = "") => { const m = v.replace(/,/g, "").match(/(\d+)\s*K/i); return v.startsWith("Below") ? 0.5 : m ? +m[1] : 0; };
   // portrait, or a typographic monogram until photos arrive
+  const SMALL = /fl-face|tray-face/;
   const face = (c, cls) => c.photo
-    ? `<img class="${cls}" src="${esc(c.photo)}" alt="" loading="lazy" decoding="async">`
+    ? `<img class="${cls}" src="${esc(SMALL.test(cls) && c.avatar ? c.avatar : c.photo)}" alt="" loading="lazy" decoding="async">`
     : `<span class="${cls} mono" style="--tint:${c.tint}" aria-hidden="true">${esc(c.initials)}</span>`;
 
   /* ---------------- facets ---------------- */
@@ -284,8 +285,10 @@
     ? [["chip", 5, 14, 2], ["card", 60, 11, 3], ["chip", 8, 25, 1], ["card", 4, 76, 3], ["chip", 60, 80, 2], ["chip", 56, 91, 1]]
     : [["card", 4, 8, 3], ["chip", 25, 7, 1], ["chip", 42, 4, 2], ["card", 63, 6, 2], ["chip", 85, 12, 1], ["chip", 11, 42, 1],
        ["card", 83, 34, 3], ["card", 3, 64, 2], ["chip", 24, 82, 2], ["chip", 86, 87, 1], ["card", 68, 72, 1], ["chip", 88, 66, 2]];
+  // faces first: creators with a photo fill the floating hero before initials
+  const HERO = ALL.filter((c) => c.photo).concat(ALL.filter((c) => !c.photo));
   stage.innerHTML = SLOTS.map(([type, x, y, d], i) => {
-    const c = ALL[i % ALL.length];
+    const c = HERO[i % HERO.length];
     const inner = type === "card"
       ? `<span class="fl-card" style="--tint:${c.tint}">${face(c, "fl-face")}<b>${esc(c.name.split(" ").slice(0, 2).join(" "))}</b><small>@${esc(c.handle)}</small><em>${esc(c.niches[0])} · ${fmt(c.reach)}</em></span>`
       : `<span class="fl-chip">${face(c, "fl-face fl-face--sm")}<span><b>${esc(c.name.split(" ")[0])}</b><small>${esc(c.niches[0])}</small></span></span>`;
