@@ -93,7 +93,8 @@
     yt: (a, b) => b.yt - a.yt,
     views: (a, b) => viewsRank(b.avgViews) - viewsRank(a.avgViews) || b.reach - a.reach,
   };
-  const results = () => ALL.filter((c) => matches(c)).sort(SORTS[state.sort] || SORTS.reach);
+  // creators with a profile photo always come first; the chosen sort applies within each group
+  const results = () => ALL.filter((c) => matches(c)).sort((a, b) => (!!b.photo - !!a.photo) || (SORTS[state.sort] || SORTS.reach)(a, b));
   const countFor = (k, v) => ALL.filter((c) => matches(c, k) && inFacet(c, k, v)).length;
   const labelOf = (k, v) => (k === "size" ? SIZES.find((s) => s.id === v).label : v);
 
