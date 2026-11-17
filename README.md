@@ -51,3 +51,7 @@ This writes `assets/js/creators-data.js` with **public fields only** (no email, 
 - **Consent**: the form's checkbox covers being contacted, not being publicly listed. Add a "Show me on the Right Team creator page" checkbox (or get each creator's OK) before going live.
 - Filters, counts and the hero all build themselves from the data; filtered views are shareable via the URL (e.g. `creators.html?niche=Food&travel=Travels+for+campaigns`).
 
+
+## Creator onboarding
+
+Creators register at `join.html` (Supabase + NocoDB). Setup, daily use and the import of old Google Form responses: [docs/ONBOARDING.md](docs/ONBOARDING.md).

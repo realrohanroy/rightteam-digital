@@ -1,0 +1,21 @@
+# NocoDB: the spreadsheet-style screen the ops team uses to review creators.
+# Only needed if you self-host. NocoDB Cloud (app.nocodb.com) works the same way with no server.
+#
+#   1. copy .env.example to .env and fill it in (never commit .env)
+#   2. docker compose up -d
+#   3. open http://localhost:8080, create the admin account, then
+#      "Connect external data source" -> PostgreSQL -> use NOCODB_PG_URL from .env
+services:
+  nocodb:
+    image: nocodb/nocodb:latest   # pin to the version you install once it works
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    env_file: .env
+    environment:
+      NC_DB: "sqlite3:///usr/app/data/noco.db"   # NocoDB's own settings; creator data stays in Supabase
+      NC_DISABLE_TELE: "true"
+    volumes:
+      - nocodb_data:/usr/app/data
+volumes:
+  nocodb_data:

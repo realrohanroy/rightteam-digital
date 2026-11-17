@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join as a Creator — Right Team Digital</title>
+  <meta name="description" content="Register as a creator with Right Team Digital. Four short steps, about five minutes. We review every profile and get in touch about brand collaborations that fit you.">
+  <meta name="theme-color" content="#f7f8f5">
+  <link rel="icon" href="assets/img/rt-logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css?v=36">
+</head>
+<body data-page="join">
+<main id="main" class="frame">
+  <section class="sheet page-hero">
+    <div class="wrap form-wrap join">
+      <aside class="join__intro">
+        <h1 class="display h-lg">Join our creator network.</h1>
+        <p class="lede">Four short steps, about five minutes. We review every profile and get in touch when a brand campaign fits your audience.</p>
+        <ol class="join__progress" id="joinProgress" aria-label="Registration steps">
+          <li data-for="1" aria-current="step"><span>1</span>About you</li>
+          <li data-for="2"><span>2</span>Your channels</li>
+          <li data-for="3"><span>3</span>Your content</li>
+          <li data-for="4"><span>4</span>Contact &amp; rates</li>
+        </ol>
+        <p class="small join__privacy">Your phone number, email, date of birth and rates stay private with our team. Only your name, handle, city, niche and audience size can appear on our site, and only after we approve your profile.</p>
+      </aside>
+
+      <form class="brief-form join__form" id="joinForm" novalidate>
+        <div class="form-status join__setup" id="joinSetup" hidden></div>
+
+        <!-- honeypot: real people never see or fill this -->
+        <div class="join__hp" aria-hidden="true"><label for="j-website">Website</label><input id="j-website" name="website" tabindex="-1" autocomplete="off"></div>
+
+        <!-- STEP 1 -->
+        <section class="join-step" data-step="1" aria-labelledby="st1">
+          <h2 class="join-step__title" id="st1"><small>Step 1 of 4</small>About you</h2>
+          <div class="field-row">
+            <div class="field"><label for="j-name">Full name</label><input id="j-name" name="name" autocomplete="name" required maxlength="80"><span class="form-error">Enter your full name.</span></div>
+            <div class="field"><label for="j-handle">Instagram handle</label><span class="hint">e.g. @yourname</span><input id="j-handle" name="handle" required autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="31"><span class="form-error" data-msg="Enter your Instagram handle, e.g. @yourname.">Enter your Instagram handle, e.g. @yourname.</span><span class="join__ok" id="handleOk" hidden>Available ✓</span></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="j-city">City</label><input id="j-city" name="city" autocomplete="address-level2" required maxlength="60"><span class="form-error">Enter your city.</span></div>
+            <div class="field"><label for="j-state">State</label><input id="j-state" name="state" autocomplete="address-level1" maxlength="60" list="states"></div>
+          </div>
+          <fieldset class="field" data-required="langs"><legend>Languages you create in</legend><div class="choice-grid" data-chips="langs"></div><span class="form-error">Pick at least one language.</span></fieldset>
+          <div class="field" data-required="photo">
+            <label for="j-photo">Profile photo</label>
+            <span class="hint">A clear photo of your face. Brands see this first.</span>
+            <label class="join__drop" for="j-photo"><img id="photoPreview" alt="" hidden><span id="photoLabel">Choose a photo</span></label>
+            <input id="j-photo" type="file" accept="image/jpeg,image/png,image/webp" class="sr-only">
+            <span class="form-error" data-msg="Add a profile photo (JPG or PNG).">Add a profile photo (JPG or PNG).</span>
+          </div>
+          <div class="field"><label for="j-bio">About you</label><span class="hint">2–3 lines brands will read. Optional.</span><textarea id="j-bio" name="bio" maxlength="600" rows="3"></textarea></div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section class="join-step" data-step="2" aria-labelledby="st2" hidden>
+          <h2 class="join-step__title" id="st2"><small>Step 2 of 4</small>Your channels</h2>
+          <fieldset class="field" data-required="platforms"><legend>Where are you active?</legend><div class="choice-grid" data-chips="platforms"></div><span class="form-error">Pick at least one platform.</span></fieldset>
+          <div class="field-row">
+            <div class="field"><label for="j-ig">Instagram followers</label><span class="hint">You can type 12500, 12.5K or 1.2L</span><input id="j-ig" name="ig_followers" inputmode="decimal" required data-count><span class="join__num" aria-live="polite"></span><span class="form-error">Enter your follower count.</span></div>
+            <div class="field"><label for="j-views">Average views per reel</label><select id="j-views" name="avg_views" data-options="views"></select></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="j-ytlink">YouTube channel link</label><span class="hint">Optional</span><input id="j-ytlink" name="yt_link" type="url" inputmode="url" placeholder="https://youtube.com/@…"><span class="form-error">Paste the full link, starting with https://</span></div>
+            <div class="field"><label for="j-yt">YouTube subscribers</label><span class="hint">Optional</span><input id="j-yt" name="yt_subscribers" inputmode="decimal" data-count><span class="join__num" aria-live="polite"></span><span class="form-error">Enter a number, e.g. 4500 or 4.5K.</span></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="j-aud">Where is most of your audience?</label><select id="j-aud" name="audience_in" data-options="audience"></select></div>
+            <div class="field"><label for="j-posts">How often do you post?</label><select id="j-posts" name="posts_consistently" data-options="posts"></select></div>
+          </div>
+          <div class="field"><label for="j-other">Other profile link</label><span class="hint">Facebook, X, Snapchat, podcast… Optional</span><input id="j-other" name="other_link" type="url" inputmode="url" placeholder="https://"><span class="form-error">Paste the full link, starting with https://</span></div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section class="join-step" data-step="3" aria-labelledby="st3" hidden>
+          <h2 class="join-step__title" id="st3"><small>Step 3 of 4</small>Your content</h2>
+          <fieldset class="field" data-required="niches"><legend>Your niche</legend><span class="hint">Pick up to 3</span><div class="choice-grid" data-chips="niches" data-max="3"></div><span class="form-error">Pick at least one niche.</span></fieldset>
+          <fieldset class="field"><legend>What do you make?</legend><div class="choice-grid" data-chips="roles"></div></fieldset>
+          <fieldset class="field"><legend>Collaborations you're open to</legend><div class="choice-grid" data-chips="collabs"></div></fieldset>
+          <div class="field-row">
+            <div class="field"><label for="j-setup">Shooting &amp; editing setup</label><select id="j-setup" name="setup" data-options="setup"></select></div>
+            <div class="field"><label for="j-travel">Open to outstation campaigns?</label><select id="j-travel" name="open_to_travel"><option value="">Choose…</option><option value="true">Yes</option><option value="false">No, only in my city</option></select></div>
+          </div>
+          <div class="field"><label for="j-post1">Links to your 3 best reels or posts</label><span class="hint">Paste Instagram or YouTube links. Optional but it helps a lot.</span>
+            <input id="j-post1" name="best_post_1" type="url" inputmode="url" placeholder="https://www.instagram.com/reel/…">
+            <input name="best_post_2" type="url" inputmode="url" placeholder="https://" aria-label="Second best post link">
+            <input name="best_post_3" type="url" inputmode="url" placeholder="https://" aria-label="Third best post link">
+            <span class="form-error">Paste the full link, starting with https://</span></div>
+          <div class="field"><label for="j-brands">Brands you've worked with</label><span class="hint">Optional</span><input id="j-brands" name="brands" maxlength="300"></div>
+          <div class="field"><label for="j-port">Portfolio link</label><span class="hint">Drive folder, website or highlights. Optional</span><input id="j-port" name="portfolio_link" type="url" inputmode="url" placeholder="https://"><span class="form-error">Paste the full link, starting with https://</span></div>
+        </section>
+
+        <!-- STEP 4 -->
+        <section class="join-step" data-step="4" aria-labelledby="st4" hidden>
+          <h2 class="join-step__title" id="st4"><small>Step 4 of 4</small>Contact &amp; rates</h2>
+          <p class="small join__lock">🔒 Everything on this step stays private with our team.</p>
+          <div class="field-row">
+            <div class="field"><label for="j-email">Email</label><input id="j-email" name="email" type="email" autocomplete="email" required><span class="form-error">Enter a valid email address.</span></div>
+            <div class="field"><label for="j-phone">Mobile number</label><input id="j-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+91"><span class="form-error">Enter a valid mobile number.</span></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="j-wa">WhatsApp number</label><span class="hint">Leave empty if same as mobile</span><input id="j-wa" name="whatsapp" type="tel" placeholder="+91"><span class="form-error">Enter a valid WhatsApp number.</span></div>
+            <div class="field"><label for="j-dob">Date of birth</label><span class="hint">Optional</span><input id="j-dob" name="date_of_birth" type="date"></div>
+          </div>
+          <fieldset class="field"><legend>Your usual rates (₹)</legend><span class="hint">Optional. Rough numbers are fine; we never share them.</span>
+            <div class="join__rates">
+              <label>Reel<input name="rate_reel" inputmode="numeric" placeholder="₹"></label>
+              <label>Story<input name="rate_story" inputmode="numeric" placeholder="₹"></label>
+              <label>Post<input name="rate_post" inputmode="numeric" placeholder="₹"></label>
+              <label>Collab post<input name="rate_collab" inputmode="numeric" placeholder="₹"></label>
+              <label>YouTube short<input name="rate_yt_short" inputmode="numeric" placeholder="₹"></label>
+              <label>YouTube video<input name="rate_yt_long" inputmode="numeric" placeholder="₹"></label>
+            </div>
+          </fieldset>
+          <div class="field"><label for="j-ins">Instagram insights screenshots</label><span class="hint">Reach, audience age and top cities. Up to 3 images. Optional</span><input id="j-ins" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="hint" id="insCount"></span></div>
+          <div class="field"><label for="j-else">Anything else brands should know?</label><textarea id="j-else" name="anything_else" maxlength="1000" rows="3"></textarea></div>
+          <div class="field" data-required="consent">
+            <label class="join__consent"><input type="checkbox" name="consent" value="true"> <span>The information above is accurate. Right Team Private Limited may contact me on WhatsApp, email or phone about creator opportunities, and may show my public profile (name, handle, city, niche, audience size, photo) on its website after review. Registration doesn't guarantee a paid collaboration. See the <a href="privacy.html">privacy policy</a>.</span></label>
+            <span class="form-error">Please tick this box to register.</span>
+          </div>
+        </section>
+
+        <div class="form-status" id="joinStatus" role="status" aria-live="polite"></div>
+        <div class="join__nav">
+          <button class="btn btn--ghost" type="button" id="joinBack" hidden>Back</button>
+          <button class="btn btn--ink" type="submit" id="joinNext">Continue <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        </div>
+      </form>
+
+      <div class="brief-form join__done" id="joinDone" hidden tabindex="-1">
+        <h2 class="display h-md">You're in the queue 🎉</h2>
+        <p class="lede">Thanks for registering. Our team reviews new profiles within 3 working days and will message you on WhatsApp or email.</p>
+        <a class="btn btn--ink" href="creators.html">See the creator directory <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+<datalist id="states"><option>Gujarat</option><option>Maharashtra</option><option>Rajasthan</option><option>Madhya Pradesh</option><option>Delhi</option><option>Karnataka</option><option>Punjab</option><option>Uttar Pradesh</option><option>West Bengal</option><option>Tamil Nadu</option><option>Telangana</option><option>Kerala</option></datalist>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/content.js?v=35"></script>
+<script src="assets/js/site.js?v=35"></script>
+<script src="assets/js/join.js?v=1"></script>
+</body>
+</html>

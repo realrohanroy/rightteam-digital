@@ -138,7 +138,7 @@
         <div><h3>Services</h3><ul>${SERVICES.map((s) => `<li><a href="services.html#${s.id}">${s.name}</a></li>`).join("")}</ul></div>
         <div><h3>Company</h3><ul>
           <li><a href="work.html">Our Work</a></li><li><a href="about.html">About</a></li>
-          <li><a href="creators.html">Find a Creator</a></li><li><a href="start.html">Contact</a></li><li><a href="start.html?service=network">Join Our Network</a></li>
+          <li><a href="creators.html">Find a Creator</a></li><li><a href="start.html">Contact</a></li><li><a href="join.html">Join as a Creator</a></li>
         </ul></div>
         <div><h3>Small print</h3><ul>
           <li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms</a></li>

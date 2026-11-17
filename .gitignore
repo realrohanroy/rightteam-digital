@@ -10,3 +10,7 @@ node_modules/
 
 # Parallax local debug artifacts
 .parallax/
+
+# generated import with contact details - never commit
+supabase/seed/
+__pycache__/
