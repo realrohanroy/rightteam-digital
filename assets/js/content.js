@@ -26,7 +26,7 @@ window.RT = {
     // Creator registration (join.html). Paste from Supabase -> Project Settings -> API.
     // The anon key is safe to publish: it can only call submit_creator() and upload to pending/.
     // Until both are set, join.html shows a notice (and links fallbackForm if given).
-    onboarding: { supabaseUrl: "", supabaseAnonKey: "", fallbackForm: "" },
+    onboarding: { supabaseUrl: "https://yucjszatcjmobpyetqjg.supabase.co", supabaseAnonKey: "sb_publishable_p8iLZ2Lq8pNJOQ5BD-xsKg_uCY4DS0T", fallbackForm: "" },
     // Footer status ("At our desks" / "After hours"). India time, 24h clock,
     // days: 0 = Sunday … 6 = Saturday. TODO confirm your real office hours.
     hours: { tz: "Asia/Kolkata", open: 10, close: 19, days: [1, 2, 3, 4, 5, 6] },
