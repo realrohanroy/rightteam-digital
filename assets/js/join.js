@@ -123,7 +123,7 @@
       ["portfolio_link", (f) => isUrl(f.portfolio_link.value.trim())],
     ],
     4: () => [
-      ["email", (f) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())],
+      ["email", (f) => /^[a-z0-9][^@\s]*@[^@\s]+\.[^@\s]+$/i.test(f.email.value.trim())],
       ["phone", (f) => phoneOk(f.phone.value)],
       ["whatsapp", (f) => !f.whatsapp.value.trim() || phoneOk(f.whatsapp.value)],
       ["[data-required=consent]", (f) => f.consent.checked],
@@ -159,7 +159,9 @@
 
   /* ---------- images: downscale + re-encode (drops EXIF / GPS) ---------- */
   const shrink = (file, max = 1600) => new Promise((res, rej) => {
-    if (!/^image\/(jpeg|png|webp)$/.test(file.type)) return rej(new Error("type"));
+    // some Android pickers report no type at all: let the browser try to decode it instead of refusing
+    if (file.type && !file.type.startsWith("image/")) return rej(new Error("type"));
+    if (file.size > 30 * 1024 * 1024) return rej(new Error("huge"));
     const url = URL.createObjectURL(file), img = new Image();
     img.onload = () => {
       const k = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
@@ -189,7 +191,9 @@
       setErr(field, false);
     } catch (e) {
       photoBlob = null; preview.hidden = true; photoLabel.textContent = "Choose a photo";
-      setErr(field, true, e.message === "small" ? "That photo is too small. Use one at least 300 px wide." : "Use a JPG, PNG or WebP photo.");
+      setErr(field, true, e.message === "small" ? "That photo is too small. Use one at least 300 px wide."
+        : e.message === "huge" ? "That file is too large. Choose a normal photo from your gallery."
+        : "We couldn't open that photo. Use a JPG or PNG. On iPhone, a screenshot of the photo works.");
     }
   }));
   const insIn = $("#j-ins"), insCount = $("#insCount");
@@ -209,7 +213,9 @@
   }));
 
   /* ---------- draft: survives a refresh or a dropped connection ---------- */
-  const SKIP = new Set(["website", "consent"]);
+  // private answers are never kept on the device (shared phones, cyber cafés)
+  const SKIP = new Set(["website", "consent", "email", "phone", "whatsapp", "date_of_birth", "gender", "anything_else",
+    "rate_reel", "rate_story", "rate_post", "rate_collab", "rate_yt_short", "rate_yt_long"]);
   const saveDraft = () => {
     const d = {};
     for (const el of form.elements) {
@@ -314,6 +320,8 @@
         if (err.hint === "handle") handleTaken = /already/.test(err.message);
         setErr(field, true, err.message);
         say(err.message);
+      } else if (err.hint) {
+        say(err.message); // e.g. rate limit: the server's own wording is the clearest
       } else {
         say(navigator.onLine === false
           ? "You seem to be offline. Your answers are saved; press Submit again when you're back online."
