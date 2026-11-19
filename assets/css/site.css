@@ -955,3 +955,4 @@ body.has-tray .frame { padding-bottom: 96px; }
 @media (max-width: 860px) { .join__rates { grid-template-columns: 1fr 1fr; } }
 .join .field-row { align-items: end; }
 .join .field input { align-self: end; }
+.join__other { margin-top: 2px; }

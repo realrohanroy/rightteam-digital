@@ -17,10 +17,10 @@
 
   // option values are what the site shows, so publishing needs no mapping
   const OPT = {
-    langs: ["Gujarati", "Hindi", "English", "Marathi", "Punjabi", "Sindhi", "Rajasthani", "Bengali", "Tamil", "Telugu", "Kannada", "Malayalam", "Urdu"],
+    langs: ["Gujarati", "Hindi", "English", "Marathi", "Punjabi", "Sindhi", "Rajasthani", "Bengali", "Tamil", "Telugu", "Kannada", "Malayalam", "Urdu", "Other"],
     platforms: ["Instagram", "YouTube", "Facebook", "Snapchat", "X", "LinkedIn", "Podcasts"],
-    niches: ["Fashion & Beauty", "Lifestyle", "Food", "Travel", "Health & Fitness", "Tech", "Business", "Finance & Education", "Parenting", "Comedy", "Gaming", "City & Local"],
-    roles: ["Reels & posts", "YouTube videos", "UGC", "Shoots & edits", "Podcasts", "AI content", "Blogging"],
+    niches: ["Fashion & Beauty", "Lifestyle", "Food", "Travel", "Health & Fitness", "Tech", "Business", "Finance & Education", "Parenting", "Comedy", "Gaming", "City & Local", "Other"],
+    roles: ["Influencer / content creator", "YouTube videos", "UGC", "Shoots & edits", "Podcasts", "AI content", "Blogging", "Aspiring creator"],
     collabs: ["Paid collabs", "Long-term partnerships", "Influencer campaigns", "Events", "UGC without posting", "Podcasts", "Barter", "Affiliate"],
     views: ["Below 1K", "1K–5K", "5K–10K", "10K–50K", "50K–100K", "100K+", "New creator"],
     audience: ["Gujarat", "Metro cities", "Other Indian states", "Outside India"],
@@ -43,6 +43,17 @@
   $$("select[data-options]", form).forEach((sel) => {
     sel.innerHTML = `<option value="">Choose…</option>` + OPT[sel.dataset.options].map((v) => `<option>${v}</option>`).join("");
   });
+
+  /* ---------- "Other" chips reveal a text box; "Not yet" hides the brands box ---------- */
+  const syncExtras = () => {
+    $$("[data-other-for]", form).forEach((box) => {
+      const on = !!$(`input[name=${box.dataset.otherFor}][value="Other"]:checked`, form);
+      box.hidden = !on;
+      if (!on) box.value = "";
+    });
+    $("#brandsField").hidden = form.elements.worked_with_brands.value === "false";
+  };
+  form.addEventListener("change", syncExtras);
 
   /* ---------- counts: 12500 / 12.5k / 1.2L / 1.5M ---------- */
   const parseCount = (s) => {
@@ -96,7 +107,7 @@
       ["name", (f) => f.name.value.trim().length >= 2],
       ["handle", (f) => /^[a-z0-9._]{1,30}$/.test(normHandle(f.handle.value)) && !handleTaken],
       ["city", (f) => f.city.value.trim().length >= 2],
-      ["[data-required=langs]", () => $$("input[name=langs]:checked", form).length > 0],
+      ["[data-required=langs]", (f) => $$("input[name=langs]:checked", form).length > 0 && (f.lang_other.hidden || f.lang_other.value.trim() !== "")],
       ["[data-required=photo]", () => !!photoBlob],
     ],
     2: () => [
@@ -107,7 +118,7 @@
       ["other_link", (f) => isUrl(f.other_link.value.trim())],
     ],
     3: () => [
-      ["[data-required=niches]", () => $$("input[name=niches]:checked", form).length > 0],
+      ["[data-required=niches]", (f) => $$("input[name=niches]:checked", form).length > 0 && (f.niche_other.hidden || f.niche_other.value.trim() !== "")],
       ["best_post_1", (f) => ["best_post_1", "best_post_2", "best_post_3"].every((n) => isUrl(f[n].value.trim()))],
       ["portfolio_link", (f) => isUrl(f.portfolio_link.value.trim())],
     ],
@@ -123,7 +134,9 @@
     let first = null;
     checks[n]().forEach(([key, ok]) => {
       const f = fieldOf(key), bad = !ok(form.elements);
-      setErr(f, bad, key === "handle" && handleTaken ? "This handle is already registered. Email us to update your profile." : null);
+      const otherMissing = bad && /langs|niches/.test(key) && $$("input[type=checkbox]:checked", f).length > 0;
+      setErr(f, bad, key === "handle" && handleTaken ? "This handle is already registered. Email us to update your profile."
+        : otherMissing ? "Type what \u201cOther\u201d means." : null);
       if (bad && !first) first = f;
     });
     if (first) { const el = $("input:not([type=checkbox]):not(.sr-only),textarea,select,input", first) || first; el.focus(); }
@@ -159,8 +172,12 @@
     img.onerror = () => { URL.revokeObjectURL(url); rej(new Error("decode")); };
     img.src = url;
   });
+  // images still being resized; Continue / Submit wait for these so nothing is silently dropped
+  const pending = new Set();
+  const track = (fn) => () => { const p = fn(); pending.add(p); p.finally(() => pending.delete(p)); };
+  const settle = () => Promise.allSettled([...pending]);
   const photoIn = $("#j-photo"), preview = $("#photoPreview"), photoLabel = $("#photoLabel");
-  photoIn.addEventListener("change", async () => {
+  photoIn.addEventListener("change", track(async () => {
     const f = photoIn.files[0], field = photoIn.closest(".field");
     if (!f) return;
     try {
@@ -174,13 +191,22 @@
       photoBlob = null; preview.hidden = true; photoLabel.textContent = "Choose a photo";
       setErr(field, true, e.message === "small" ? "That photo is too small. Use one at least 300 px wide." : "Use a JPG, PNG or WebP photo.");
     }
-  });
+  }));
   const insIn = $("#j-ins"), insCount = $("#insCount");
-  insIn.addEventListener("change", async () => {
-    insightBlobs = [];
-    for (const f of [...insIn.files].slice(0, 3)) { try { insightBlobs.push((await shrink(f, 2000)).blob); } catch { /* skip unreadable */ } }
-    insCount.textContent = insightBlobs.length ? `${insightBlobs.length} screenshot${insightBlobs.length > 1 ? "s" : ""} ready${insIn.files.length > 3 ? " (first 3 kept)" : ""}` : "";
-  });
+  let ytInsightBlobs = [];
+  const ytIn = $("#j-ytins"), ytCount = $("#ytInsCount");
+  ytIn.addEventListener("change", track(async () => {
+    const out = [];
+    for (const f of [...ytIn.files].slice(0, 2)) { try { out.push((await shrink(f, 2000)).blob); } catch { /* skip unreadable */ } }
+    ytInsightBlobs = out;
+    ytCount.textContent = out.length ? `${out.length} screenshot${out.length > 1 ? "s" : ""} ready${ytIn.files.length > 2 ? " (first 2 kept)" : ""}` : "";
+  }));
+  insIn.addEventListener("change", track(async () => {
+    const out = [];
+    for (const f of [...insIn.files].slice(0, 3)) { try { out.push((await shrink(f, 2000)).blob); } catch { /* skip unreadable */ } }
+    insightBlobs = out;
+    insCount.textContent = out.length ? `${out.length} screenshot${out.length > 1 ? "s" : ""} ready${insIn.files.length > 3 ? " (first 3 kept)" : ""}` : "";
+  }));
 
   /* ---------- draft: survives a refresh or a dropped connection ---------- */
   const SKIP = new Set(["website", "consent"]);
@@ -206,6 +232,7 @@
   form.addEventListener("input", saveDraft);
   form.addEventListener("change", saveDraft);
   loadDraft();
+  syncExtras();
 
   /* ---------- API ---------- */
   const headers = (extra) => ({ apikey: KEY, Authorization: `Bearer ${KEY}`, ...extra });
@@ -221,22 +248,24 @@
     if (!r.ok) throw Object.assign(new Error("Upload failed"), { hint: "photo" });
     return path;
   }
-  const payload = (photoPath, insights) => {
+  const payload = (photoPath, insights, ytInsights) => {
     const f = form.elements, v = (n) => f[n].value.trim(), on = (n) => $$(`input[name=${n}]:checked`, form).map((x) => x.value);
     const rates = {};
     ["reel", "story", "post", "collab", "yt_short", "yt_long"].forEach((k) => { const x = v(`rate_${k}`).replace(/[₹,\s]/g, ""); if (x) rates[k] = x; });
     return {
       website: v("website"),
       handle: normHandle(v("handle")), name: v("name"), city: v("city"), state: v("state"),
-      langs: on("langs"), platforms: on("platforms"), niches: on("niches"), roles: on("roles"), collabs: on("collabs"),
+      langs: on("langs").map((x) => (x === "Other" ? v("lang_other") : x)).filter(Boolean), platforms: on("platforms"), niches: on("niches"), roles: on("roles"), collabs: on("collabs"),
       ig_followers: parseCount(v("ig_followers")), yt_subscribers: parseCount(v("yt_subscribers")) || 0,
       yt_link: v("yt_link"), other_link: v("other_link"), avg_views: v("avg_views"), audience_in: v("audience_in"),
       posts_consistently: v("posts_consistently"), setup: v("setup"),
       open_to_travel: v("open_to_travel") === "" ? null : v("open_to_travel") === "true",
       best_posts: ["best_post_1", "best_post_2", "best_post_3"].map(v).filter(Boolean),
-      brands: v("brands"), portfolio_link: v("portfolio_link"), bio: v("bio"),
-      photo_path: photoPath, insights_paths: insights,
-      email: v("email"), phone: v("phone"), whatsapp: v("whatsapp"), date_of_birth: v("date_of_birth"),
+      niche_other: on("niches").includes("Other") ? v("niche_other") : "", style: v("style"),
+      worked_with_brands: v("worked_with_brands") === "" ? null : v("worked_with_brands") === "true",
+      brands: v("worked_with_brands") === "false" ? "" : v("brands"), portfolio_link: v("portfolio_link"), bio: v("bio"),
+      photo_path: photoPath, insights_paths: insights, yt_insights_paths: ytInsights,
+      email: v("email"), phone: v("phone"), whatsapp: v("whatsapp"), date_of_birth: v("date_of_birth"), gender: v("gender"),
       rates, anything_else: v("anything_else"), consent: f.consent.checked, consent_version: CONSENT_VERSION,
     };
   };
@@ -260,6 +289,7 @@
     e.preventDefault();
     if (busy) return;
     clearStatus();
+    if (pending.size) { busy = true; say("Getting your photos ready…"); await settle(); busy = false; clearStatus(); }
     if (!validate(step)) return;
     if (step < last) { show(step + 1); return; }
     if (!READY) { say(`Registration isn't connected yet. Your answers are saved on this device. ${email ? "Or email us at " + email + "." : ""}`); return; }
@@ -268,8 +298,10 @@
       const photoPath = await upload(photoBlob);
       const insights = [];
       for (const b of insightBlobs) insights.push(await upload(b));
+      const ytInsights = [];
+      for (const b of ytInsightBlobs) ytInsights.push(await upload(b));
       say("Saving your registration…");
-      await rpc("submit_creator", { p: payload(photoPath, insights) });
+      await rpc("submit_creator", { p: payload(photoPath, insights, ytInsights) });
       try { localStorage.removeItem(DRAFT); } catch { /* ignore */ }
       form.hidden = true;
       const done = $("#joinDone"); done.hidden = false; done.focus();

@@ -21,7 +21,7 @@ Creator ─► join.html ─► Supabase (Postgres + private photo storage) ◄�
 You need a free Supabase account. The free tier covers far more than 1,000 creators.
 
 1. **Create the project.** Go to supabase.com → New project. Choose region **Mumbai (ap-south-1)** and save the database password in your password manager.
-2. **Create the tables.** Open SQL Editor and paste `supabase/migrations/20261117000000_creator_onboarding.sql`. Run it. It's safe to run again.
+2. **Create the tables.** Open the SQL Editor and run every file in `supabase/migrations/` in order of their dates: `20261117000000_creator_onboarding.sql`, then `20261119000000_form_parity.sql`. Each one is safe to run again.
 3. **Connect the website.** Go to Project Settings → API. Copy the **Project URL** and the **anon public** key into `assets/js/content.js` under `onboarding`:
    ```js
    onboarding: { supabaseUrl: "https://xxxx.supabase.co", supabaseAnonKey: "eyJ…", fallbackForm: "" },

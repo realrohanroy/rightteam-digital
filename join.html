@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=36">
+  <link rel="stylesheet" href="assets/css/site.css?v=37">
 </head>
 <body data-page="join">
 <main id="main" class="frame">
@@ -45,7 +45,7 @@
             <div class="field"><label for="j-city">City</label><input id="j-city" name="city" autocomplete="address-level2" required maxlength="60"><span class="form-error">Enter your city.</span></div>
             <div class="field"><label for="j-state">State</label><input id="j-state" name="state" autocomplete="address-level1" maxlength="60" list="states"></div>
           </div>
-          <fieldset class="field" data-required="langs"><legend>Languages you create in</legend><div class="choice-grid" data-chips="langs"></div><span class="form-error">Pick at least one language.</span></fieldset>
+          <fieldset class="field" data-required="langs"><legend>Languages you create in</legend><div class="choice-grid" data-chips="langs"></div><input name="lang_other" class="join__other" data-other-for="langs" placeholder="Which other language?" maxlength="40" aria-label="Other language" hidden><span class="form-error">Pick at least one language.</span></fieldset>
           <div class="field" data-required="photo">
             <label for="j-photo">Profile photo</label>
             <span class="hint">A clear photo of your face. Brands see this first.</span>
@@ -78,8 +78,9 @@
         <!-- STEP 3 -->
         <section class="join-step" data-step="3" aria-labelledby="st3" hidden>
           <h2 class="join-step__title" id="st3"><small>Step 3 of 4</small>Your content</h2>
-          <fieldset class="field" data-required="niches"><legend>Your niche</legend><span class="hint">Pick up to 3</span><div class="choice-grid" data-chips="niches" data-max="3"></div><span class="form-error">Pick at least one niche.</span></fieldset>
+          <fieldset class="field" data-required="niches"><legend>Your niche</legend><span class="hint">Pick up to 3</span><div class="choice-grid" data-chips="niches" data-max="3"></div><input name="niche_other" class="join__other" data-other-for="niches" placeholder="Describe your niche" maxlength="60" aria-label="Other niche" hidden><span class="form-error">Pick at least one niche.</span></fieldset>
           <fieldset class="field"><legend>What do you make?</legend><div class="choice-grid" data-chips="roles"></div></fieldset>
+          <div class="field"><label for="j-style">Describe your content style in 2–3 lines</label><span class="hint">e.g. "Funny Gujarati food reels shot on the street, fast cuts and honest reviews."</span><textarea id="j-style" name="style" maxlength="600" rows="3"></textarea></div>
           <fieldset class="field"><legend>Collaborations you're open to</legend><div class="choice-grid" data-chips="collabs"></div></fieldset>
           <div class="field-row">
             <div class="field"><label for="j-setup">Shooting &amp; editing setup</label><select id="j-setup" name="setup" data-options="setup"></select></div>
@@ -90,7 +91,10 @@
             <input name="best_post_2" type="url" inputmode="url" placeholder="https://" aria-label="Second best post link">
             <input name="best_post_3" type="url" inputmode="url" placeholder="https://" aria-label="Third best post link">
             <span class="form-error">Paste the full link, starting with https://</span></div>
-          <div class="field"><label for="j-brands">Brands you've worked with</label><span class="hint">Optional</span><input id="j-brands" name="brands" maxlength="300"></div>
+          <div class="field-row">
+            <div class="field"><label for="j-worked">Have you worked with brands before?</label><select id="j-worked" name="worked_with_brands"><option value="">Choose…</option><option value="true">Yes</option><option value="false">Not yet</option></select></div>
+            <div class="field" id="brandsField"><label for="j-brands">Which brands?</label><input id="j-brands" name="brands" maxlength="300" placeholder="e.g. Amul, boAt, a local café"></div>
+          </div>
           <div class="field"><label for="j-port">Portfolio link</label><span class="hint">Drive folder, website or highlights. Optional</span><input id="j-port" name="portfolio_link" type="url" inputmode="url" placeholder="https://"><span class="form-error">Paste the full link, starting with https://</span></div>
         </section>
 
@@ -106,6 +110,10 @@
             <div class="field"><label for="j-wa">WhatsApp number</label><span class="hint">Leave empty if same as mobile</span><input id="j-wa" name="whatsapp" type="tel" placeholder="+91"><span class="form-error">Enter a valid WhatsApp number.</span></div>
             <div class="field"><label for="j-dob">Date of birth</label><span class="hint">Optional</span><input id="j-dob" name="date_of_birth" type="date"></div>
           </div>
+          <div class="field-row">
+            <div class="field"><label for="j-gender">Gender</label><span class="hint">Optional. Some brands ask for it.</span><select id="j-gender" name="gender"><option value="">Choose…</option><option>Female</option><option>Male</option><option>Non-binary</option><option>Prefer not to say</option></select></div>
+            <div class="field"></div>
+          </div>
           <fieldset class="field"><legend>Your usual rates (₹)</legend><span class="hint">Optional. Rough numbers are fine; we never share them.</span>
             <div class="join__rates">
               <label>Reel<input name="rate_reel" inputmode="numeric" placeholder="₹"></label>
@@ -117,6 +125,7 @@
             </div>
           </fieldset>
           <div class="field"><label for="j-ins">Instagram insights screenshots</label><span class="hint">Reach, audience age and top cities. Up to 3 images. Optional</span><input id="j-ins" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="hint" id="insCount"></span></div>
+          <div class="field" id="ytInsField"><label for="j-ytins">YouTube Studio analytics screenshots</label><span class="hint">Views, watch time and audience. Up to 2 images. Optional</span><input id="j-ytins" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="hint" id="ytInsCount"></span></div>
           <div class="field"><label for="j-else">Anything else brands should know?</label><textarea id="j-else" name="anything_else" maxlength="1000" rows="3"></textarea></div>
           <div class="field" data-required="consent">
             <label class="join__consent"><input type="checkbox" name="consent" value="true"> <span>The information above is accurate. Right Team Private Limited may contact me on WhatsApp, email or phone about creator opportunities, and may show my public profile (name, handle, city, niche, audience size, photo) on its website after review. Registration doesn't guarantee a paid collaboration. See the <a href="privacy.html">privacy policy</a>.</span></label>
@@ -145,6 +154,6 @@
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="assets/js/content.js?v=36"></script>
 <script src="assets/js/site.js?v=35"></script>
-<script src="assets/js/join.js?v=1"></script>
+<script src="assets/js/join.js?v=3"></script>
 </body>
 </html>
