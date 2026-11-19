@@ -55,3 +55,7 @@ This writes `assets/js/creators-data.js` with **public fields only** (no email, 
 ## Creator onboarding
 
 Creators register at `join.html` (Supabase + NocoDB). Setup, daily use and the import of old Google Form responses: [docs/ONBOARDING.md](docs/ONBOARDING.md).
+
+## Deploying
+
+Staging and production on Hostinger: [docs/DEPLOY.md](docs/DEPLOY.md). Build the upload package with `python -I tools/build_deploy.py staging|production`.

@@ -14,3 +14,6 @@ node_modules/
 # generated import with contact details - never commit
 supabase/seed/
 __pycache__/
+
+# deploy packages (built by tools/build_deploy.py)
+dist/

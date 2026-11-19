@@ -1,0 +1,7 @@
+# Old rightteam.in addresses -> new pages (301 redirects, production build only).
+# One per line: old/path  new-page.html     (no domain, no leading slash needed)
+# Fill this in from the old site's sitemap / Google Search Console "Pages" report before launch.
+#
+# about-us            about.html
+# contact             start.html
+# services/gst        services.html
