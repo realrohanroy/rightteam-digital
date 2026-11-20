@@ -142,7 +142,7 @@
         </ul></div>
         <div><h3>Small print</h3><ul>
           <li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms</a></li>
-          <li><a href="${esc(S.mainSite || "#")}">Right Team Private Limited</a></li>
+          <li><a href="${esc(S.mainSite || "about.html")}">Right Team Private Limited</a></li>
         </ul></div>
       </nav>
     </div>

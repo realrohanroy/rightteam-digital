@@ -19,7 +19,7 @@ window.RT = {
     whatsapp: "",                         // e.g. "919800000000" (country code, no +). Empty hides WhatsApp.
     instagram: "https://www.instagram.com/", // TODO your handle
     linkedin: "https://www.linkedin.com/",   // TODO
-    mainSite: "https://rightteam.in",        // TODO parent brand site
+    mainSite: "",                         // separate parent-company site, if one exists again. Empty = footer links to about.html
     // Paste a Formspree / Getform / your API URL to receive briefs directly.
     // Left empty, "Send My Brief" opens the visitor's email app with the brief filled in.
     formEndpoint: "",

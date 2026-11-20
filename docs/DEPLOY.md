@@ -11,7 +11,10 @@ The site is plain HTML, CSS and JavaScript. Hostinger only stores and serves fil
 
 ## 0. Before you touch anything
 
-1. **Confirm the old site can go offline.** rightteam.in currently runs another site, which looks like the Right Team compliance site: a React frontend plus a backend. Replacing it takes that site off the main domain. If the company still needs it, move it to a subdomain (for example `compliance.rightteam.in`) **before** step 4.
+1. **The old site is being retired** (decided 2026-11-20). rightteam.in currently runs the Right Team compliance site: a React frontend plus a backend. Before switching:
+   - **Back up its data, not just its pages.** The backend may hold client enquiries or accounts in a database, possibly on another service such as Render, Railway or a VPS. Export that database and keep the export somewhere safe and private.
+   - **Then shut that backend down** once the export is confirmed, so it stops costing money and doesn't leave personal data on a forgotten server.
+   - **If any client still uses a login, form or link** from the old site, tell them where to go now.
 2. **Don't touch email.** If anyone uses `@rightteam.in` email, it depends on the domain's **MX** and **TXT** DNS records. Every step below changes only the website. Never delete MX or TXT records.
 3. **Find out where rightteam.in is hosted now.**
    - **hPanel → Websites:** if `rightteam.in` is listed, the current site is on Hostinger (**case A**).
@@ -67,7 +70,7 @@ If the staging folder sits inside the old site's `public_html`, the old site's r
 ## 4. Gates before production (the production build enforces the first)
 
 - [ ] **Supabase hardening is applied.** Run [`supabase/migrations/20261119100000_hardening.sql`](../supabase/migrations/20261119100000_hardening.sql). `build_deploy.py production` **refuses to build** until it is, because a public page exposes the Supabase key.
-- [ ] **Placeholders are filled in** in `assets/js/content.js` (the build lists them): contact email, Instagram, LinkedIn, office hours. Also the footer's "Right Team Private Limited" link (`mainSite`). After the switch it points to this same site, so link it to the compliance site's new address or remove it.
+- [ ] **Placeholders are filled in** in `assets/js/content.js` (the build lists them): contact email, Instagram, LinkedIn, office hours. The footer's "Right Team Private Limited" link now goes to the About page, since the old company site is retired.
 - [ ] **Creators have agreed** to appear publicly. The 27 creators on the page came from the Google Form; ask them, or have them re-register via `/join.html`.
 - [ ] **The privacy policy mentions the creator form** (photo, contact details, rates, screenshots) and who can see that data. Have someone check the legal pages.
 - [ ] **`deploy/redirects.txt` is filled in** from step 1.
