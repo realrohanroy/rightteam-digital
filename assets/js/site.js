@@ -84,7 +84,9 @@
         </div>
       </div>
       <a class="nav__link" href="work.html"${cur("work")}>Our Work</a>
+      <a class="nav__link" href="creators.html"${cur("creators")}>Find a Creator</a>
       <a class="nav__link" href="about.html"${cur("about")}>About</a>
+      <a class="nav__link nav__link--join" href="join.html"${cur("join")}>Join as a Creator</a>
     </nav>
     <a class="btn btn--ink btn--small header-cta" href="start.html">Start a Project <span class="btn__dot">${icon("arrow")}</span></a>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">${icon("menu")}</button>
@@ -98,6 +100,7 @@
     </details>
     <a href="work.html">Our Work</a>
     <a href="creators.html">Find a Creator</a>
+    <a href="join.html">Join as a Creator</a>
     <a href="about.html">About</a>
     <a class="btn btn--ink" href="start.html">Start a Project <span class="btn__dot">${icon("arrow")}</span></a>
   </div>`;
@@ -635,7 +638,15 @@ About my campaign: `;
       const g = form.querySelector(`input[name="service"][value="package"]`); if (g) g.checked = true;
       const brief = form.elements.brief; if (brief && !brief.value) brief.value = `Goal: ${goal.replace(/-/g, " ")}\n\n`;
     }
-    if (svc === "network") { const h = $("#formTitle"); if (h) h.textContent = "Join our creator & media network."; }
+    // creators register on join.html (it saves to the creator database); old ?service=network links go there
+    if (svc === "network") location.replace("join.html");
+    const creatorHint = $("#creatorHint");
+    const syncCreatorHint = () => {
+      const r = form.querySelector('input[name="service"]:checked');
+      if (creatorHint) creatorHint.hidden = !(r && r.value === "network");
+    };
+    form.addEventListener("change", syncCreatorHint);
+    syncCreatorHint();
     const status = $("#formStatus");
     const validate = () => {
       let ok = true;

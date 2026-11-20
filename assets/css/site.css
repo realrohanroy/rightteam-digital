@@ -956,3 +956,6 @@ body.has-tray .frame { padding-bottom: 96px; }
 .join .field-row { align-items: end; }
 .join .field input { align-self: end; }
 .join__other { margin-top: 2px; }
+.nav__link--join { color: var(--brand); }
+@media (max-width: 1100px) { .nav__link--join { display: none; } }
+#creatorHint[hidden] { display: none; }
