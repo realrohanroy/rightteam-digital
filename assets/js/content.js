@@ -16,6 +16,7 @@ window.RT = {
     name: "Right Team Digital",
     company: "Right Team Private Limited",
     email: "hello@rightteam.in",          // TODO confirm
+    phone: "+91 93140 05000",             // shown on the footer "Call" button (tap-to-call). Empty hides it.
     whatsapp: "",                         // e.g. "919800000000" (country code, no +). Empty hides WhatsApp.
     instagram: "https://www.instagram.com/", // TODO your handle
     linkedin: "https://www.linkedin.com/",   // TODO

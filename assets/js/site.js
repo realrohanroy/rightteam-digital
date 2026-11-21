@@ -131,6 +131,7 @@
       <div class="footer__contact">
         ${S.email ? `<div class="footer__mail"><a href="mailto:${esc(S.email)}">${esc(S.email)}</a><button type="button" class="footer__copy" data-copy="${esc(S.email)}" aria-label="Copy email address"><span data-copy-label>Copy</span></button></div>` : ""}
         <div class="footer__social">
+          ${S.phone ? `<a class="pill pill--call" href="tel:${esc(S.phone.replace(/[^\d+]/g, ""))}" aria-label="Call Right Team on ${esc(S.phone)}">${icon("phone")} Call ${esc(S.phone)}</a>` : ""}
           ${S.whatsapp ? `<a class="pill" href="https://wa.me/${esc(S.whatsapp)}" target="_blank" rel="noopener">${icon("chat")} WhatsApp</a>` : ""}
           <a class="pill" href="${esc(S.instagram || "#")}" target="_blank" rel="noopener">${icon("insta")} Instagram</a>
           <a class="pill" href="${esc(S.linkedin || "#")}" target="_blank" rel="noopener">LinkedIn</a>

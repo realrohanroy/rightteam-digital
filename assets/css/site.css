@@ -559,6 +559,9 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 .footer__social { display: flex; gap: 8px; flex-wrap: wrap; }
 .footer__social .pill { background: transparent; color: #eaf1fb; border-color: var(--f-line); padding: 11px 16px; transition: background-color .25s, color .25s; }
 .footer__social .pill:hover { background: #eaf1fb; color: var(--ink); }
+/* the one direct-response action in the footer: filled, first, number visible for desktop visitors */
+.footer__social .pill--call { background: var(--lime); color: var(--ink); border-color: transparent; font-weight: 600; font-variant-numeric: tabular-nums; }
+.footer__social .pill--call:hover { background: #fff; color: var(--ink); }
 
 .footer__links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 28px 0 8px; }
 .footer__links h3 { margin: 0 0 12px; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--f-soft); }
@@ -569,21 +572,21 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 /* the wordmark: big left-aligned name, RT logo on the right */
 .footer__mark { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-top: clamp(28px, 4vw, 56px); overflow: hidden;
   /* room for the logo's 10px outer ring, which overflow:hidden would otherwise trim */
-  padding: 14px 14px 0; margin-inline: -14px; }
+  padding: 14px 14px 0; margin-inline: -14px;
+  /* size the name and logo from the footer's own width (not the screen's), so they always fit */
+  container-type: inline-size; }
 .footer__mark-text {
   font-family: var(--font-display); font-weight: 600; letter-spacing: -0.045em; line-height: 0.82;
-  font-size: clamp(3.4rem, 13vw, 13.5rem); color: #eaf1fb; white-space: nowrap; padding-bottom: 0.06em;
+  font-size: clamp(2rem, 13.6cqi, 13.5rem); color: #eaf1fb; white-space: nowrap; padding-bottom: 0.06em;
 }
 .footer__mark-logo {
-  width: clamp(64px, 11vw, 176px); height: auto; flex: none; border-radius: 50%; margin-bottom: 0.4vw;
+  width: clamp(44px, 11cqi, 176px); height: auto; flex: none; border-radius: 50%; margin-bottom: 0.4cqi;
   box-shadow: 0 0 0 2px rgba(234, 241, 251, 0.85), 0 0 0 10px rgba(212, 243, 107, 0.12);
 }
 .footer__bottom { display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; width: 100%; padding-top: 16px; font-size: 0.82rem; color: var(--f-soft); }
 
 @media (max-width: 640px) {
   .footer__mark { gap: 12px; }
-  .footer__mark-text { font-size: 12.4vw; }
-  .footer__mark-logo { width: 13vw; }
 }
 @media (max-width: 760px) {
   .footer__cta { grid-template-columns: 1fr; }
