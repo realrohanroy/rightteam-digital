@@ -23,7 +23,6 @@
     roles: ["Influencer / content creator", "YouTube videos", "UGC", "Shoots & edits", "Podcasts", "AI content", "Blogging", "Aspiring creator"],
     collabs: ["Paid collabs", "Long-term partnerships", "Influencer campaigns", "Events", "UGC without posting", "Podcasts", "Barter", "Affiliate"],
     views: ["Below 1K", "1K–5K", "5K–10K", "10K–50K", "50K–100K", "100K+", "New creator"],
-    audience: ["Gujarat", "Metro cities", "Other Indian states", "Outside India"],
     posts: ["Daily", "3–4 times a week", "Weekly", "Occasionally"],
     setup: ["Shoots on phone", "Own shoot & edit setup", "Needs production support"],
   };
