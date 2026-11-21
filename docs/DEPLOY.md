@@ -1,4 +1,45 @@
-# Deploying to Hostinger: staging first, then rightteam.in
+# Deploying rightteam.in
+
+> **Chosen route (2026-11-21): Vercel.** The site is served by the Vercel project that already
+> publishes every push to `main`. Hostinger only keeps the domain's DNS (and email, if any).
+> Follow **"Vercel route"** below. The Hostinger steps further down remain as a fallback.
+
+## Vercel route
+
+What's already in the repo:
+- `.vercelignore` publishes only `*.html`, `assets/`, `robots.txt` and `sitemap.xml`. Tools, migrations and docs are never served.
+- `vercel.json` sets the security headers and caching (the same rules as `deploy/htaccess.txt`). Vercel shows `404.html` for missing pages by itself.
+- `robots.txt` and `sitemap.xml` point at `https://rightteam.in`.
+
+Steps:
+1. **Plan:** Vercel's free Hobby plan is for non-commercial use only. A company site needs **Vercel Pro**, or move it to Cloudflare Pages (free for commercial use).
+2. **Back up the old site** (section 0 and section 1, case A below): zip `public_html`, export its database, and export the old backend's database if it has one.
+3. **Lower the DNS TTL:** in **hPanel → Domains → rightteam.in → DNS**, set the TTL of the `@` and `www` records to 300 a day ahead, so the switch spreads quickly.
+4. **Add the domain in Vercel:**
+   1. Go to **Project → Settings → Domains** and add `rightteam.in` and `www.rightteam.in`.
+   2. Set `www` to **redirect to `rightteam.in`**.
+   3. Note the records Vercel asks for: usually **A `@` → 76.76.21.21** and **CNAME `www` → `cname.vercel-dns.com`**. Use the exact values Vercel shows.
+5. **Point DNS at Vercel**, wherever the domain's nameservers are (hPanel, or Cloudflare if it was moved there):
+   - Change the `@` **A** record to Vercel's address.
+   - **Delete any other A or AAAA records for `@`.** A leftover one sends some visitors to the old site.
+   - Set the `www` record to Vercel's CNAME.
+   - **Don't touch MX or TXT records** (email).
+   - On Cloudflare, set these two records to **DNS only** (grey cloud).
+6. **Wait** until Vercel shows both domains as **Valid Configuration**. It issues HTTPS on its own, usually within minutes; DNS can take up to 24 h.
+7. **Test** with the section 3 checklist on `https://rightteam.in`, and check that `www` and `http://` both end up on `https://rightteam.in`.
+8. **Retire the old site on Hostinger** once rightteam.in shows the new site everywhere:
+   1. Delete the old files from the website in hPanel. Keep the backup zip for at least a month.
+   2. Remove the website entry from hPanel, which frees a website slot. **Keep the domain and its DNS zone.**
+   3. Shut down the old backend after exporting its data.
+9. **Google:** in Search Console, verify `rightteam.in` and submit `https://rightteam.in/sitemap.xml`.
+10. **Old addresses:** list the old site's important URLs and add them as redirects in `vercel.json` → `"redirects"`, for example `{ "source": "/contact-us", "destination": "/start.html", "permanent": true }`.
+11. **After a week of working HTTPS:** raise `Strict-Transport-Security` in `vercel.json` to `max-age=31536000`.
+
+Rollback: set the `@` A record (and `www`) back to the old values. Take a screenshot of the DNS records before step 5.
+
+---
+
+# Fallback: Hostinger hosting, staging first
 
 ```
 build the package  ─►  staging.rightteam.in (private, password-protected)  ─►  test  ─►  rightteam.in

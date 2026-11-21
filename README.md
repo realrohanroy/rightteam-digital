@@ -5,7 +5,7 @@ The website of **Right Team Digital**, the digital-marketing arm of Right Team P
 | | |
 |---|---|
 | **Public site (now)** | <https://rightteam-digital.vercel.app>. Vercel **publishes every push to `main` automatically.** |
-| **Production (planned)** | `https://rightteam.in` on Hostinger, after testing on `staging.rightteam.in`. See [docs/DEPLOY.md](docs/DEPLOY.md). |
+| **Production (planned)** | `https://rightteam.in`, served by the same Vercel project once the domain's DNS points there. See [docs/DEPLOY.md](docs/DEPLOY.md). Only `*.html`, `assets/`, `robots.txt` and `sitemap.xml` are published (`.vercelignore`). |
 | **Creator registrations** | Supabase database. The team reviews them in NocoDB. See [docs/ONBOARDING.md](docs/ONBOARDING.md). |
 | **Tech** | Plain HTML, CSS and JavaScript. No framework and no build step, so any static host works. |
 
