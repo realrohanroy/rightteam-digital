@@ -6,6 +6,21 @@
 
 ## Hostinger Git route
 
+**rightteam.in is a Hostinger Node.js app deployment** (it used to build the old React site from the `rightteam` repo, root `frontend`). To switch it, change these settings under **Websites → rightteam.in → ⋮ → Settings**:
+
+| Setting | Value |
+|---|---|
+| Repository | `realrohanroy/rightteam-digital`, branch `main` |
+| Framework | Other (not Create React App) |
+| Root directory | `/` (empty, the repo root, not `frontend`) |
+| Build command | `npm run build` |
+| Output directory | `_site` |
+| Node version | 22.x |
+
+`npm run build` (`tools/build_site.mjs`) has no dependencies. It copies only the pages, `assets/`, `robots.txt`, `sitemap.xml` and `.htaccess` into `_site/`. **Rollback:** switch the repository back to `rightteam` / root `frontend` / framework Create React App, or redeploy its last commit.
+
+The steps below are for a plain (non-app) Hostinger website.
+
 What's already in the repo:
 - **`.htaccess` (repo root):**
   - forces HTTPS and redirects `www` to `rightteam.in`;
