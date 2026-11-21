@@ -1,0 +1,8 @@
+# Vercel publishes ONLY the public website. Everything else in the repo (tools, database
+# migrations, docs, tests, ops config) stays private. Allowlist: ignore all, then re-include.
+/*
+!/*.html
+!/assets
+!/robots.txt
+!/sitemap.xml
+!/vercel.json
