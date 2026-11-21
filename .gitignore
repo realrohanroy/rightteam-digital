@@ -17,3 +17,6 @@ __pycache__/
 
 # deploy packages (built by tools/build_deploy.py)
 dist/
+
+# public site built for Hostinger (npm run build)
+_site/

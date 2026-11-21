@@ -1,0 +1,12 @@
+{
+  "name": "rightteam-digital",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Right Team Digital website. Static HTML/CSS/JS; the build only copies the public files into _site/.",
+  "scripts": {
+    "build": "node tools/build_site.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
