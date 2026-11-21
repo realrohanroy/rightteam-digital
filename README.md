@@ -4,8 +4,8 @@ The website of **Right Team Digital**, the digital-marketing arm of Right Team P
 
 | | |
 |---|---|
-| **Public site (now)** | <https://rightteam-digital.vercel.app>. Vercel **publishes every push to `main` automatically.** |
-| **Production (planned)** | `https://rightteam.in`, served by the same Vercel project once the domain's DNS points there. See [docs/DEPLOY.md](docs/DEPLOY.md). Only `*.html`, `assets/`, `robots.txt` and `sitemap.xml` are published (`.vercelignore`). |
+| **Public site (now)** | <https://rightteam-digital.vercel.app> (being retired). Vercel publishes every push to `main` automatically until the project is deleted. |
+| **Production** | `https://rightteam.in` on **Hostinger**, deployed from this repo's `main` branch (hPanel → GIT, auto-deploy on push). The root `.htaccess` serves only `*.html`, `assets/`, `robots.txt` and `sitemap.xml`. See [docs/DEPLOY.md](docs/DEPLOY.md). |
 | **Creator registrations** | Supabase database. The team reviews them in NocoDB. See [docs/ONBOARDING.md](docs/ONBOARDING.md). |
 | **Tech** | Plain HTML, CSS and JavaScript. No framework and no build step, so any static host works. |
 
@@ -13,7 +13,7 @@ The website of **Right Team Digital**, the digital-marketing arm of Right Team P
 
 ## ⚠️ Rules everyone must follow
 
-1. **Every push to `main` goes live on Vercel within a minute.** Check changes locally first (see "Run it on your computer" below).
+1. **Every push to `main` goes live** (on Hostinger via auto-deploy, and on Vercel until it's retired). Check changes locally first (see "Run it on your computer" below).
 2. **Never commit creator personal data.** That means CSV or XLSX form exports, `supabase/seed/`, `.env` files, phone numbers or emails. `.gitignore` blocks the usual files, but check `git status` before committing.
 3. **Never put the Supabase `service_role` / secret key anywhere in this repo.** Only the *publishable* key belongs in `assets/js/content.js`; it's designed to be public.
 4. **Contact details, dates of birth, gender and rates never appear on the site.** They exist only in the private `creator_private` table.
@@ -147,7 +147,7 @@ Full setup, NocoDB connection and the daily review flow: [docs/ONBOARDING.md](do
 ## Deploying
 
 - **Vercel (current public site):** automatic on every push to `main`. To roll back, use Vercel → Deployments → the previous deployment → **Promote to Production**.
-- **Hostinger (planned home on `rightteam.in`):**
+- **Hostinger (`rightteam.in`):** hPanel's GIT deployment pulls `main` on every push. Keep the root `.htaccess` allowlist up to date if you add a new top-level public file. Fallback without Git:
   ```bash
   python -I tools/build_deploy.py staging      # or: production
   ```

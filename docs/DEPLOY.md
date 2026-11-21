@@ -1,41 +1,51 @@
 # Deploying rightteam.in
 
-> **Chosen route (2026-11-21): Vercel.** The site is served by the Vercel project that already
-> publishes every push to `main`. Hostinger only keeps the domain's DNS (and email, if any).
-> Follow **"Vercel route"** below. The Hostinger steps further down remain as a fallback.
+> **Chosen route (2026-11-21): Hostinger, deployed from GitHub.** hPanel pulls the `main`
+> branch into `public_html`. The root `.htaccess` makes sure only the public website is served.
+> Vercel is being retired.
 
-## Vercel route
+## Hostinger Git route
 
 What's already in the repo:
-- `.vercelignore` publishes only `*.html`, `assets/`, `robots.txt` and `sitemap.xml`. Tools, migrations and docs are never served.
-- `vercel.json` sets the security headers and caching (the same rules as `deploy/htaccess.txt`). Vercel shows `404.html` for missing pages by itself.
-- `robots.txt` and `sitemap.xml` point at `https://rightteam.in`.
+- **`.htaccess` (repo root):**
+  - forces HTTPS and redirects `www` to `rightteam.in`;
+  - sets the security headers and caching;
+  - shows `404.html` for missing pages;
+  - **serves only** `*.html`, `assets/`, `robots.txt` and `sitemap.xml`. `tools/`, `supabase/`, `docs/`, `.git`, `README.md` and the rest answer 404, even though Hostinger copies them into `public_html`.
+- **`robots.txt` and `sitemap.xml`** point at `https://rightteam.in`.
 
 Steps:
-1. **Plan:** Vercel's free Hobby plan is for non-commercial use only. A company site needs **Vercel Pro**, or move it to Cloudflare Pages (free for commercial use).
-2. **Back up the old site** (section 0 and section 1, case A below): zip `public_html`, export its database, and export the old backend's database if it has one.
-3. **Lower the DNS TTL:** in **hPanel → Domains → rightteam.in → DNS**, set the TTL of the `@` and `www` records to 300 a day ahead, so the switch spreads quickly.
-4. **Add the domain in Vercel:**
-   1. Go to **Project → Settings → Domains** and add `rightteam.in` and `www.rightteam.in`.
-   2. Set `www` to **redirect to `rightteam.in`**.
-   3. Note the records Vercel asks for: usually **A `@` → 76.76.21.21** and **CNAME `www` → `cname.vercel-dns.com`**. Use the exact values Vercel shows.
-5. **Point DNS at Vercel**, wherever the domain's nameservers are (hPanel, or Cloudflare if it was moved there):
-   - Change the `@` **A** record to Vercel's address.
-   - **Delete any other A or AAAA records for `@`.** A leftover one sends some visitors to the old site.
-   - Set the `www` record to Vercel's CNAME.
-   - **Don't touch MX or TXT records** (email).
-   - On Cloudflare, set these two records to **DNS only** (grey cloud).
-6. **Wait** until Vercel shows both domains as **Valid Configuration**. It issues HTTPS on its own, usually within minutes; DNS can take up to 24 h.
-7. **Test** with the section 3 checklist on `https://rightteam.in`, and check that `www` and `http://` both end up on `https://rightteam.in`.
-8. **Retire the old site on Hostinger** once rightteam.in shows the new site everywhere:
-   1. Delete the old files from the website in hPanel. Keep the backup zip for at least a month.
-   2. Remove the website entry from hPanel, which frees a website slot. **Keep the domain and its DNS zone.**
-   3. Shut down the old backend after exporting its data.
-9. **Google:** in Search Console, verify `rightteam.in` and submit `https://rightteam.in/sitemap.xml`.
-10. **Old addresses:** list the old site's important URLs and add them as redirects in `vercel.json` → `"redirects"`, for example `{ "source": "/contact-us", "destination": "/start.html", "permanent": true }`.
-11. **After a week of working HTTPS:** raise `Strict-Transport-Security` in `vercel.json` to `max-age=31536000`.
+1. **Back up the old site** (section 0 and section 1, case A below):
+   - zip `public_html` and download it;
+   - export its database;
+   - export the old backend's database, if it has one.
+2. **Empty `public_html`.** Hostinger only deploys Git into an empty folder.
+   1. In File Manager, create `old-site-YYYY-MM-DD` **outside** `public_html`.
+   2. Move everything from `public_html` into it, including hidden files (turn on **Show hidden files**).
+3. **Connect the repo:** **hPanel → Websites → rightteam.in → GIT**, or the GitHub import screen.
+   - Repository: `realrohanroy/rightteam-digital`. Branch: `main`. Folder: leave empty (that means `public_html`).
+   - If it says **"missing package.json"**, choose **Continue as a static website**. There is no build step.
+   - Private repo via SSH: copy the SSH key hPanel shows into **GitHub → repo → Settings → Deploy keys** (read-only).
+4. **Auto-deploy:** in the same GIT screen, turn on **Auto Deployment**. Copy its webhook URL into **GitHub → repo → Settings → Webhooks** (content type `application/json`, push events). Every push to `main` then goes live, as Vercel did.
+5. **HTTPS:** **hPanel → Security → SSL**, for `rightteam.in` and `www.rightteam.in`.
+6. **DNS:** if the domain's `@` A record points anywhere other than this Hostinger website (an old host, Vercel), set it to the IP hPanel shows. **Leave MX and TXT records alone.**
+7. **Test** (section 3 checklist below), and also check:
+   - `https://rightteam.in/tools/creator_photo_map.json`, `/README.md` and `/.git/config` all show the "This page has moved" page (404);
+   - `http://` and `www.` both end on `https://rightteam.in`;
+   - a full creator registration with an `rt_test_` handle works.
+8. **Retire Vercel** once rightteam.in works:
+   1. Delete the Vercel project, or at least disconnect its Git repo. Otherwise `rightteam-digital.vercel.app` stays up as a duplicate copy.
+   2. Only after that, `vercel.json` and `.vercelignore` can be deleted from the repo. **Not before**: `.vercelignore` is what hides the internal files on Vercel.
+9. **Retire the old site** after a month with no problems: shut down its old backend once its data is exported, and delete the `old-site-…` folder.
+10. **Google:** in Search Console, verify `rightteam.in` and submit `https://rightteam.in/sitemap.xml`.
+11. **Old addresses:** add a `RewriteRule` line per old URL in `.htaccess`, under "old site addresses".
+12. **After a week of working HTTPS:** raise `Strict-Transport-Security` in `.htaccess` to `max-age=31536000`.
 
-Rollback: set the `@` A record (and `www`) back to the old values. Take a screenshot of the DNS records before step 5.
+**Rollback:**
+- **Git:** in hPanel's GIT screen, deploy an earlier commit, or `git revert` the bad commit and push.
+- **Full rollback:** move the files out of `public_html` and move the `old-site-…` folder's contents back.
+
+Optional staging: connect the same repo to `staging.rightteam.in` first and password-protect that folder (section 2 below).
 
 ---
 
