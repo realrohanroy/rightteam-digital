@@ -68,6 +68,18 @@
   draw();
   gsap.set(offsets, { attr: { startOffset: "100%" } });
 
+  // Phones: the words are narrower than the pill, so passing behind it hides them
+  // completely. Lift the pill clear of the ribbon (the tallest word plus the wave's
+  // swing); it drops back to the centre for the final "LEADS" tag and the exit.
+  const lift = () => {
+    if (!matchMedia("(max-width: 640px)").matches) return 0;
+    const s = svg.getBoundingClientRect().width / 1000;
+    // half a capital (148px font, caps ~0.72em) + the wave's swing (52) + room for its tilt
+    return -Math.round((148 * 0.36 + 52 + 24) * s + pill.offsetHeight / 2 + 8);
+  };
+
+  // set before the timeline is built: its scale-in "from" tween caches the transform
+  gsap.set(pill, { y: lift() });
   const tl = gsap.timeline({ paused: true, onComplete: finish });
   const flyers = offsets.slice(0, -1);
   // Each word: glide in (IN), drift slowly through the centre where it can be
