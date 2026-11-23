@@ -848,6 +848,35 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 @media (max-width: 520px) { .cr-tray__clear { display: none; } .cr-tray__text { font-size: 0.8rem; } }
 [hidden] { display: none !important; }
 body.has-tray .frame { padding-bottom: 96px; }
+/* ---- locked directory (creators.js LOCKED): identities frosted until brand login exists ---- */
+.redact { display: block; width: var(--w, 60%); height: 0.72em; border-radius: var(--r-pill);
+  background: linear-gradient(90deg, rgba(15, 33, 64, 0.17), rgba(15, 33, 64, 0.07)); filter: blur(0.6px); }
+.redact--name { height: 1.05rem; margin: 3px 0 2px; }
+.cr-card--locked .cr-card__handle { display: flex; align-items: center; gap: 8px; }
+.cr-card--locked .redact--handle { width: calc(var(--w) * 0.5); flex: none; }
+.cr-card--locked .cr-stats dd .redact { height: 0.8em; margin-top: 5px; }
+.cr-card--locked .cr-card__img { filter: blur(16px) saturate(1.2); clip-path: inset(0 round 22px 22px 22px 70px); }
+.cr-card--locked .cr-card__media { cursor: default; }
+.cr-lock {
+  position: absolute; left: 50%; top: calc(50% + 5px); translate: -50% -50%; z-index: 1;
+  display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border: 0; border-radius: var(--r-pill);
+  background: var(--ink); color: #fff; font: inherit; font-weight: 600; font-size: 0.88rem; white-space: nowrap; cursor: pointer;
+  box-shadow: 0 14px 30px -14px rgba(15, 33, 64, 0.7); transition: background-color .25s, color .25s, transform .25s var(--ease);
+}
+.cr-lock__label { display: inline-flex; align-items: center; gap: 8px; }
+.cr-lock .icon { font-size: 1.05em; stroke-width: 2; }
+.cr-lock:hover { transform: translateY(-2px); }
+.cr-lock:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+.cr-lock.is-soon { background: var(--lime); color: var(--ink); transform: none; }
+/* floating hero cards: same treatment, not clickable */
+.cr-locked .fl__in { cursor: default; }
+.cr-locked .fl-face { filter: blur(7px) saturate(1.2); clip-path: circle(50%); }
+.cr-locked .fl-card .redact { margin: 3px auto; }
+.cr-locked .fl-card .redact--name { width: 70%; }
+.cr-locked .fl-chip__txt { display: grid; gap: 4px; min-width: 64px; }
+.cr-locked .redact--chip { height: 0.7rem; }
+@media (prefers-reduced-motion: reduce) { .cr-lock { transition: none; } .cr-lock:hover { transform: none; } }
+
 /* phones: compact list cards (photo left, facts right) so several creators fit on screen */
 @media (max-width: 560px) {
   .cr-grid { grid-template-columns: 1fr; gap: 10px; }
@@ -864,6 +893,13 @@ body.has-tray .frame { padding-bottom: 96px; }
   .cr-card__langs { display: none; }
   .cr-card__actions { gap: 6px; }
   .cr-short, .cr-view { min-height: 40px; font-size: 0.78rem; }
+}
+@media (max-width: 560px) {
+  .cr-card--locked { position: relative; }
+  .cr-card--locked .cr-card__media { position: static; }
+  .cr-card--locked .cr-card__img { clip-path: inset(0 round 18px 18px 18px 44px); }
+  .cr-card--locked .cr-card__body { padding-bottom: 62px; }
+  .cr-lock { left: auto; top: auto; right: 12px; bottom: 12px; translate: none; min-height: 40px; padding: 0 16px; font-size: 0.8rem; }
 }
 
 /* initials avatar used until creator photos arrive */

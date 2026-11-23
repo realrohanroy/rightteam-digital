@@ -36,6 +36,16 @@
     ? `<img class="${cls}" src="${esc(SMALL.test(cls) && c.avatar ? c.avatar : c.photo)}" alt="" loading="lazy" decoding="async">`
     : `<span class="${cls} mono" style="--tint:${c.tint}" aria-hidden="true">${esc(c.initials)}</span>`;
 
+  /* LOCKED: brand logins aren't built yet. Cards show only what a brand filters by
+     (niche, city, languages); the photo is frosted and the name, handle and numbers
+     are never written into the page, only placeholder bars. Every profile action
+     answers "Coming soon". Set to false to bring back full cards, profiles and the shortlist. */
+  const LOCKED = true;
+  const LOCK = `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.6"/><path d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9"/></svg>`;
+  // placeholder bar; its length follows the hidden text so cards don't all look identical
+  const bar = (len, cls = "") => `<span class="redact ${cls}" style="--w:${Math.max(30, Math.min(94, len))}%" aria-hidden="true"></span>`;
+  if (LOCKED) document.documentElement.classList.add("cr-locked");
+
   /* ---------------- facets ---------------- */
   const uniq = (key) => [...new Set(ALL.flatMap((c) => c[key]))].sort();
   const SIZES = [
@@ -84,7 +94,8 @@
   const inFacet = (c, k, v) => (k === "size" ? SIZES.find((s) => s.id === v).test(c.reach) : FACETS[k].get(c).includes(v));
   const matches = (c, skip) => {
     const q = state.q.trim().toLowerCase();
-    if (q && ![c.name, c.handle, c.city, c.bio, c.style, c.brands, ...c.niches, ...c.langs].join(" ").toLowerCase().includes(q)) return false;
+    const hay = LOCKED ? [c.city, c.state, ...c.niches, ...c.langs] : [c.name, c.handle, c.city, c.bio, c.style, c.brands, ...c.niches, ...c.langs];
+    if (q && !hay.join(" ").toLowerCase().includes(q)) return false;
     return KEYS.every((k) => k === skip || !state[k].size || [...state[k]].some((v) => inFacet(c, k, v)));
   };
   const SORTS = {
@@ -123,7 +134,27 @@
       <div><dt>Avg. views</dt><dd>${esc(c.avgViews || "—")}</dd></div>
     </dl>`;
 
-  const card = (c) => `
+  const lockedCard = (c) => `
+    <article class="cr-card cr-card--locked" style="--tint:${c.tint}">
+      <div class="cr-card__media">
+        ${face(c, "cr-card__img")}
+        <span class="pill pill--glass cr-card__niche">${esc(c.niches[0])}</span>
+        <button class="cr-lock" type="button" data-lock><span class="cr-lock__label">${LOCK} Log in to view</span></button>
+      </div>
+      <div class="cr-card__body">
+        <p class="sr-only">${esc(c.niches[0])} creator in ${esc(c.city)}. Name, handle and audience numbers are shown to signed-in brands.</p>
+        ${bar(34 + c.name.length * 2.4, "redact--name")}
+        <p class="cr-card__handle">${bar(28 + c.handle.length * 2.2, "redact--handle")}<span class="cr-card__city">${esc(c.city)}</span></p>
+        <dl class="cr-stats" aria-hidden="true">
+          <div><dt>Instagram</dt><dd>${bar(70)}</dd></div>
+          <div><dt>YouTube</dt><dd>${bar(55)}</dd></div>
+          <div><dt>Avg. views</dt><dd>${bar(80)}</dd></div>
+        </dl>
+        <p class="cr-card__langs">${c.langs.map(esc).join(" · ")}</p>
+      </div>
+    </article>`;
+
+  const card = (c) => LOCKED ? lockedCard(c) : `
     <article class="cr-card" style="--tint:${c.tint}">
       <button class="cr-card__media" type="button" data-open="${esc(c.handle)}" aria-label="View profile: ${esc(c.name)}">
         ${face(c, "cr-card__img")}
@@ -181,6 +212,7 @@
 
   /* tray */
   const tray = $("#crTray");
+  if (LOCKED) shortlist = [];
   const paintTray = () => {
     tray.hidden = !shortlist.length;
     document.body.classList.toggle("has-tray", !!shortlist.length);
@@ -205,9 +237,23 @@
     const rm = e.target.closest("[data-remove]");
     if (rm) { if (rm.dataset.remove === "q") { state.q = ""; $("#dirQuery").value = ""; } else state[rm.dataset.remove].delete(rm.dataset.value); render(); return; }
     if (e.target.closest("[data-clear]")) { state.q = ""; $("#dirQuery").value = ""; KEYS.forEach((k) => state[k].clear()); shown = PAGE; render(); return; }
+    const lk = e.target.closest("[data-lock]"); if (lk) { comingSoon(lk); return; }
+    if (LOCKED) return;
     const sb = e.target.closest("[data-short]"); if (sb) { toggleList(sb.dataset.short); return; }
     const op = e.target.closest("[data-open]"); if (op) { openDrawer(op.dataset.open); return; }
   });
+
+  // the only thing "Log in to view" does for now: say so, then return to normal
+  const live = document.createElement("p");
+  live.className = "sr-only"; live.setAttribute("aria-live", "polite"); document.body.appendChild(live);
+  function comingSoon(btn) {
+    const label = $(".cr-lock__label", btn);
+    if (btn.classList.contains("is-soon")) return;
+    const was = label.innerHTML;
+    btn.classList.add("is-soon"); label.textContent = "Coming soon";
+    live.textContent = ""; requestAnimationFrame(() => { live.textContent = "Brand login is coming soon."; });
+    setTimeout(() => { btn.classList.remove("is-soon"); label.innerHTML = was; }, 2600);
+  }
 
   /* modal helpers */
   let lastFocus = null;
@@ -299,6 +345,12 @@
   });
   stage.innerHTML = SLOTS.map(([type, x, y, d], i) => {
     const c = HERO[i % HERO.length];
+    if (LOCKED) {
+      const inner = type === "card"
+        ? `<span class="fl-card" style="--tint:${c.tint}">${face(c, "fl-face")}${bar(60 + c.name.length, "redact--name")}${bar(48 + c.handle.length)}<em>${esc(c.niches[0])}</em></span>`
+        : `<span class="fl-chip">${face(c, "fl-face fl-face--sm")}<span class="fl-chip__txt">${bar(80, "redact--chip")}<small>${esc(c.niches[0])}</small></span></span>`;
+      return `<div class="fl fl--d${d}" style="left:${x}%;top:${y}%" data-depth="${d}"><div class="fl__par"><div class="fl__in" aria-hidden="true">${inner}</div></div></div>`;
+    }
     const inner = type === "card"
       ? `<span class="fl-card" style="--tint:${c.tint}">${face(c, "fl-face")}<b>${esc(c.name.split(" ").slice(0, 2).join(" "))}</b><small>@${esc(c.handle)}</small><em>${esc(c.niches[0])} · ${fmt(c.reach)}</em></span>`
       : `<span class="fl-chip">${face(c, "fl-face fl-face--sm")}<span><b>${esc(c.name.split(" ")[0])}</b><small>${esc(c.niches[0])}</small></span></span>`;
