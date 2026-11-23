@@ -125,8 +125,30 @@
       ["email", (f) => /^[a-z0-9][^@\s]*@[^@\s]+\.[^@\s]+$/i.test(f.email.value.trim())],
       ["phone", (f) => phoneOk(f.phone.value)],
       ["whatsapp", (f) => !f.whatsapp.value.trim() || phoneOk(f.whatsapp.value)],
+      ["date_of_birth", (f) => dobMsg(f.date_of_birth.value) === ""],
+      ["[data-required=rates]", () => rateMsg() === ""],
       ["[data-required=consent]", (f) => f.consent.checked],
     ],
+  };
+  // date of birth: required, a real date, age 13–100 (the server checks the same)
+  const dobMsg = (val) => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(val || "");
+    if (!m) return "Enter your date of birth.";
+    const t = new Date();
+    let age = t.getFullYear() - +m[1];
+    if (t.getMonth() + 1 < +m[2] || (t.getMonth() + 1 === +m[2] && t.getDate() < +m[3])) age--;
+    if (age < 13) return "You need to be at least 13 to register.";
+    if (age > 100) return "Check the year of your date of birth.";
+    return "";
+  };
+  // rates: at least one format, as a number (5000, 5,000, 5K or 1.2L)
+  const RATE_KEYS = ["reel", "story", "post", "collab", "yt_short", "yt_long"];
+  const rateVal = (k) => parseCount(form.elements[`rate_${k}`].value.replace(/₹/g, ""));
+  const rateMsg = () => {
+    const vals = RATE_KEYS.map(rateVal);
+    if (vals.some((n) => isNaN(n))) return "Enter rates as numbers, e.g. 5000 or 5K.";
+    if (!vals.some((n) => n > 0)) return "Enter your rate for at least one format.";
+    return "";
   };
   const fieldOf = (key) => (key.startsWith("[") ? $(key, form) : form.elements[key].closest(".field"));
   const validate = (n) => {
@@ -135,7 +157,9 @@
       const f = fieldOf(key), bad = !ok(form.elements);
       const otherMissing = bad && /langs|niches/.test(key) && $$("input[type=checkbox]:checked", f).length > 0;
       setErr(f, bad, key === "handle" && handleTaken ? "This handle is already registered. Email us to update your profile."
-        : otherMissing ? "Type what \u201cOther\u201d means." : null);
+        : otherMissing ? "Type what \u201cOther\u201d means."
+        : bad && key === "date_of_birth" ? dobMsg(form.elements.date_of_birth.value)
+        : bad && key === "[data-required=rates]" ? rateMsg() : null);
       if (bad && !first) first = f;
     });
     if (first) { const el = $("input:not([type=checkbox]):not(.sr-only),textarea,select,input", first) || first; el.focus(); }
@@ -256,7 +280,7 @@
   const payload = (photoPath, insights, ytInsights) => {
     const f = form.elements, v = (n) => f[n].value.trim(), on = (n) => $$(`input[name=${n}]:checked`, form).map((x) => x.value);
     const rates = {};
-    ["reel", "story", "post", "collab", "yt_short", "yt_long"].forEach((k) => { const x = v(`rate_${k}`).replace(/[₹,\s]/g, ""); if (x) rates[k] = x; });
+    RATE_KEYS.forEach((k) => { const n = rateVal(k); if (n > 0) rates[k] = String(n); });
     return {
       website: v("website"),
       handle: normHandle(v("handle")), name: v("name"), city: v("city"), state: v("state"),

@@ -110,13 +110,13 @@
           </div>
           <div class="field-row">
             <div class="field"><label for="j-wa">WhatsApp number</label><span class="hint">Leave empty if same as mobile</span><input id="j-wa" name="whatsapp" type="tel" placeholder="+91"><span class="form-error">Enter a valid WhatsApp number.</span></div>
-            <div class="field"><label for="j-dob">Date of birth</label><span class="hint">Optional</span><input id="j-dob" name="date_of_birth" type="date"></div>
+            <div class="field"><label for="j-dob">Date of birth</label><span class="hint">Kept private</span><input id="j-dob" name="date_of_birth" type="date" required autocomplete="bday"><span class="form-error" data-msg="Enter your date of birth.">Enter your date of birth.</span></div>
           </div>
           <div class="field-row">
             <div class="field"><label for="j-gender">Gender</label><span class="hint">Optional. Some brands ask for it.</span><select id="j-gender" name="gender"><option value="">Choose…</option><option>Female</option><option>Male</option><option>Non-binary</option><option>Prefer not to say</option></select></div>
             <div class="field"></div>
           </div>
-          <fieldset class="field"><legend>Your usual rates (₹)</legend><span class="hint">Optional. Rough numbers are fine; we never share them.</span>
+          <fieldset class="field" data-required="rates"><legend>Your usual rates (₹)</legend><span class="hint">Fill in the formats you make, at least one. Rough numbers are fine, e.g. 5000 or 5K; we never share them.</span>
             <div class="join__rates">
               <label>Reel<input name="rate_reel" inputmode="numeric" placeholder="₹"></label>
               <label>Story<input name="rate_story" inputmode="numeric" placeholder="₹"></label>
@@ -125,6 +125,7 @@
               <label>YouTube short<input name="rate_yt_short" inputmode="numeric" placeholder="₹"></label>
               <label>YouTube video<input name="rate_yt_long" inputmode="numeric" placeholder="₹"></label>
             </div>
+            <span class="form-error" data-msg="Enter your rate for at least one format.">Enter your rate for at least one format.</span>
           </fieldset>
           <div class="field"><label for="j-ins">Instagram insights screenshots</label><span class="hint">Reach, audience age and top cities. Up to 3 images. Optional</span><input id="j-ins" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="hint" id="insCount"></span></div>
           <div class="field" id="ytInsField"><label for="j-ytins">YouTube Studio analytics screenshots</label><span class="hint">Views, watch time and audience. Up to 2 images. Optional</span><input id="j-ytins" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="hint" id="ytInsCount"></span></div>
@@ -156,6 +157,6 @@
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="assets/js/content.js?v=39"></script>
 <script src="assets/js/site.js?v=41"></script>
-<script src="assets/js/join.js?v=5"></script>
+<script src="assets/js/join.js?v=6"></script>
 </body>
 </html>
