@@ -216,6 +216,20 @@
   } else {
     addEventListener("scroll", () => onScroll(scrollY), { passive: true });
   }
+  // A reload starts at the top. Some browsers (the Google app on iOS) restore the old
+  // scroll position on reload, which lands mid-hero with the header already in its
+  // "scrolled" state and the pinned animations out of step. Back/forward still restores.
+  const navType = (performance.getEntriesByType && performance.getEntriesByType("navigation")[0] || {}).type;
+  if (navType === "reload" && !location.hash) {
+    // ScrollTrigger keeps its own scroll memory and puts the old position back after
+    // its load-time refresh, so clear that too, then re-check once everything settled.
+    if (hasGSAP && ScrollTrigger.clearScrollMemory) ScrollTrigger.clearScrollMemory("manual");
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const toTop = () => { if (scrollY > 0 || (lenis && lenis.scroll > 0)) { scrollTo(0, 0); lenis && lenis.scrollTo(0, { immediate: true, force: true }); } };
+    toTop();
+    addEventListener("load", () => { toTop(); setTimeout(toTop, 0); setTimeout(toTop, 250); }, { once: true });
+  }
+  onScroll(lenis ? lenis.scroll : scrollY); // header matches the real position from the first frame
   // deep links like services.html#reels-video land below the fixed header
   if (location.hash && lenis) setTimeout(() => { const t = $(location.hash); t && lenis.scrollTo(t, { offset: -90, immediate: true }); }, 60);
 
