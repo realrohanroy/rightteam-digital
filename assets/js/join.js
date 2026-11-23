@@ -27,7 +27,7 @@
     setup: ["Shoots on phone", "Own shoot & edit setup", "Needs production support"],
   };
   // which step each server-side validation hint belongs to
-  const HINT_STEP = { name: 1, handle: 1, city: 1, photo: 1, ig_followers: 2, email: 4, phone: 4, whatsapp: 4, date_of_birth: 4, consent: 4, insights: 4 };
+  const HINT_STEP = { name: 1, handle: 1, city: 1, photo: 1, ig_followers: 2, email: 4, phone: 4, whatsapp: 4, date_of_birth: 4, rates: 4, consent: 4, insights: 4 };
 
   /* ---------- build chip groups + selects ---------- */
   $$("[data-chips]", form).forEach((box) => {
@@ -339,7 +339,7 @@
       const s = HINT_STEP[err.hint];
       if (s) {
         show(s);
-        const field = err.hint === "insights" ? $("#j-ins").closest(".field") : fieldOf(["photo", "consent"].includes(err.hint) ? `[data-required=${err.hint}]` : err.hint);
+        const field = err.hint === "insights" ? $("#j-ins").closest(".field") : fieldOf(["photo", "consent", "rates"].includes(err.hint) ? `[data-required=${err.hint}]` : err.hint);
         if (err.hint === "handle") handleTaken = /already/.test(err.message);
         setErr(field, true, err.message);
         say(err.message);

@@ -134,6 +134,7 @@ creator ─► join.html ─► Supabase (Postgres + private photo storage) ◄�
 | `20261117000000_creator_onboarding.sql` | Tables, privacy rules, the registration function, photo storage, ops access | ✅ |
 | `20261119000000_form_parity.sql` | Gender, content style, worked-with-brands, YouTube screenshots, "Other" niche | ✅ (columns only) |
 | `20261119100000_hardening.sql` | Abuse protection (see above) | ✅ |
+| `20261123000000_require_dob_rates.sql` | Website registrations must include a date of birth and at least one rate (the team can still add creators without them) | ⏳ run it |
 
 > ⚠️ Don't re-run an **older** file after a newer one. `form_parity.sql` contains an older version of the registration function and would undo the hardening. To change the function, write a **new** migration file with a later date.
 
