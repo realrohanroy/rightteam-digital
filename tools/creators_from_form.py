@@ -35,7 +35,10 @@ COLLAB = {
     "Long-Term Brand Partnerships": "Long-term partnerships", "Affiliate Partnerships": "Affiliate",
 }
 SETUP = {"Yes, Complete Setup": "Own shoot & edit setup", "Smartphone-Based Setup": "Shoots on phone", "I Need Production Support": "Needs production support"}
-CITY_FIX = {"ahemdabad": "Ahmedabad", "ahmedabad": "Ahmedabad", "surat": "Surat"}
+CITY_FIX = {"ahemdabad": "Ahmedabad", "ahmdabad": "Ahmedabad", "ahmedabad": "Ahmedabad", "surat": "Surat",
+            "bangalore": "Bengaluru", "jai vihar": "Delhi"}
+# Instagram paths that are not usernames (someone pasted a reel or post link instead of their profile)
+NOT_HANDLE = {"reel", "reels", "p", "tv", "stories", "explore", "accounts", "share"}
 
 
 def col(row, prefix):
@@ -59,7 +62,7 @@ def handle_from(link):
     if link.startswith("@"):
         return link[1:].split()[0]
     m = re.search(r"instagram\.com/([A-Za-z0-9._]+)", link)
-    return m.group(1) if m else ""
+    return m.group(1) if m and m.group(1).lower() not in NOT_HANDLE else ""
 
 
 def title(s):
@@ -100,6 +103,8 @@ def main(csv_path):
             skipped.append(f"{name} (@{handle or '?'}, IG {ig}, YT {yt})")
             continue
         city_raw = col(r, "City").strip()
+        # several cities ("Vadodara, Ahmedabad, Surat", "Delhi and Chandigarh"): list the first, so the city filter works
+        city_raw = re.split(r"\s*(?:,|&|/|\band\b)\s*", city_raw, maxsplit=1)[0].strip() or city_raw
         city = CITY_FIX.get(city_raw.lower(), title(city_raw) if city_raw.islower() else city_raw.strip())
         niches = [NICHE[n] for n in split(col(r, "Your Content Niche")) if n in NICHE]
         platforms = [p.title() if p.lower() != "youtube" else "YouTube" for p in split(col(r, "Which Platforms"))]

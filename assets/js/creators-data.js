@@ -4,6 +4,43 @@
 window.RT = window.RT || {};
 window.RT.creators = [
  {
+  "handle": "_spindia_",
+  "name": "Sid Prajapati",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Gujarati"
+  ],
+  "niches": [
+   "Comedy"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 1700000,
+  "yt": 1700000,
+  "ytLink": "https://youtube.com/@spindia007",
+  "avgViews": "100K+",
+  "audienceIn": "Gujarat",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Influencer campaigns"
+  ],
+  "brands": "So many",
+  "bio": "Making comedy videos",
+  "style": "Making funny and relatable content",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "amdavadi_crowd",
   "name": "Urmesh Janaksinh Nahera",
   "city": "Ahmedabad",
@@ -143,6 +180,46 @@ window.RT.creators = [
   "reels": [],
   "photo": "assets/creators/chatoraankit.jpg",
   "avatar": "assets/creators/chatoraankit-sq.jpg"
+ },
+ {
+  "handle": "themealcrackers",
+  "name": "Sayma Memon",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Food",
+   "Business",
+   "City & Local"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "YouTube"
+  ],
+  "followers": 167000,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "50K–100K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs"
+  ],
+  "brands": "Food Brands Barbecue nation",
+  "bio": "Student passionately working on food blogging",
+  "style": "Voiceover reels",
+  "reels": [
+   "https://www.instagram.com/reel/DcLT8NjNmqg/"
+  ],
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "ahmedabadcityboy",
@@ -296,9 +373,44 @@ window.RT.creators = [
   "avatar": "assets/creators/moinnn_24-sq.jpg"
  },
  {
+  "handle": "dhaval.jogani_",
+  "name": "Dhaval Jogani",
+  "city": "Surat",
+  "state": "Gujarat",
+  "langs": [
+   "Gujarati"
+  ],
+  "niches": [
+   "Finance & Education"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 129000,
+  "yt": 10100,
+  "ytLink": "https://www.youtube.com/@DhavalJogani",
+  "avgViews": "10K–50K",
+  "audienceIn": "Gujarat",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs"
+  ],
+  "brands": "ono creators , \nicici \njio",
+  "bio": "Educational, engaging, and practical finance content that simplifies complex topics like taxation, investments, real estate, and financial planning. The content focuses on real-life examples, financial awareness, and act",
+  "style": "",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "nish_mukherjee",
   "name": "Nishtha Mukherjee",
-  "city": "Mumbai & Goa",
+  "city": "Mumbai",
   "state": "Maharashtra",
   "langs": [
    "Hindi",
@@ -393,6 +505,62 @@ window.RT.creators = [
   "avatar": "assets/creators/realadityabhavsar-sq.jpg"
  },
  {
+  "handle": "mihirsmicpodcast",
+  "name": "Mihir Adhyaru",
+  "city": "Vadodara",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "Tech",
+   "Business",
+   "Finance & Education",
+   "Health & Fitness",
+   "Comedy",
+   "Parenting",
+   "City & Local"
+  ],
+  "roles": [
+   "Podcasts",
+   "YouTube videos"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube"
+  ],
+  "followers": 86000,
+  "yt": 15000,
+  "ytLink": "https://youtube.com/@mihirsmic",
+  "avgViews": "10K–50K",
+  "audienceIn": "Gujarat",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Podcasts",
+   "Long-term partnerships"
+  ],
+  "brands": "Local brands",
+  "bio": "Mihir Adhyaru | Founder & Host of Mihir’s Mic Podcast 🎙️ Sharing stories, inspiring conversations and connecting voices across Gujarat.",
+  "style": "Gujarati storytelling, engaging podcasts, trending topics, real-life experiences, inspiring conversations, cinema, business and social discussions with a local Gujarati connect.",
+  "reels": [
+   "https://www.instagram.com/reel/DW_dOG4kT7P/",
+   "https://www.instagram.com/reel/DTLEGoCDLNU/",
+   "https://www.instagram.com/reel/DYlvcWBM92m/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "prabhakar.joshi.official",
   "name": "Prabhakar Joshi",
   "city": "Indore",
@@ -446,6 +614,152 @@ window.RT.creators = [
   "avatar": ""
  },
  {
+  "handle": "prapp_t",
+  "name": "Prapti Tar",
+  "city": "Mapusa",
+  "state": "Goa",
+  "langs": [
+   "Hindi",
+   "English",
+   "Konkani"
+  ],
+  "niches": [
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "City & Local"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "Facebook",
+   "Snapchat"
+  ],
+  "followers": 75000,
+  "yt": 170,
+  "ytLink": "https://youtube.com/@thatfoodiegoangirl",
+  "avgViews": "10K–50K",
+  "audienceIn": "Metro cities",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Long-term partnerships"
+  ],
+  "brands": "Nutella, ikea, belgium waffles, buzz ballz, lays, swiggy, sangeeta moblies, kfc, the sleep company, kissan.. and lots more",
+  "bio": "Just a girl who loves travelling, cooking, eating and shooting bits of my life",
+  "style": "Lifestyle, food, recipies, local finds, new things in city , shopping, Itineraries",
+  "reels": [
+   "https://www.instagram.com/reel/C5s2cLUPTb6/",
+   "https://www.instagram.com/reel/DfepUBczwVz/",
+   "https://www.instagram.com/reel/DeMcRYCTs1A/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "brijesh_purohit_",
+  "name": "Brijesh Purohit",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel"
+  ],
+  "roles": [
+   "YouTube videos"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 70000,
+  "yt": 12000,
+  "ytLink": "https://youtube.com/@brijeshpurohit2.o",
+  "avgViews": "10K–50K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Influencer campaigns",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "Fern hotels , Maggie Samsung Paytm Havmore Vadilaal and many more",
+  "bio": "Behind the content is a passionate dreamer, a corporate professional, and a creator who loves exploring, experiencing, and sharing real stories. Every reel has a little piece of my hard work, creativity, and journey. ❤",
+  "style": "My style is raw, relatable, and creative, with a mix of travel, food, lifestyle, and fashion. I love showcasing real experiences, hidden gems, local discoveries, and stories that connect with people naturally. ❤️",
+  "reels": [
+   "https://www.instagram.com/reel/Dbmg4_WhYtw/",
+   "https://www.instagram.com/reel/De84wpau4nh/",
+   "https://www.instagram.com/reel/DYdpraEhzaN/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "heenatales",
+  "name": "Heena Solanki",
+  "city": "Mumbai",
+  "state": "Maharashtra",
+  "langs": [
+   "Hindi",
+   "Gujarati"
+  ],
+  "niches": [
+   "Lifestyle"
+  ],
+  "roles": [
+   "UGC",
+   "Podcasts",
+   "YouTube videos"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 64500,
+  "yt": 3600,
+  "ytLink": "https://youtube.com/@heenatales",
+  "avgViews": "50K–100K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Amazon, Jay thadeshwar, Patola saree brands, Adani, Divy bhaskar and many more",
+  "bio": "I am a Writer, author & Self help content creator",
+  "style": "My content style is based on self-help & Relationships.",
+  "reels": [
+   "https://www.instagram.com/reel/DfNIbmSh5Ul/",
+   "https://www.instagram.com/reel/DW1YKH4iNkL/",
+   "https://www.instagram.com/p/DPyc5fFiIMN/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "akash_trapper",
   "name": "Thakor Mahendra Sinh",
   "city": "Surat",
@@ -490,6 +804,52 @@ window.RT.creators = [
   ],
   "photo": "assets/creators/akash_trapper.jpg",
   "avatar": "assets/creators/akash_trapper-sq.jpg"
+ },
+ {
+  "handle": "urvashi1012",
+  "name": "Urvashi Sharma",
+  "city": "Mumbai",
+  "state": "Maharashtra",
+  "langs": [
+   "Hindi",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "Facebook",
+   "Snapchat"
+  ],
+  "followers": 50000,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "10K–50K",
+  "audienceIn": "Metro cities",
+  "setup": "Shoots on phone",
+  "posts": "Weekly",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "",
+  "bio": "Influencer - beauty, fashion, lifestyle A social extrovert, complete butterfly, travel enthusiast",
+  "style": "Creative Interactive Beauty fashion and lifestyle related",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "bhvn_rwl",
@@ -583,6 +943,84 @@ window.RT.creators = [
   "avatar": ""
  },
  {
+  "handle": "nikhil_karooth",
+  "name": "Nikhil Karooth",
+  "city": "Calicut",
+  "state": "Kerala",
+  "langs": [
+   "Malayalam"
+  ],
+  "niches": [
+   "Finance & Education"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "YouTube"
+  ],
+  "followers": 35000,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "100K+",
+  "audienceIn": "Other Indian states",
+  "setup": "Shoots on phone",
+  "posts": "Weekly",
+  "travels": true,
+  "collabs": [
+   "Paid collabs"
+  ],
+  "brands": "Policy bazaar",
+  "bio": "Creating finance based content",
+  "style": "",
+  "reels": [
+   "https://www.instagram.com/reel/DWTnJjlEnhb/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "biswajit.msme",
+  "name": "Biswajit Deka",
+  "city": "Guwahati",
+  "state": "Assam",
+  "langs": [
+   "Hindi",
+   "English"
+  ],
+  "niches": [
+   "Business",
+   "Finance & Education",
+   "City & Local"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram"
+  ],
+  "followers": 31900,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "10K–50K",
+  "audienceIn": "Metro cities",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "",
+  "bio": "Finance educator from North East, covering specifically MSMEs",
+  "style": "Content for start ups, business owners covering all aspect of business finance from loan, govt schemes , business ideas",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "harsh__menghani",
   "name": "Harsh Menghani",
   "city": "Ahmedabad",
@@ -630,6 +1068,166 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DZhP_C7AIGJ/",
    "https://www.instagram.com/reel/Dd6K-n3gbRp/"
   ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "darshiiii_13",
+  "name": "Darshi Polara",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "Snapchat"
+  ],
+  "followers": 19899,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "10K–50K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Influencer campaigns",
+   "Events"
+  ],
+  "brands": "Vivo , Maaza , Eevee jewellery, Flipkart , Mamaearth",
+  "bio": "Hi! I'm a passionate content creator who loves capturing moments, exploring new places, experimenting with creativity, and turning everyday experiences into beautiful stories. I enjoy creating lifestyle, fashion, travel,",
+  "style": "I'm a passionate content creator who loves exploring new places, capturing beautiful moments, and sharing lifestyle, fashion, travel, and aesthetic content. I enjoy creating relatable and creative content while connecting with new people and brands. Always exc",
+  "reels": [
+   "https://www.instagram.com/p/DcqhTm5jHiD/",
+   "https://www.instagram.com/reel/DZVAmFlsthI/",
+   "https://www.instagram.com/reel/De3YpCtMaYT/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "mayupandya107.8",
+  "name": "Mayuri Pandya",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Gujarati"
+  ],
+  "niches": [
+   "Lifestyle"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram And Facebook"
+  ],
+  "followers": 19500,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "65,964",
+  "audienceIn": "Ahmedabad, Gujarat, India",
+  "setup": "",
+  "posts": "yes",
+  "travels": true,
+  "collabs": [],
+  "brands": "",
+  "bio": "I am a Gujarati Content Creator specializing in Government Job Updates, Recruitment Notifications, Career Guidance, and Educational Information. I create informative and engaging content to help students and job aspirant",
+  "style": "Informative, Educational and Engaging Gujarati Content",
+  "reels": [
+   "https://www.instagram.com/reel/DdecO8STrkX/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "the_asmi21",
+  "name": "Asmita Sanyasi",
+  "city": "Delhi",
+  "state": "Delhi (NCT)",
+  "langs": [
+   "Hindi",
+   "English",
+   "Nepali"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Travel"
+  ],
+  "roles": [
+   "UGC"
+  ],
+  "platforms": [
+   "Instagram",
+   "Snapchat"
+  ],
+  "followers": 17200,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "5K–10K",
+  "audienceIn": "Outside India",
+  "setup": "",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting"
+  ],
+  "brands": "Shagufaah \nAffordable decorations \nAbeehastyle&studio \n(Recent 3 brands)",
+  "bio": "Hi! It’s Asmita, from Kathmandu, Nepal. I am currently perusing my bachelor’s degree in business. I am 22 years old living with my nuclear family. I love to communicate and travel. I love trying new food.",
+  "style": "Girly, expressive, effortless",
+  "reels": [
+   "https://www.instagram.com/reel/Dfm1TufRxBa/",
+   "https://www.instagram.com/p/Dd64wVlE0EH/",
+   "https://www.instagram.com/p/DX06XgrlC3n/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "nikhilvarg",
+  "name": "Nikhil Varghese",
+  "city": "Bengaluru",
+  "state": "Karnataka",
+  "langs": [
+   "English"
+  ],
+  "niches": [
+   "Finance & Education"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 17000,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "10K–50K",
+  "audienceIn": "Outside India",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "Podcasts",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Aspora",
+  "bio": "NRI finance and taxes",
+  "style": "",
+  "reels": [],
   "photo": "",
   "avatar": ""
  },
@@ -769,6 +1367,137 @@ window.RT.creators = [
   "avatar": ""
  },
  {
+  "handle": "nikitaparecha",
+  "name": "Nikita Parecha",
+  "city": "Delhi",
+  "state": "Delhi (NCT)",
+  "langs": [
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Travel"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram"
+  ],
+  "followers": 13800,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "10K–50K",
+  "audienceIn": "Metro cities",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Events"
+  ],
+  "brands": "",
+  "bio": "Authentic & Raw",
+  "style": "",
+  "reels": [
+   "https://www.instagram.com/reel/Df2QJxUTjh5/",
+   "https://www.instagram.com/reel/DdwID4dzlQS/",
+   "https://www.instagram.com/reel/DYAERJHyzRs/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "iamslow_ar",
+  "name": "Iamslow",
+  "city": "Itanagar",
+  "state": "Arunachal Pradesh",
+  "langs": [
+   "Hindi"
+  ],
+  "niches": [
+   "Gaming"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 12000,
+  "yt": 13000,
+  "ytLink": "https://youtube.com/@iamslow_ar",
+  "avgViews": "50K–100K",
+  "audienceIn": "Other Indian states",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "",
+  "bio": "Gaming content",
+  "style": "I post relate able gaming content for the audience to laugh and feel",
+  "reels": [
+   "https://www.instagram.com/reel/DXt2mCZgOTU/",
+   "https://www.instagram.com/reel/DLpW5H7ScRe/",
+   "https://www.instagram.com/reel/DU0eK7gkgQT/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "susmitamishra27_",
+  "name": "Susmita Mishra",
+  "city": "Delhi",
+  "state": "Delhi (NCT)",
+  "langs": [
+   "Hindi",
+   "English",
+   "Nepali And Maithili"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "Comedy"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "Facebook",
+   "Tiktok"
+  ],
+  "followers": 11793,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "10K–50K",
+  "audienceIn": "Metro cities",
+  "setup": "Own shoot & edit setup",
+  "posts": "Weekly",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Long-term partnerships"
+  ],
+  "brands": "Helembari (Premium Tea), Nakshatra (Astrology App – link-in-bio conversion campaign)",
+  "bio": "Actress, model, and content creator passionate about relatable storytelling, expressive comedy, and aesthetic fashion. I love turning real-life moments into engaging reels that feel natural, entertaining, and true to my ",
+  "style": "Authentic personal storytelling across food, travel, culture, and history, mixed with relatable Aquarius humor. I create natural, conversational reels with strong visual hooks that feel unscripted and genuinely engaging.",
+  "reels": [
+   "https://www.instagram.com/reel/Dcq7UMVy-mk/",
+   "https://www.instagram.com/reel/DYezvA3y_EF/",
+   "https://www.instagram.com/reel/DfxNq9SyG12/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "shuttered_smiles",
   "name": "Nimrat Kaur Randhawa",
   "city": "Ahmedabad",
@@ -863,6 +1592,142 @@ window.RT.creators = [
   "avatar": "assets/creators/bhavya_homoeopathy-sq.jpg"
  },
  {
+  "handle": "mai_hu_py",
+  "name": "Piyush Yadav",
+  "city": "Vadodara",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi"
+  ],
+  "niches": [
+   "Lifestyle"
+  ],
+  "roles": [],
+  "platforms": [
+   "Insta And Yt"
+  ],
+  "followers": 6104,
+  "yt": 547,
+  "ytLink": "https://youtube.com/@lifeofpyofficial",
+  "avgViews": "8k views",
+  "audienceIn": "Vadodara",
+  "setup": "",
+  "posts": "yes",
+  "travels": false,
+  "collabs": [],
+  "brands": "",
+  "bio": "Well Mai hu PY, and I make funny lifestyle vlogs, in Parul University Campus",
+  "style": "I am Piyush Yadav — mostly known as PY. A film student and content creator making funny, lifestyle and relatable reels through distinctive voiceovers and original concepts.",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "anuja_dubey_25",
+  "name": "Anuja Dubey",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Business",
+   "Finance & Education",
+   "Health & Fitness"
+  ],
+  "roles": [
+   "UGC"
+  ],
+  "platforms": [
+   "Instagram",
+   "Facebook"
+  ],
+  "followers": 5975,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "100K+",
+  "audienceIn": "Gujarat",
+  "setup": "",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "Lots of brands like clothing real estate resorts etcc",
+  "bio": "Not just a person behind the camera, but a creative mind behind every story. I'm a passionate Digital Marketer, Videographer, Model & Content Creator who believes in turning ordinary ideas into extraordinary experiences.",
+  "style": "Ugc",
+  "reels": [
+   "https://www.instagram.com/reel/DewczhqAjvj/",
+   "https://www.instagram.com/reel/DYooJGlss7O/",
+   "https://www.instagram.com/reel/DerW5BZIhbf/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "khwahish0320243",
+  "name": "Toral Acharya",
+  "city": "Vadodara",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Comedy"
+  ],
+  "roles": [
+   "YouTube videos",
+   "Shoots & edits"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 5458,
+  "yt": 1700,
+  "ytLink": "https://www.youtube.com/@Khwahishen83",
+  "avgViews": "5K–10K",
+  "audienceIn": "Metro cities",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Garnier, Dove, Pilgrim, Neutrogena, Amazon, Myntra, Flipkart, Meesho, PS marketing agency, JD Fresh etc..",
+  "bio": "I am emotional, friendly and talketive and giving my 100% in work as well as in relation..😊",
+  "style": "I am creating content for my own as well as brand's requirements.. Basically I prefer content should be clear and satisfying.",
+  "reels": [
+   "https://www.instagram.com/reel/DZuVx8QAD6E/",
+   "https://www.youtube.com/shorts/-yLthT3Svhg/",
+   "https://www.instagram.com/reel/DQhT2tgCGFq/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "byharshmotwani",
   "name": "Harsh Motwani",
   "city": "Ahmedabad",
@@ -916,6 +1781,51 @@ window.RT.creators = [
   ],
   "photo": "assets/creators/byharshmotwani.jpg",
   "avatar": "assets/creators/byharshmotwani-sq.jpg"
+ },
+ {
+  "handle": "inf_gaming26",
+  "name": "Het Mukeshbhai Kalal",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Gaming"
+  ],
+  "roles": [
+   "YouTube videos"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube"
+  ],
+  "followers": 156,
+  "yt": 3791,
+  "ytLink": "https://youtube.com/@kalal_het",
+  "avgViews": "1K–5K",
+  "audienceIn": "Other Indian states",
+  "setup": "Shoots on phone",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Influencer campaigns",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "",
+  "bio": "I'm Het Kalal, a passionate content creator, YouTuber, live streamer and esports caster from Ahmedabad, Gujarat. I started my content creation journey in 2020 with my channel, Infinity Gaming, driven by my love for gamin",
+  "style": "My content style is energetic, entertaining and audience-focused, featuring gaming videos, live streams, esports coverage and engaging short-form content. I combine creativity, Hindi/Hinglish commentary and interactive presentation to keep my audience entertai",
+  "reels": [
+   "https://www.instagram.com/reel/DcQ54yONKnz/",
+   "https://www.instagram.com/reel/DeJndS8Trai/",
+   "https://www.instagram.com/reel/Dfg5KmFSDum/"
+  ],
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "vivaan_m_tiwari_",
@@ -1008,6 +1918,63 @@ window.RT.creators = [
   "avatar": "assets/creators/shubh_mevada._-sq.jpg"
  },
  {
+  "handle": "_placeswithfaces_",
+  "name": "Sakshi Khandelwal",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "Tech",
+   "Business",
+   "Finance & Education",
+   "Health & Fitness",
+   "Comedy",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC",
+   "Blogging"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 3026,
+  "yt": 122,
+  "ytLink": "https://youtube.com/@places_with_faces",
+  "avgViews": "1K–5K",
+  "audienceIn": "Gujarat",
+  "setup": "Own shoot & edit setup",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Events",
+   "Long-term partnerships"
+  ],
+  "brands": "nova, flipkart, jewellery",
+  "bio": "Travels, UGC, lifestyle, GRWM",
+  "style": "Travel, UGC, storytelling",
+  "reels": [
+   "https://www.instagram.com/reel/DXbYy-ciS9e/",
+   "https://www.instagram.com/reel/DY1xE4OgM8V/",
+   "https://www.instagram.com/reel/DN50dTrE8a6/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "_avani_patel1513",
   "name": "Avani Panchotiya",
   "city": "Ahmedabad",
@@ -1045,6 +2012,168 @@ window.RT.creators = [
   ],
   "photo": "assets/creators/_avani_patel1513.jpg",
   "avatar": "assets/creators/_avani_patel1513-sq.jpg"
+ },
+ {
+  "handle": "vaghela.prakash.881120",
+  "name": "Vaghela Prakash Ganpatbhai",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "Tech",
+   "Business",
+   "Finance & Education",
+   "Health & Fitness",
+   "Comedy",
+   "Gaming",
+   "Parenting",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC",
+   "Podcasts",
+   "YouTube videos",
+   "Blogging",
+   "Shoots & edits",
+   "AI content"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube"
+  ],
+  "followers": 2580,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "1K–5K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Beardo face wash Himalaya Shilajit Vicks inhaler",
+  "bio": "I am influencer and content creator i am enjoying technology content",
+  "style": "I am enjoying technology content",
+  "reels": [
+   "https://www.instagram.com/reel/Dcu6QsUs9zA/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "soulfullife_withkriti",
+  "name": "Kriti Chandan",
+  "city": "Darbhanga",
+  "state": "Bihar",
+  "langs": [
+   "Hindi",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "Health & Fitness",
+   "Parenting",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC"
+  ],
+  "platforms": [
+   "Instagram",
+   "Facebook"
+  ],
+  "followers": 2420,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "5K–10K",
+  "audienceIn": "Other Indian states",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Madhubanipaints, Thekuacompany",
+  "bio": "I’m Kriti Chandan a Chartered Accountant turned content creator, Mrs India 2026 2nd Runner Up, and a woman who loves expressing life through stories. My content is a blend of fashion, beauty, lifestyle, travel, motherhoo",
+  "style": "My content style is a blend of classy, aesthetic, feminine, and relatable storytelling with a touch of sass and authenticity. I love creating visually engaging content that captures real-life moments, celebrates culture, and inspires women through fashion, lif",
+  "reels": [
+   "https://www.instagram.com/reel/DZPeEZSTA7H/",
+   "https://www.instagram.com/reel/DVnodnhk4A4/",
+   "https://www.instagram.com/reel/DYqttMHz2Nl/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "mr_safvan_1002",
+  "name": "Safvan Mansuri",
+  "city": "Dehgam",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi"
+  ],
+  "niches": [
+   "Lifestyle",
+   "Travel",
+   "Health & Fitness"
+  ],
+  "roles": [
+   "YouTube videos"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube"
+  ],
+  "followers": 2388,
+  "yt": 353,
+  "ytLink": "https://youtube.com/@fit_with_safvan",
+  "avgViews": "1K–5K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": false,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "Podcasts",
+   "Long-term partnerships"
+  ],
+  "brands": "GNC nutrition",
+  "bio": "I am a passionate bodybuilding athlete",
+  "style": "To motivate the youth towards fitness and health",
+  "reels": [
+   "https://www.instagram.com/reel/DGA3ue5CdJa/",
+   "https://www.instagram.com/reel/DFSj3SgCGrp/",
+   "https://www.instagram.com/reel/DOGZnK6Dx9M/"
+  ],
+  "photo": "",
+  "avatar": ""
  },
  {
   "handle": "_mitaliihansraj_",
@@ -1099,6 +2228,211 @@ window.RT.creators = [
   "avatar": ""
  },
  {
+  "handle": "fit_with_shreya",
+  "name": "Shreya Sharma",
+  "city": "Bengaluru",
+  "state": "Karnataka",
+  "langs": [
+   "Hindi",
+   "English",
+   "Punjabi"
+  ],
+  "niches": [
+   "Lifestyle",
+   "Health & Fitness",
+   "City & Local"
+  ],
+  "roles": [
+   "YouTube videos",
+   "Shoots & edits"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 2066,
+  "yt": 25,
+  "ytLink": "https://youtube.com/@shreya_1110",
+  "avgViews": "1K–5K",
+  "audienceIn": "Metro cities",
+  "setup": "Shoots on phone",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Hello Tempayy",
+  "bio": "Fun, creative and always on her toes - Health Coach - Associated with Rustic Wisdom- A health and wellness startup based in Bangalore",
+  "style": "Relatable, solution to problems and entertaining",
+  "reels": [
+   "https://www.instagram.com/p/DXqaAxwkzrQ/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "shristyd_",
+  "name": "Shristy Deka",
+  "city": "Vadodara",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "English",
+   "Assamese"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC"
+  ],
+  "platforms": [
+   "Instagram",
+   "Facebook"
+  ],
+  "followers": 2023,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "5K–10K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Veedaz, Desi Farms, Bertolli, Decorbazzar, Farmdidi, Morify, Beriglo etc.",
+  "bio": "Hey, I am Shristy, a lifestyle content creator who loves exploring food, discovering new experiences, and creating engaging content around everyday moments. My content is a blend of lifestyle, food, travel, and creativit",
+  "style": "My content style is a blend of aesthetic storytelling, lifestyle, food, and creative experiences. I enjoy creating visually appealing, relatable content that captures everyday moments in an engaging way. My aim is to make content feel less like an advertisemen",
+  "reels": [
+   "https://www.instagram.com/reel/DdGTXvQuWa0/",
+   "https://www.instagram.com/reel/CdPzq5Ajt4O/",
+   "https://www.instagram.com/reel/DZ_5s8dMiE4/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "kuntal_padhiyar",
+  "name": "Kuntal Padhiyar",
+  "city": "Dhoraji",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Health & Fitness"
+  ],
+  "roles": [
+   "UGC",
+   "YouTube videos",
+   "Shoots & edits"
+  ],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Facebook"
+  ],
+  "followers": 1696,
+  "yt": 1978,
+  "ytLink": "https://youtube.com/@kuntalpadhiyar",
+  "avgViews": "1K–5K",
+  "audienceIn": "Gujarat",
+  "setup": "Own shoot & edit setup",
+  "posts": "Daily",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "Influencer campaigns",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Oldspice, Head&shoulders, Denver, Sammvaad, Varbandhan, Dove, Mannlich, and many more",
+  "bio": "A fashion and lifestyle influencer having the experience of more than 3 years and who also loves to create content not just for monetary purposes but also passionate about the same !",
+  "style": "Being a fashion and lifestyle influencer my content always focuses on my targeted audience which is GenZ ! So the topics which are covered are like basically the problems which are faced by them, Some of the topics from they’re unaware or want to seek the know",
+  "reels": [
+   "https://www.instagram.com/reel/DfrlxQ7ojQv/",
+   "https://www.instagram.com/reel/Da0ICONoFWv/",
+   "https://www.instagram.com/reel/De1qPKOTG_T/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "apurv_0ll",
+  "name": "Apurv Parikh",
+  "city": "Gandhinagar",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Travel",
+   "Business",
+   "Comedy"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "YouTube",
+   "Snapchat"
+  ],
+  "followers": 1742,
+  "yt": 390,
+  "ytLink": "https://youtube.com/@apurvvlog3956",
+  "avgViews": "100K+",
+  "audienceIn": "Gujarat",
+  "setup": "Needs production support",
+  "posts": "Weekly",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Dakshis",
+  "bio": "Fashion comedy entertainment",
+  "style": "",
+  "reels": [
+   "https://www.instagram.com/reel/DeeDKQft38P/",
+   "https://www.instagram.com/reel/DTcr5FJilDp/",
+   "https://www.instagram.com/reel/DcoBSwqKE6k/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "mehtamaitri06",
   "name": "Maitri Mehta",
   "city": "Ahmedabad",
@@ -1148,6 +2482,93 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DfboBWcOteU/",
    "https://www.instagram.com/reel/De_125UhN0r/",
    "https://www.instagram.com/reel/Debjbx4OVqI/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "meanwhile.samarth",
+  "name": "Samarth Vyas",
+  "city": "Vadodara",
+  "state": "Gujarat",
+  "langs": [
+   "Gujarati",
+   "Hindi And English"
+  ],
+  "niches": [
+   "Lifestyle"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram"
+  ],
+  "followers": 1594,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "I am currently working on building my content and understanding my audience.",
+  "audienceIn": "I am yet to check my Instagram audience insights",
+  "setup": "",
+  "posts": "no",
+  "travels": false,
+  "collabs": [],
+  "brands": "",
+  "bio": "I am an upcoming content creator from Vadodara, Gujarat. I am interested in creating content about business, marketing, personal experiences and storytelling. I want to share real and relatable content and build my perso",
+  "style": "I am interested in creating simple and relatable content about business, marketing, personal experiences and daily life. I want to share real stories and ideas that people can connect with.",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "_sheenzu_",
+  "name": "Harsheen Thakor",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati",
+   "English"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Food",
+   "Tech",
+   "Business",
+   "Finance & Education",
+   "Health & Fitness",
+   "Comedy",
+   "City & Local"
+  ],
+  "roles": [
+   "UGC",
+   "Shoots & edits"
+  ],
+  "platforms": [
+   "Instagram"
+  ],
+  "followers": 1579,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "5K–10K",
+  "audienceIn": "Gujarat",
+  "setup": "Shoots on phone",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "Barter",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Podcasts",
+   "Events",
+   "Long-term partnerships",
+   "Affiliate"
+  ],
+  "brands": "Engimach,Nutraxpm",
+  "bio": "Im sales person wo loves to engage peope through video",
+  "style": "Making tech videos information and product videos",
+  "reels": [
+   "https://www.instagram.com/reel/DR-TcnWDLnv/"
   ],
   "photo": "",
   "avatar": ""
@@ -1240,6 +2661,90 @@ window.RT.creators = [
   "avatar": "assets/creators/viveknath_18-sq.jpg"
  },
  {
+  "handle": "asha_gujarati395094",
+  "name": "Asha Panchal",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "Gujarati"
+  ],
+  "niches": [
+   "Fashion & Beauty",
+   "Lifestyle",
+   "Tech",
+   "Business",
+   "Finance & Education"
+  ],
+  "roles": [
+   "UGC",
+   "Shoots & edits"
+  ],
+  "platforms": [
+   "Instagram",
+   "Facebook"
+  ],
+  "followers": 1356,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "Below 1K",
+  "audienceIn": "Gujarat",
+  "setup": "Own shoot & edit setup",
+  "posts": "3–4 times a week",
+  "travels": true,
+  "collabs": [
+   "Paid collabs",
+   "UGC without posting",
+   "Influencer campaigns",
+   "Long-term partnerships"
+  ],
+  "brands": "be4Local",
+  "bio": "I am Asha Panchal, a Digital Content Creator and UGC Creator from India. I create engaging AI videos, product videos, social media content, and creative advertisements. I love turning ideas into attractive visual content",
+  "style": "My content style is creative, engaging, and educational. I create AI videos, digital skills tutorials, UGC product videos, and attractive brand promotions. My goal is to make content simple, useful, and visually appealing.",
+  "reels": [
+   "https://www.instagram.com/reel/DZFvkr-S3l8/",
+   "https://www.instagram.com/reel/DYC9ZNRyyNg/",
+   "https://www.instagram.com/reel/DaXbtA1ggBk/"
+  ],
+  "photo": "",
+  "avatar": ""
+ },
+ {
+  "handle": "bynitiksha",
+  "name": "Nitiksha Motivaras",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi",
+   "English",
+   "Gujarati"
+  ],
+  "niches": [
+   "Lifestyle"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram",
+   "Facebook",
+   "YouTube"
+  ],
+  "followers": 1284,
+  "yt": 26,
+  "ytLink": "https://youtube.com/@find_by_nitiksha",
+  "avgViews": "11,000 (11K)",
+  "audienceIn": "",
+  "setup": "Own shoot & edit setup",
+  "posts": "No (Currently working, but open to posting consistently based on assigned tasks/campaigns)",
+  "travels": false,
+  "collabs": [],
+  "brands": "",
+  "bio": "Social Media Manager, Video Editor & Content Creator",
+  "style": "",
+  "reels": [],
+  "photo": "",
+  "avatar": ""
+ },
+ {
   "handle": "dipsistudio",
   "name": "Dipali Challa",
   "city": "Gandhinagar",
@@ -1280,5 +2785,39 @@ window.RT.creators = [
   ],
   "photo": "assets/creators/dipsistudio.jpg",
   "avatar": "assets/creators/dipsistudio-sq.jpg"
+ },
+ {
+  "handle": "keyur_jain018",
+  "name": "Keyur Jain",
+  "city": "Dahod",
+  "state": "Gujarat",
+  "langs": [
+   "Hindi Gujrati English"
+  ],
+  "niches": [
+   "Lifestyle"
+  ],
+  "roles": [],
+  "platforms": [
+   "Instagram"
+  ],
+  "followers": 1164,
+  "yt": 0,
+  "ytLink": "",
+  "avgViews": "5k to 10k",
+  "audienceIn": "gujrat",
+  "setup": "",
+  "posts": "Yes",
+  "travels": true,
+  "collabs": [],
+  "brands": "",
+  "bio": "I'm Keyur Jain, a passionate content creator, photographer, and storyteller from Limdi, Gujarat. I love capturing real moments, creating cinematic visuals, and turning everyday stories into engaging content. My work revo",
+  "style": "My content style is cinematic, creative, and storytelling-driven, with a focus on capturing authentic moments through engaging visuals. I blend professional photography, dynamic reels, aesthetic transitions, and creative editing to make every story memorable a",
+  "reels": [
+   "https://www.instagram.com/reel/DeL7wUoM4vv/",
+   "https://www.instagram.com/reel/Db2orB9su_p/"
+  ],
+  "photo": "",
+  "avatar": ""
  }
 ];
