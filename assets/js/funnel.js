@@ -1,7 +1,6 @@
-/* The lead engine: scroll turns a crowd into a shortlist.
-   A drifting crowd (pale dots) becomes one flowing current; a lime gate stops
-   the unqualified (they drop away) and the few that pass turn lime. Those then
-   fill a shortlist panel row by row: an avatar and two lines of "text". */
+/* The lead engine: a scroll-driven particle funnel.
+   Strangers (pale dots) are pulled into the funnel, unqualified leads fall away,
+   qualified ones turn lime and gather in the "sales" ring at the bottom. */
 import * as THREE from "three";
 
 const section = document.querySelector(".engine");
@@ -30,34 +29,18 @@ function init() {
   scene.add(group);
 
   /* ---- particles ---- */
-  // The first nQual particles are the qualified leads; aSlot.y is each one's
-  // place in the shortlist (row by row: an avatar cluster, then two text lines).
-  const nQual = Math.round(N * QUAL);
-  const ROWS = 7;
-  const PER = Math.ceil(nQual / ROWS);
-  const AV = Math.max(6, Math.round(PER * 0.25));
   const geo = new THREE.BufferGeometry();
   const seeds = new Float32Array(N * 4);
   for (let i = 0; i < N * 4; i++) seeds[i] = Math.random();
-  const slots = new Float32Array(N * 2);
-  for (let i = 0; i < nQual; i++) { slots[i * 2] = 1; slots[i * 2 + 1] = i; }
   geo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(N * 3), 3));
   geo.setAttribute("aSeed", new THREE.BufferAttribute(seeds, 4));
-  geo.setAttribute("aSlot", new THREE.BufferAttribute(slots, 2));
-
-  // the stream runs X0 → X1; the gate stands at TG of the way along
-  const X0 = -3.9, X1 = 3.9, TG = 0.62, GATE_X = X0 + (X1 - X0) * TG;
-  // shortlist panel: rows start at ROW_TOP, avatar column at LX
-  const LX = -1.5, ROW_TOP = 1.65, ROW_GAP = 0.55;
-  const f = (n) => n.toFixed(4);
 
   const uniforms = {
     uTime: { value: 0 },
     uProg: { value: reduce ? 1 : 0 },
     uSize: { value: mobile ? 95 : 120 },
     uPR: { value: renderer.getPixelRatio() },
-    uPer: { value: PER },
-    uAv: { value: AV },
+    uQual: { value: QUAL },
   };
 
   const mat = new THREE.ShaderMaterial({
@@ -67,83 +50,52 @@ function init() {
     blending: THREE.AdditiveBlending,
     vertexShader: /* glsl */ `
       attribute vec4 aSeed;
-      attribute vec2 aSlot;
-      uniform float uTime, uProg, uSize, uPR, uPer, uAv;
+      uniform float uTime, uProg, uSize, uPR, uQual;
       varying float vAlpha;
       varying float vQual;
-      varying float vText;
       #define TAU 6.28318530718
       float ease(float t) { return t * t * (3.0 - 2.0 * t); }
       void main() {
-        float qual = aSlot.x;
+        float qual = step(aSeed.w, uQual);
 
-        // A — attract: a wide, drifting crowd
+        // A — attention: a wide, drifting field of people
         vec3 a = (aSeed.xyz - 0.5) * vec3(16.0, 9.0, 7.0);
         a.x += cos(uTime * 0.21 + aSeed.y * TAU) * 0.3;
         a.y += sin(uTime * 0.27 + aSeed.x * TAU) * 0.3;
 
-        // B — capture: the crowd becomes one flowing current, left to right
-        float t = fract(aSeed.y + uTime * 0.05 * (0.7 + aSeed.z * 0.6));
-        float x = mix(${f(X0)}, ${f(X1)}, t);
-        float lane = (aSeed.z - 0.5) * 1.15;
-        vec3 b = vec3(x, lane + sin(x * 0.9 - uTime * 1.2 + aSeed.x * 0.6) * 0.32, (aSeed.x - 0.5) * 0.9);
-        float ends = smoothstep(0.0, 0.07, t) * smoothstep(1.0, 0.93, t);
+        // B — capture: a spiralling funnel
+        float t = fract(aSeed.y + uTime * 0.04 * (0.6 + aSeed.z));
+        float ang = aSeed.x * TAU + uTime * (0.5 + aSeed.z * 0.5) + t * 7.0;
+        float r = mix(2.9, 0.24, pow(t, 0.72)) * (0.86 + aSeed.z * 0.28);
+        vec3 b = vec3(cos(ang) * r, mix(2.7, -1.7, t), sin(ang) * r);
 
-        // C — qualify: a gate across the stream; the rest hit it and drop away
-        float gone = step(${f(TG)}, t);
-        float past = max(t - ${f(TG)}, 0.0);
-        float pd = min(past, 0.09);
-        vec3 pile = vec3(${f(GATE_X)} - 0.1 - pd * 0.8, b.y - pd * 4.0 - pd * pd * 40.0, b.z);
-        vec3 c = mix(mix(b, pile, gone), b, qual);
+        // C — qualify: the rest slip out and fall away
+        vec3 fall = b + vec3((aSeed.x - 0.5) * 6.0, -4.0 - aSeed.z * 4.0, (aSeed.y - 0.5) * 3.0);
 
-        // D — convert: qualified leads fill a shortlist, one row at a time
-        float k = aSlot.y;
-        float row = floor(k / uPer);
-        float j = k - row * uPer;
-        float y0 = ${f(ROW_TOP)} - row * ${f(ROW_GAP)};
-        float h = fract(sin((row + 1.0) * 12.9898) * 43758.5453);
-        float text = step(uAv, j);
-        vec3 d;
-        if (j < uAv) {
-          float ang = j * 2.39996;
-          float rr = 0.17 * sqrt((j + 0.5) / uAv);
-          d = vec3(${f(LX)} + cos(ang) * rr, y0 + sin(ang) * rr, 0.0);
-        } else {
-          float i = j - uAv;
-          float nt = uPer - uAv;
-          float n1 = floor(nt * 0.62);
-          d = i < n1
-            ? vec3(${f(LX)} + 0.38 + i / max(n1 - 1.0, 1.0) * (1.5 + h * 0.9), y0 + 0.075, 0.0)
-            : vec3(${f(LX)} + 0.38 + (i - n1) / max(nt - n1 - 1.0, 1.0) * (0.7 + h * 0.5), y0 - 0.1, 0.0);
-        }
-        d.y += sin(uTime * 0.8 + row) * 0.015;
+        // D — convert: qualified leads circle the sales ring
+        float a2 = aSeed.x * TAU + uTime * (0.7 + aSeed.z * 0.6);
+        float rr = 0.6 + aSeed.z * 0.55;
+        vec3 d = vec3(cos(a2) * rr, -2.1 + (aSeed.y - 0.5) * 0.35 + sin(a2 * 2.0) * 0.08, sin(a2) * rr * 0.55);
 
         float p1 = ease(clamp(uProg / 0.3, 0.0, 1.0));
         float p2 = ease(clamp((uProg - 0.36) / 0.24, 0.0, 1.0));
         float p3 = ease(clamp((uProg - 0.66) / 0.24, 0.0, 1.0));
-        float rp = qual * ease(clamp(p3 * 1.6 - row * 0.09, 0.0, 1.0));
 
         vec3 pos = mix(a, b, p1);
-        pos = mix(pos, c, p2);
-        pos = mix(pos, d, rp);
+        pos = mix(pos, mix(fall, b, qual), p2);
+        pos = mix(pos, d, qual * p3);
 
         vec4 mv = modelViewMatrix * vec4(pos, 1.0);
         gl_Position = projectionMatrix * mv;
 
-        vQual = qual * max(p2 * gone, rp);
-        vText = text * rp;
-        float endsA = mix(1.0, ends, p1 * (1.0 - rp));
-        float rejA = 1.0 - (1.0 - qual) * p2 * gone * smoothstep(0.0, 0.07, past);
-        float outA = 1.0 - (1.0 - qual) * p3 * 0.97;
-        vAlpha = mix(0.55, 0.9, aSeed.z) * endsA * rejA * outA * mix(1.0, 0.8, vText);
-        float size = uSize * (0.45 + aSeed.z * 0.7) * (1.0 + vQual * 0.6);
-        size *= mix(1.0, mix(1.2, 0.55, text), rp);
+        vQual = qual * p2;
+        vAlpha = mix(0.55, 0.9, aSeed.z) * (1.0 - (1.0 - qual) * p2 * 0.9);
+        float size = uSize * (0.45 + aSeed.z * 0.7) * (1.0 + vQual * 0.9 + qual * p3 * 0.5);
         gl_PointSize = size * uPR / -mv.z;
       }`,
     fragmentShader: /* glsl */ `
       varying float vAlpha;
       varying float vQual;
-      varying float vText;
       void main() {
         vec2 c = gl_PointCoord - 0.5;
         float d = length(c);
@@ -152,7 +104,6 @@ function init() {
         vec3 pale = vec3(0.78, 0.87, 1.0);
         vec3 lime = vec3(0.83, 0.95, 0.42);
         vec3 col = mix(pale, lime, vQual);
-        col = mix(col, vec3(0.92, 0.96, 0.86), vText * 0.55);
         gl_FragColor = vec4(col, core * core * vAlpha);
       }`,
   });
@@ -160,40 +111,26 @@ function init() {
   points.frustumCulled = false;
   group.add(points);
 
-  /* ---- guides: the qualifying gate and the shortlist panel ---- */
-  const lineMat = (color, max) => {
+  /* ---- funnel guide rings ---- */
+  const ringMats = [];
+  const ringAt = (y, r, opacity, color = 0xffffff) => {
+    const pts = [];
+    for (let i = 0; i <= 96; i++) { const a = (i / 96) * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r)); }
     const m = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0, depthWrite: false });
-    m.userData.max = max;
+    m.userData.max = opacity;
+    ringMats.push(m);
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), m);
+    group.add(line);
     return m;
   };
-  const gateMat = lineMat(0xd4f36b, 0.85);
-  const gatePts = [];
-  for (let i = 0; i < 14; i++) {
-    const y = -1.25 + i * (2.5 / 14);
-    gatePts.push(new THREE.Vector3(GATE_X, y, 0), new THREE.Vector3(GATE_X, y + 0.11, 0));
+  for (let i = 0; i < 7; i++) {
+    const t = i / 6;
+    ringAt(2.7 - t * 4.4, 2.9 - Math.pow(t, 0.72) * 2.66, 0.1 + t * 0.06);
   }
-  group.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(gatePts), gateMat));
-
-  const panelMat = lineMat(0xffffff, 0.22);
-  const sepMat = lineMat(0xffffff, 0.08);
-  const pl = LX - 0.4, pr = LX + 3.3, pt = ROW_TOP + 0.42, pb = ROW_TOP - (ROWS - 1) * ROW_GAP - 0.42, rad = 0.28;
-  const panelPts = [];
-  const corner = (cx, cy, a0) => {
-    for (let i = 0; i <= 8; i++) { const a = a0 + (i / 8) * (Math.PI / 2); panelPts.push(new THREE.Vector3(cx + Math.cos(a) * rad, cy + Math.sin(a) * rad, 0)); }
-  };
-  corner(pr - rad, pt - rad, 0); corner(pl + rad, pt - rad, Math.PI / 2);
-  corner(pl + rad, pb + rad, Math.PI); corner(pr - rad, pb + rad, Math.PI * 1.5);
-  panelPts.push(panelPts[0].clone());
-  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(panelPts), panelMat));
-  const sepPts = [];
-  for (let r = 0; r < ROWS - 1; r++) {
-    const y = ROW_TOP - r * ROW_GAP - ROW_GAP / 2;
-    sepPts.push(new THREE.Vector3(pl + 0.2, y, 0), new THREE.Vector3(pr - 0.2, y, 0));
-  }
-  group.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(sepPts), sepMat));
+  const salesRing = ringAt(-2.1, 1.2, 0.9, 0xd4f36b);
+  salesRing.userData.sales = true;
 
   /* ---- sizing: funnel sits right of the copy on desktop ---- */
-  let baseScale = 1, listBoost = 1;
   const resize = () => {
     const w = stage.clientWidth, h = stage.clientHeight;
     renderer.setSize(w, h, false);
@@ -202,12 +139,9 @@ function init() {
     const visH = 2 * Math.tan((camera.fov * Math.PI) / 360) * camera.position.z;
     const visW = visH * camera.aspect;
     const narrow = w < 860;
-    group.position.x = narrow ? 0 : visW * 0.22;
-    group.position.y = narrow ? -0.2 : 0.2;
-    baseScale = narrow ? Math.min(0.8, visW / 8.2) : Math.min(0.82, visH / 8, (visW * 0.54) / 8);
-    // phones: the 8-unit stream sets the scale; the 3.7-unit shortlist can grow to fill the width
-    listBoost = narrow ? Math.max(1, Math.min(1.8, visW / 4.6 / baseScale)) : 1;
-    group.scale.setScalar(baseScale);
+    group.position.x = narrow ? 0 : visW * 0.2;
+    group.position.y = narrow ? -0.2 : 0.35;
+    group.scale.setScalar(narrow ? Math.min(0.8, visW / 7.5) : Math.min(0.82, visH / 8));
   };
   resize();
   new ResizeObserver(resize).observe(stage);
@@ -223,6 +157,7 @@ function init() {
   /* ---- copy + readout ---- */
   const steps = [...section.querySelectorAll(".engine__step")];
   const readout = section.querySelector("[data-readout]");
+  const nQual = Math.round(N * QUAL);
   const setStep = (p) => {
     const idx = Math.min(steps.length - 1, Math.floor(p * steps.length * 0.999));
     steps.forEach((s, i) => s.classList.toggle("is-active", reduce || i === idx));
@@ -269,12 +204,9 @@ function init() {
     tilt.y += (tilt.ty - tilt.y) * 0.05;
     group.rotation.y = tilt.x + (reduce ? 0 : Math.sin(uniforms.uTime.value * 0.15) * 0.08);
     group.rotation.x = 0.14 + tilt.y;
-    const qualify = smooth((p - 0.34) / 0.1);
+    const ringIn = smooth(p / 0.3);
     const convert = smooth((p - 0.66) / 0.24);
-    gateMat.opacity = gateMat.userData.max * qualify * (1 - convert);
-    group.scale.setScalar(baseScale * (1 + (listBoost - 1) * convert));
-    panelMat.opacity = panelMat.userData.max * convert;
-    sepMat.opacity = sepMat.userData.max * convert;
+    ringMats.forEach((m) => { m.opacity = m.userData.sales ? m.userData.max * convert : m.userData.max * ringIn * (1 - convert * 0.5); });
     setStep(p);
     renderer.render(scene, camera);
   };
