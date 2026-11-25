@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=41">
+  <link rel="stylesheet" href="assets/css/site.css?v=42">
   <!-- Intro gate (see assets/js/intro.js): skip if seen in this tab, started in any tab in the last 30 min, reduced motion, or a #hash deep link. -->
   <script>try{var a=+localStorage.getItem("rt-intro-at")||0,f=/[?&]intro=1/.test(location.search);if(!f&&(sessionStorage.getItem("rt-intro")||Date.now()-a<18e5||location.hash.length>1||matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro-skip")}catch(e){}</script>
   <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
@@ -100,10 +100,10 @@
         <h2 class="display h-lg" id="engineTitle">From scroll to sale.</h2>
         <p class="lede">Every campaign we run follows the same four steps. Keep scrolling to watch a crowd become a shortlist.</p>
         <ol class="engine__steps">
-          <li class="engine__step is-active"><b>Attract</b><span>Reels, creators and ads that make the right people stop scrolling.</span></li>
-          <li class="engine__step"><b>Capture</b><span>A landing page, instant form or WhatsApp chat that makes enquiring easy.</span></li>
-          <li class="engine__step"><b>Qualify</b><span>Screening questions and quick call-backs filter out time-wasters before they reach you.</span></li>
-          <li class="engine__step"><b>Convert</b><span>Leads land in your WhatsApp or CRM with follow-ups, and we report cost per qualified lead.</span></li>
+          <li data-step="1" class="engine__step is-active"><b>Attract</b><span>Reels, creators and ads that make the right people stop scrolling.</span></li>
+          <li data-step="2" class="engine__step"><b>Capture</b><span>A landing page, instant form or WhatsApp chat that makes enquiring easy.</span></li>
+          <li data-step="3" class="engine__step"><b>Qualify</b><span>Screening questions and quick call-backs filter out time-wasters before they reach you.</span></li>
+          <li data-step="4" class="engine__step"><b>Convert</b><span>Leads land in your WhatsApp or CRM with follow-ups, and we report cost per qualified lead.</span></li>
         </ol>
       </div>
       <div class="engine__readout" data-readout aria-hidden="true">
@@ -308,7 +308,7 @@
 <script src="assets/js/content.js?v=39"></script>
 <script src="assets/js/world-dots.js?v=34"></script>
 <script src="assets/js/site.js?v=41"></script>
-<script type="module" src="assets/js/funnel.js?v=34"></script>
+<script type="module" src="assets/js/funnel.js?v=35"></script>
 <script type="module" src="assets/js/world.js?v=34"></script>
 </body>
 </html>

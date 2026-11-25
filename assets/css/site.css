@@ -341,7 +341,7 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 .engine__steps { list-style: none; margin: auto 0 0; padding: 0; display: grid; gap: 4px; max-width: 420px; counter-reset: step; }
 .engine__step { counter-increment: step; display: grid; grid-template-columns: 44px 1fr; gap: 2px 14px; padding: 14px 16px; border-radius: 20px; opacity: .38; transition: opacity .4s, background-color .4s; }
 .engine__step::before {
-  content: counter(step); grid-row: span 2; width: 34px; height: 34px; border-radius: 50%;
+  content: attr(data-step); grid-row: span 2; width: 34px; height: 34px; border-radius: 50%;
   display: grid; place-items: center; font-weight: 600; font-size: 0.85rem; border: 1px solid rgba(255,255,255,.3); align-self: start;
 }
 .engine__step b { font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; color: #fff; letter-spacing: -0.01em; }
@@ -349,7 +349,7 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 .engine__step.is-active { opacity: 1; background: rgba(255,255,255,.06); }
 .engine__step.is-active::before { background: var(--glow); color: var(--ink); border-color: transparent; }
 .engine__readout {
-  position: absolute; z-index: 2; right: var(--gutter); top: 36px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: end;
+  position: absolute; z-index: 2; right: var(--gutter); top: 116px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: end;
 }
 .engine__readout .pill { background: rgba(255,255,255,.08); color: #eaf1fb; border-color: rgba(255,255,255,.14); backdrop-filter: blur(8px); }
 .engine__readout .pill b { color: var(--lime); font-weight: 600; font-variant-numeric: tabular-nums; }
