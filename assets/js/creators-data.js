@@ -37,8 +37,8 @@ window.RT.creators = [
   "bio": "Making comedy videos",
   "style": "Making funny and relatable content",
   "reels": [],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/_spindia_.jpg",
+  "avatar": "assets/creators/_spindia_-sq.jpg"
  },
  {
   "handle": "amdavadi_crowd",
@@ -82,8 +82,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/Dffj87CTsun/",
    "https://www.instagram.com/reel/Dflp6dFNe1p/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/amdavadi_crowd.jpg",
+  "avatar": "assets/creators/amdavadi_crowd-sq.jpg"
  },
  {
   "handle": "umesh.hun",
@@ -557,8 +557,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DTLEGoCDLNU/",
    "https://www.instagram.com/reel/DYlvcWBM92m/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/mihirsmicpodcast.jpg",
+  "avatar": "assets/creators/mihirsmicpodcast-sq.jpg"
  },
  {
   "handle": "prabhakar.joshi.official",
@@ -657,8 +657,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DfepUBczwVz/",
    "https://www.instagram.com/reel/DeMcRYCTs1A/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/prapp_t.jpg",
+  "avatar": "assets/creators/prapp_t-sq.jpg"
  },
  {
   "handle": "brijesh_purohit_",
@@ -706,8 +706,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/De84wpau4nh/",
    "https://www.instagram.com/reel/DYdpraEhzaN/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/brijesh_purohit_.jpg",
+  "avatar": "assets/creators/brijesh_purohit_-sq.jpg"
  },
  {
   "handle": "heenatales",
@@ -756,8 +756,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DW1YKH4iNkL/",
    "https://www.instagram.com/p/DPyc5fFiIMN/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/heenatales.jpg",
+  "avatar": "assets/creators/heenatales-sq.jpg"
  },
  {
   "handle": "akash_trapper",
@@ -848,8 +848,8 @@ window.RT.creators = [
   "bio": "Influencer - beauty, fashion, lifestyle A social extrovert, complete butterfly, travel enthusiast",
   "style": "Creative Interactive Beauty fashion and lifestyle related",
   "reels": [],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/urvashi1012.jpg",
+  "avatar": "assets/creators/urvashi1012-sq.jpg"
  },
  {
   "handle": "bhvn_rwl",
@@ -975,8 +975,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DWTnJjlEnhb/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/nikhil_karooth.jpg",
+  "avatar": "assets/creators/nikhil_karooth-sq.jpg"
  },
  {
   "handle": "biswajit.msme",
@@ -1017,8 +1017,8 @@ window.RT.creators = [
   "bio": "Finance educator from North East, covering specifically MSMEs",
   "style": "Content for start ups, business owners covering all aspect of business finance from loan, govt schemes , business ideas",
   "reels": [],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/biswajit.msme.jpg",
+  "avatar": "assets/creators/biswajit.msme-sq.jpg"
  },
  {
   "handle": "harsh__menghani",
@@ -1228,8 +1228,8 @@ window.RT.creators = [
   "bio": "NRI finance and taxes",
   "style": "",
   "reels": [],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/nikhilvarg.jpg",
+  "avatar": "assets/creators/nikhilvarg-sq.jpg"
  },
  {
   "handle": "vijjufilms_",
@@ -1404,8 +1404,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DdwID4dzlQS/",
    "https://www.instagram.com/reel/DYAERJHyzRs/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/nikitaparecha.jpg",
+  "avatar": "assets/creators/nikitaparecha-sq.jpg"
  },
  {
   "handle": "iamslow_ar",
@@ -1445,8 +1445,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DLpW5H7ScRe/",
    "https://www.instagram.com/reel/DU0eK7gkgQT/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/iamslow_ar.jpg",
+  "avatar": "assets/creators/iamslow_ar-sq.jpg"
  },
  {
   "handle": "susmitamishra27_",
@@ -1724,8 +1724,8 @@ window.RT.creators = [
    "https://www.youtube.com/shorts/-yLthT3Svhg/",
    "https://www.instagram.com/reel/DQhT2tgCGFq/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/khwahish0320243.jpg",
+  "avatar": "assets/creators/khwahish0320243-sq.jpg"
  },
  {
   "handle": "byharshmotwani",
@@ -1971,8 +1971,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DY1xE4OgM8V/",
    "https://www.instagram.com/reel/DN50dTrE8a6/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/_placeswithfaces_.jpg",
+  "avatar": "assets/creators/_placeswithfaces_-sq.jpg"
  },
  {
   "handle": "_avani_patel1513",
@@ -2073,8 +2073,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/Dcu6QsUs9zA/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/vaghela.prakash.881120.jpg",
+  "avatar": "assets/creators/vaghela.prakash.881120-sq.jpg"
  },
  {
   "handle": "soulfullife_withkriti",
@@ -2172,8 +2172,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DFSj3SgCGrp/",
    "https://www.instagram.com/reel/DOGZnK6Dx9M/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/mr_safvan_1002.jpg",
+  "avatar": "assets/creators/mr_safvan_1002-sq.jpg"
  },
  {
   "handle": "_mitaliihansraj_",
@@ -2274,8 +2274,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/p/DXqaAxwkzrQ/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/fit_with_shreya.jpg",
+  "avatar": "assets/creators/fit_with_shreya-sq.jpg"
  },
  {
   "handle": "shristyd_",
@@ -2326,8 +2326,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/CdPzq5Ajt4O/",
    "https://www.instagram.com/reel/DZ_5s8dMiE4/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/shristyd_.jpg",
+  "avatar": "assets/creators/shristyd_-sq.jpg"
  },
  {
   "handle": "kuntal_padhiyar",
@@ -2377,8 +2377,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/Da0ICONoFWv/",
    "https://www.instagram.com/reel/De1qPKOTG_T/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/kuntal_padhiyar.jpg",
+  "avatar": "assets/creators/kuntal_padhiyar-sq.jpg"
  },
  {
   "handle": "apurv_0ll",
@@ -2570,8 +2570,8 @@ window.RT.creators = [
   "reels": [
    "https://www.instagram.com/reel/DR-TcnWDLnv/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/_sheenzu_.jpg",
+  "avatar": "assets/creators/_sheenzu_-sq.jpg"
  },
  {
   "handle": "shreya_vjvargiya",
@@ -2706,8 +2706,8 @@ window.RT.creators = [
    "https://www.instagram.com/reel/DYC9ZNRyyNg/",
    "https://www.instagram.com/reel/DaXbtA1ggBk/"
   ],
-  "photo": "",
-  "avatar": ""
+  "photo": "assets/creators/asha_gujarati395094.jpg",
+  "avatar": "assets/creators/asha_gujarati395094-sq.jpg"
  },
  {
   "handle": "bynitiksha",
