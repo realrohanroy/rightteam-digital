@@ -18,6 +18,16 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
+  # one address per page (Search Console "duplicate" / "not found" fixes)
+  # /index.html -> /   (THE_REQUEST so DirectoryIndex's internal lookup doesn't loop)
+  RewriteCond %{THE_REQUEST} \s/index\.html[\s?]
+  RewriteRule ^index\.html$ / [L,R=301]
+  # /services or /services/ -> /services.html, /services.html/ -> /services.html (only for real pages)
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([A-Za-z0-9_-]+)(?:\.html)?/$ /$1.html [L,R=301]
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([A-Za-z0-9_-]+)$ /$1.html [L,R=301]
+
   # ---- old site addresses -> new pages (301). Add one line per old page, e.g.:
   # RewriteRule ^contact-us/?$ /start.html [L,R=301]
   # RewriteRule ^services/gst-registration/?$ /services.html [L,R=301]
