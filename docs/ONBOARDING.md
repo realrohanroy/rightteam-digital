@@ -55,7 +55,7 @@ You need a free Supabase account. The free tier covers far more than 1,000 creat
 4. **Stop strangers making accounts.** Authentication → Sign In / Providers → turn off **Allow new users to sign up**.
 5. **Remove a reviewer** with `delete from public.admins where email = 'reviewer@example.com';`, and delete their user too.
 
-## Daily use: rightteam.in/admin.html
+## Daily use: rightteam.in/admin
 
 Sign in with the email and password from step 2. The session ends when the browser tab closes.
 
