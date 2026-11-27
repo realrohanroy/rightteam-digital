@@ -71,7 +71,7 @@
   const header = `
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header" id="siteHeader">
-    <a class="brand" href="index.html" aria-label="Right Team Digital — home">
+    <a class="brand" href="/" aria-label="Right Team Digital — home">
       <img src="assets/img/rt-logo.svg" alt="" width="38" height="38">
       <span>Right Team <small>Digital</small></span>
     </a>
@@ -79,30 +79,30 @@
       <div class="nav__group">
         <button class="nav__link" id="svcBtn" aria-expanded="false" aria-controls="svcMenu"${page === "services" ? ' aria-current="page"' : ""}>Services ${icon("chev")}</button>
         <div class="dropdown" id="svcMenu" role="menu">
-          ${SERVICES.map((s) => `<a role="menuitem" href="services.html#${s.id}"><span class="orb">${icon(s.icon)}</span><b>${s.name}</b><small>${s.desc}</small></a>`).join("")}
-          <a role="menuitem" class="dropdown__all" href="services.html#planning">Not sure? See complete packages ${icon("arrow")}</a>
+          ${SERVICES.map((s) => `<a role="menuitem" href="services#${s.id}"><span class="orb">${icon(s.icon)}</span><b>${s.name}</b><small>${s.desc}</small></a>`).join("")}
+          <a role="menuitem" class="dropdown__all" href="services#planning">Not sure? See complete packages ${icon("arrow")}</a>
         </div>
       </div>
-      <a class="nav__link" href="work.html"${cur("work")}>Our Work</a>
-      <a class="nav__link" href="creators.html"${cur("creators")}>Find a Creator</a>
-      <a class="nav__link" href="about.html"${cur("about")}>About</a>
-      <a class="nav__link nav__link--join" href="join.html"${cur("join")}>Join as a Creator</a>
+      <a class="nav__link" href="work"${cur("work")}>Our Work</a>
+      <a class="nav__link" href="creators"${cur("creators")}>Find a Creator</a>
+      <a class="nav__link" href="about"${cur("about")}>About</a>
+      <a class="nav__link nav__link--join" href="join"${cur("join")}>Join as a Creator</a>
     </nav>
-    <a class="btn btn--ink btn--small header-cta" href="start.html">Start a Project <span class="btn__dot">${icon("arrow")}</span></a>
+    <a class="btn btn--ink btn--small header-cta" href="start">Start a Project <span class="btn__dot">${icon("arrow")}</span></a>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">${icon("menu")}</button>
   </header>
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <button class="menu-btn mobile-menu__close" id="menuClose" aria-label="Close menu">${icon("x")}</button>
-    <a href="index.html">Home</a>
+    <a href="/">Home</a>
     <details><summary>Services</summary>
-      ${SERVICES.map((s) => `<a href="services.html#${s.id}"><b>${s.name}</b><small>${s.desc}</small></a>`).join("")}
-      <a href="services.html#planning"><b>Complete packages</b><small>Pick a goal, we suggest the scope</small></a>
+      ${SERVICES.map((s) => `<a href="services#${s.id}"><b>${s.name}</b><small>${s.desc}</small></a>`).join("")}
+      <a href="services#planning"><b>Complete packages</b><small>Pick a goal, we suggest the scope</small></a>
     </details>
-    <a href="work.html">Our Work</a>
-    <a href="creators.html">Find a Creator</a>
-    <a href="join.html">Join as a Creator</a>
-    <a href="about.html">About</a>
-    <a class="btn btn--ink" href="start.html">Start a Project <span class="btn__dot">${icon("arrow")}</span></a>
+    <a href="work">Our Work</a>
+    <a href="creators">Find a Creator</a>
+    <a href="join">Join as a Creator</a>
+    <a href="about">About</a>
+    <a class="btn btn--ink" href="start">Start a Project <span class="btn__dot">${icon("arrow")}</span></a>
   </div>`;
   document.body.insertAdjacentHTML("afterbegin", header);
 
@@ -124,7 +124,7 @@
           <h2 class="display footer__title">Got a brief?<br>Let's fill your calendar.</h2>
         </div>
         <div class="footer__orb-zone">
-          <a class="footer__orb" href="start.html"><span class="footer__orb-label">Start a<br>project</span><span class="footer__orb-icon">${icon("arrow")}</span></a>
+          <a class="footer__orb" href="start"><span class="footer__orb-label">Start a<br>project</span><span class="footer__orb-icon">${icon("arrow")}</span></a>
         </div>
       </div>
 
@@ -139,14 +139,14 @@
       </div>
 
       <nav class="footer__links" aria-label="Footer">
-        <div><h3>Services</h3><ul>${SERVICES.map((s) => `<li><a href="services.html#${s.id}">${s.name}</a></li>`).join("")}</ul></div>
+        <div><h3>Services</h3><ul>${SERVICES.map((s) => `<li><a href="services#${s.id}">${s.name}</a></li>`).join("")}</ul></div>
         <div><h3>Company</h3><ul>
-          <li><a href="work.html">Our Work</a></li><li><a href="about.html">About</a></li>
-          <li><a href="creators.html">Find a Creator</a></li><li><a href="start.html">Contact</a></li><li><a href="join.html">Join as a Creator</a></li>
+          <li><a href="work">Our Work</a></li><li><a href="about">About</a></li>
+          <li><a href="creators">Find a Creator</a></li><li><a href="start">Contact</a></li><li><a href="join">Join as a Creator</a></li>
         </ul></div>
         <div><h3>Small print</h3><ul>
-          <li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms</a></li>
-          <li><a href="${esc(S.mainSite || "about.html")}">Right Team Private Limited</a></li>
+          <li><a href="privacy">Privacy Policy</a></li><li><a href="terms">Terms</a></li>
+          <li><a href="${esc(S.mainSite || "about")}">Right Team Private Limited</a></li>
         </ul></div>
       </nav>
     </div>
@@ -636,7 +636,7 @@
     } else { words.forEach((w) => w.classList.add("is-on")); marks.forEach((m) => m.style.setProperty("--p", 1)); }
   }
 
-  /* ---------- Brief form (start.html) ---------- */
+  /* ---------- Brief form (start) ---------- */
   const form = $("#briefForm");
   if (form) {
     const q = new URLSearchParams(location.search);
@@ -654,7 +654,7 @@ About my campaign: `;
       const brief = form.elements.brief; if (brief && !brief.value) brief.value = `Goal: ${goal.replace(/-/g, " ")}\n\n`;
     }
     // creators register on join.html (it saves to the creator database); old ?service=network links go there
-    if (svc === "network") location.replace("join.html");
+    if (svc === "network") location.replace("join");
     const creatorHint = $("#creatorHint");
     const syncCreatorHint = () => {
       const r = form.querySelector('input[name="service"]:checked');

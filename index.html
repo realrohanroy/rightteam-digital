@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="assets/css/site.css?v=43">
   <!-- Intro gate (see assets/js/intro.js): skip if seen in this tab, started in any tab in the last 30 min, reduced motion, or a #hash deep link. -->
   <script>try{var a=+localStorage.getItem("rt-intro-at")||0,f=/[?&]intro=1/.test(location.search);if(!f&&(sessionStorage.getItem("rt-intro")||Date.now()-a<18e5||location.hash.length>1||matchMedia("(prefers-reduced-motion: reduce)").matches))document.documentElement.classList.add("intro-skip")}catch(e){}</script>
-  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
+  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" }, "integrity": { "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js": "sha384-61S/Nu32S3E5+n+KpCOTb2eRYps6fVKm+9Gz1QBvSePFthb46f063Aa/qe/lykFZ" } }</script>
 </head>
 <body data-page="home">
 <div class="intro" id="intro" aria-hidden="true">
@@ -51,7 +51,7 @@
         </h1>
         <p class="lede">We run the ads, make the reels and build the pages that bring you enquiries, then <strong>track which ones turn into sales</strong>. Bring us one campaign or your whole growth plan.</p>
         <div class="btn-row">
-          <a class="btn btn--ink" href="start.html">Start a Project <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+          <a class="btn btn--ink" href="start">Start a Project <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
           <a class="btn btn--ghost" href="#reels">See Our Reels <svg class="icon"><use href="#i-play"/></svg></a>
         </div>
       </div>
@@ -135,7 +135,7 @@
           <div class="svc__outcome">
             <small>We're here to</small>
             <strong>Fill your sales calendar</strong>
-            <a class="btn btn--ink btn--small" href="start.html?service=lead-generation">Plan My Campaign <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+            <a class="btn btn--ink btn--small" href="start?service=lead-generation">Plan My Campaign <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
           </div>
         </article>
         <article class="svc">
@@ -198,7 +198,7 @@
         <h2 class="display h-lg" id="reportTitle">Know what every rupee brought in.</h2>
         <p class="lede">Each week you get one simple report: how many enquiries came in, how many were genuine, how many booked a call, and what each one cost. No reach or follower counts padding it out.</p>
         <div class="btn-row">
-          <a class="btn btn--ink" href="start.html?service=lead-generation">Plan My Campaign <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+          <a class="btn btn--ink" href="start?service=lead-generation">Plan My Campaign <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
         </div>
       </div>
       <div class="feature__visual" aria-label="Example of a weekly lead report">
@@ -229,7 +229,7 @@
         <p class="voices__word voices__word--l" aria-hidden="true">The right</p>
         <div class="voices__aside voices__aside--l">
           <p class="lede">Tell us who you want to reach. We'll find creators, podcasters and brand partners who already speak to that audience.</p>
-          <a class="btn btn--ink" href="creators.html">Find a Creator <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+          <a class="btn btn--ink" href="creators">Find a Creator <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
         </div>
       </div>
       <div class="voices__phone">
@@ -240,7 +240,7 @@
         <p class="voices__word" aria-hidden="true">voices.</p>
         <div class="float-chip" style="position:relative"><div class="avatars" data-avatars></div><div><b>Matched by city,</b><br><span class="small">language &amp; budget</span></div></div>
         <div class="float-chip" style="position:relative"><span class="orb"><svg class="icon"><use href="#i-mic"/></svg></span><div><b>Podcast guest spots</b><br><span class="small">pitched &amp; booked</span></div></div>
-        <a class="btn btn--ghost" href="join.html">Join Our Network <svg class="icon"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--ghost" href="join">Join Our Network <svg class="icon"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -250,7 +250,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 class="display h-lg" id="workTitle">Selected work</h2>
-        <a class="btn btn--ghost" href="work.html">See All Work <svg class="icon"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--ghost" href="work">See All Work <svg class="icon"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="work-grid" id="workGrid" data-limit="3"></div>
     </div>
@@ -292,19 +292,19 @@
     <h2 class="display h-lg" id="closeTitle">What are you working on?</h2>
     <p class="lede">Tell us about your business, your audience and what you'd like to achieve. Pick a starting point or just write to us.</p>
     <div class="goal-chips">
-      <a class="pill" href="start.html?goal=more-enquiries">Get more enquiries</a>
-      <a class="pill" href="start.html?goal=grow-with-reels">Grow with reels</a>
-      <a class="pill" href="start.html?goal=find-creators">Find creators</a>
-      <a class="pill" href="start.html?goal=launch-a-product">Launch a product</a>
-      <a class="pill" href="start.html?goal=rank-on-search">Show up on Google &amp; AI search</a>
+      <a class="pill" href="start?goal=more-enquiries">Get more enquiries</a>
+      <a class="pill" href="start?goal=grow-with-reels">Grow with reels</a>
+      <a class="pill" href="start?goal=find-creators">Find creators</a>
+      <a class="pill" href="start?goal=launch-a-product">Launch a product</a>
+      <a class="pill" href="start?goal=rank-on-search">Show up on Google &amp; AI search</a>
     </div>
-    <a class="btn btn--ink" href="start.html">Share Your Brief <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+    <a class="btn btn--ink" href="start">Share Your Brief <span class="btn__dot"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
   </section>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
 <script src="assets/js/intro.js?v=36"></script>
 <script src="assets/js/content.js?v=40"></script>
 <script src="assets/js/world-dots.js?v=34"></script>

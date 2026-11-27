@@ -18,19 +18,24 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-  # one address per page (Search Console "duplicate" / "not found" fixes)
-  # /index.html -> /   (THE_REQUEST so DirectoryIndex's internal lookup doesn't loop)
-  RewriteCond %{THE_REQUEST} \s/index\.html[\s?]
-  RewriteRule ^index\.html$ / [L,R=301]
-  # /services or /services/ -> /services.html, /services.html/ -> /services.html (only for real pages)
+  # ---- clean addresses: /creators serves creators.html, and every other spelling 301s to it
+  # (THE_REQUEST is what the visitor asked for, so the internal rewrite below can't loop)
+  # /index.html, /index -> /
+  RewriteCond %{THE_REQUEST} \s/index(\.html)?[\s?]
+  RewriteRule ^index(\.html)?$ / [L,R=301]
+  # /creators.html -> /creators   (the query string, e.g. ?service=..., is kept)
+  RewriteCond %{THE_REQUEST} \s/([A-Za-z0-9_-]+)\.html[\s?]
+  RewriteRule ^([A-Za-z0-9_-]+)\.html$ /$1 [L,R=301]
+  # /creators/ and /creators.html/ -> /creators (real pages only)
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-  RewriteRule ^([A-Za-z0-9_-]+)(?:\.html)?/$ /$1.html [L,R=301]
+  RewriteRule ^([A-Za-z0-9_-]+)(?:\.html)?/$ /$1 [L,R=301]
+  # /creators -> creators.html, served without changing the address
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-  RewriteRule ^([A-Za-z0-9_-]+)$ /$1.html [L,R=301]
+  RewriteRule ^([A-Za-z0-9_-]+)$ /$1.html [L]
 
   # ---- old site addresses -> new pages (301). Add one line per old page, e.g.:
-  # RewriteRule ^contact-us/?$ /start.html [L,R=301]
-  # RewriteRule ^services/gst-registration/?$ /services.html [L,R=301]
+  # RewriteRule ^contact-us/?$ /start [L,R=301]
+  # RewriteRule ^services/gst-registration/?$ /services [L,R=301]
 
   # ---- allowlist: anything not listed here is answered with 404
   RewriteCond %{REQUEST_URI} !^/$
@@ -46,16 +51,30 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Frame-Options "DENY"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
-  # raise to max-age=31536000 once HTTPS has worked for a week
-  Header always set Strict-Transport-Security "max-age=86400" "expr=%{HTTPS} == 'on'"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+
+  # Content Security Policy: the browser only runs scripts from this site, the three CDNs
+  # (each script is also pinned with an integrity hash in the HTML) and the two inline
+  # scripts in index.html, matched by their hash. If you edit either inline script, its
+  # hash changes: recompute it (see README, "Security") or the browser will block it.
+  # A new outside service (e.g. a form endpoint) must be added to connect-src.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-LgVEZyaMsv1LlMLiwYv0hFahMO85mvsuoDpwWbuqx40=' 'sha256-NVHNqcy04k406kcnxkbxSRfjQ7NKdTL8oEMW+aOdCBw=' https://cdnjs.cloudflare.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co; media-src 'self' https://*.supabase.co; connect-src 'self' https://*.supabase.co; frame-src https://www.instagram.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
   # pages: always check for a fresh copy; scripts/styles carry ?v= so they can be cached
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  # the review page: never stored by the browser or a proxy, never indexed
+  <Files "admin.html">
+    Header set Cache-Control "no-store"
+    Header set X-Robots-Tag "noindex, nofollow"
+  </Files>
   <FilesMatch "\.(css|js)$">
     Header set Cache-Control "public, max-age=604800"
   </FilesMatch>

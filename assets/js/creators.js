@@ -221,7 +221,7 @@ const startCreators = () => {
     if (!shortlist.length) return;
     $("#trayFaces").innerHTML = shortlist.slice(0, 5).map((h) => face(byHandle[h], "tray-face")).join("");
     $("#trayText").textContent = `${shortlist.length} creator${shortlist.length === 1 ? "" : "s"} shortlisted`;
-    $("#traySend").href = `start.html?service=social-creators&creators=${encodeURIComponent(shortlist.join(","))}`;
+    $("#traySend").href = `start?service=social-creators&creators=${encodeURIComponent(shortlist.join(","))}`;
   };
   $("#trayClear").addEventListener("click", () => { shortlist = []; saveList(); paintTray(); syncShortlistButtons(); });
 
@@ -313,7 +313,7 @@ const startCreators = () => {
         <p class="small">Rates and availability are shared on request for each campaign.</p>
         <div class="cr-drawer__actions">
           ${shortBtn(c, "cr-short--big")}
-          <a class="btn btn--ink" href="start.html?service=social-creators&creators=${encodeURIComponent(c.handle)}">Request ${esc(c.name.split(" ")[0])} <span class="btn__dot">${icon("arrow")}</span></a>
+          <a class="btn btn--ink" href="start?service=social-creators&creators=${encodeURIComponent(c.handle)}">Request ${esc(c.name.split(" ")[0])} <span class="btn__dot">${icon("arrow")}</span></a>
         </div>
       </div>`;
     $("[data-close-drawer]", drawer).addEventListener("click", () => closeModal(drawer, drawerOv));
