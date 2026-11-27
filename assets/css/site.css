@@ -362,6 +362,17 @@ html.intro-on, html.intro-on body { overflow: hidden; }
   .engine__step.is-active { display: grid; opacity: 1; background: rgba(11, 46, 86, 0.75); backdrop-filter: blur(6px); }
   .engine__readout { left: var(--gutter); right: auto; top: 76px; bottom: auto; justify-content: start; display: none; }
 }
+/* short laptop screens: the four steps must fit inside the pinned stage, so only the active step shows its line */
+@media (min-width: 861px) and (max-height: 900px) {
+  .engine__copy { gap: 16px; padding-top: 96px; padding-bottom: 28px; }
+  .engine__copy .display { font-size: clamp(2.1rem, 4.2vw, 3.4rem); }
+  .engine__step { padding: 9px 14px; align-items: center; }
+  .engine__step:not(.is-active) span { display: none; }
+  .engine__step:not(.is-active)::before { grid-row: auto; }
+}
+@media (min-width: 861px) and (max-height: 700px) {
+  .engine__copy .lede { display: none; }
+}
 
 /* ---------- Service rows (reference: benefit rows) ---------- */
 .svc-list { display: grid; gap: 14px; }
