@@ -81,6 +81,7 @@ lib/, scripts/, test/   Three.js visual debugging and regression tests (Parallax
 | `creators.html` | Find a Creator: floating "Discover" hero, filterable directory, profile drawer, shortlist sent to the brief form |
 | `start.html` | Start a Project (brief form). Pre-fills from `?service=…`, `?goal=…` or `?creators=handle1,handle2` |
 | `join.html` | Creator registration: 4 steps, saved to Supabase |
+| `admin.html` | Creator review for the team (login only, not indexed): verify, crop the photo, approve. Approved creators appear on `creators.html` straight away |
 | `privacy.html`, `terms.html` | Drafts that need legal review before production |
 
 ## Editing content: `assets/js/content.js`
@@ -107,7 +108,7 @@ python -I tools/creator_photos.py "path/to/extracted/photos"         # face-crop
 
 `tools/creator_photo_map.json` links each Instagram handle to the uploader name in the Drive file name. Photos are compressed and stripped of location data. Creators without a usable photo show their initials.
 
-> **Not automatic yet (Phase 2):** creators who register on `join.html` and are approved in NocoDB don't appear in the directory automatically. Until Phase 2 (a GitHub Action that publishes approved creators) is built, a developer adds them.
+> **Website registrations publish themselves:** creators who register on `join.html` are reviewed in `admin.html`. **Approve & publish** puts them on `creators.html` within seconds (`assets/js/creators-live.js` reads them from Supabase; if Supabase is down the page shows the static list). A handle in both lists shows the database version. Setup: `docs/ONBOARDING.md`.
 
 > **Consent:** the 27 creators listed came from the old Google Form, whose consent didn't clearly cover public listing. Get each one's OK, or ask them to re-register on `join.html`, before production.
 
@@ -135,6 +136,7 @@ creator ─► join.html ─► Supabase (Postgres + private photo storage) ◄�
 | `20261119000000_form_parity.sql` | Gender, content style, worked-with-brands, YouTube screenshots, "Other" niche | ✅ (columns only) |
 | `20261119100000_hardening.sql` | Abuse protection (see above) | ✅ |
 | `20261123000000_require_dob_rates.sql` | Website registrations must include a date of birth and at least one rate (the team can still add creators without them) | ⏳ run it |
+| `20261127000000_publish_creators.sql` | Phase 2: reviewer logins (`admins`), the `admin_*` functions `admin.html` uses, the public `creator-photos` bucket, and `public_creators()` that `creators.html` reads | ⏳ run it, then add reviewers |
 
 > ⚠️ Don't re-run an **older** file after a newer one. `form_parity.sql` contains an older version of the registration function and would undo the hardening. To change the function, write a **new** migration file with a later date.
 
@@ -184,4 +186,4 @@ Full setup, NocoDB connection and the daily review flow: [docs/ONBOARDING.md](do
 - [ ] Creators' consent for public listing
 - [ ] Legal review of `privacy.html` and `terms.html`, which must mention the creator form's data
 - [ ] Old rightteam.in addresses in `deploy/redirects.txt`
-- [ ] Phase 2: approved creators published to the directory automatically
+- [x] Phase 2: approved creators published to the directory automatically (`admin.html`; run the migration and add reviewers)

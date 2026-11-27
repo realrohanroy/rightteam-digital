@@ -1,6 +1,7 @@
 /* creators.html — "Discover" rows intro, hero, faceted directory, profile drawer, shortlist.
    Data: window.RT.creators from assets/js/creators-data.js (generated from the
-   registration form by tools/creators_from_form.py — public fields only).
+   Google Form by tools/creators_from_form.py — public fields only), plus the creators
+   approved in admin.html, added by creators-live.js.
 
    What a brand sees, and why (creator-marketing research: brands shortlist on
    audience fit first — niche, language, location, size — then credibility —
@@ -12,7 +13,7 @@
    facet (niche chips), one "More filters" sheet with per-option counts and a
    live "Show N" button, removable applied-filter pills, URL-synced state,
    "Show more" (not infinite scroll) and a useful empty state. */
-(() => {
+const startCreators = () => {
   const RT = window.RT || {};
   const ALL = (RT.creators || []).map((c, i) => ({
     ...c,
@@ -107,7 +108,8 @@
   // creators with a profile photo always come first; the chosen sort applies within each group
   // pinned to the top row in the default view (sort by reach)
   const PINNED = ["shreya_vjvargiya", "chinmaychaudhariiii"];
-  const pin = (c) => { const i = PINNED.indexOf(c.handle); return i < 0 ? 99 : i; };
+  // ("featured" is ticked in admin.html and comes first)
+  const pin = (c) => { if (c.featured) return -1; const i = PINNED.indexOf(c.handle); return i < 0 ? 99 : i; };
   const results = () => ALL.filter((c) => matches(c)).sort((a, b) => (!!b.photo - !!a.photo)
     || ((state.sort || "reach") === "reach" ? pin(a) - pin(b) : 0) || (SORTS[state.sort] || SORTS.reach)(a, b));
   const countFor = (k, v) => ALL.filter((c) => matches(c, k) && inFacet(c, k, v)).length;
@@ -452,4 +454,6 @@
   render(false);
   paintTray();
   runIntro().then((fromIntro) => playHero(fromIntro));
-})();
+};
+// creators-live.js adds the creators approved in admin.html first (it gives up after 2.5 s)
+((window.RT && window.RT.creatorsReady) || Promise.resolve()).then(startCreators, startCreators);

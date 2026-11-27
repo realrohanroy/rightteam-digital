@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creator review — Right Team Digital</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f8f5">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="assets/img/rt-logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css?v=1">
+</head>
+<body>
+<header class="ad-top">
+  <a class="ad-brand" href="index.html"><img src="assets/img/rt-logo.svg" alt="" width="30" height="30"><span>Creator review</span></a>
+  <div class="ad-who" id="who" hidden><span id="whoEmail"></span><button class="ad-btn ad-btn--ghost" id="signOut" type="button">Sign out</button></div>
+</header>
+
+<main id="app">
+  <!-- signed out -->
+  <section class="ad-login" id="login" hidden>
+    <form class="ad-card" id="loginForm" novalidate>
+      <h1>Sign in to review creators</h1>
+      <p class="ad-muted">For the Right Team review team only. Ask the admin for an account.</p>
+      <label>Email<input name="email" type="email" autocomplete="username" required></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="ad-error" id="loginError" role="alert"></p>
+      <button class="ad-btn ad-btn--primary" type="submit">Sign in</button>
+    </form>
+  </section>
+
+  <!-- signed in -->
+  <section class="ad-shell" id="shell" hidden>
+    <nav class="ad-tabs" id="tabs" aria-label="Creator status"></nav>
+    <div class="ad-panes">
+      <aside class="ad-list" id="list" aria-label="Creators"></aside>
+      <article class="ad-detail" id="detail" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <p class="ad-config" id="noConfig" hidden>Supabase isn't connected: <code>onboarding.supabaseUrl</code> and <code>supabaseAnonKey</code> in <code>assets/js/content.js</code> are empty.</p>
+</main>
+
+<div class="ad-toast" id="toast" role="status" hidden></div>
+
+<script src="assets/js/content.js?v=40"></script>
+<script src="assets/js/admin.js?v=1"></script>
+</body>
+</html>
