@@ -132,8 +132,8 @@
   function renderTabs() {
     $("#tabs").innerHTML = TABS.map((t) => {
       const n = all.filter((c) => inTab(c, t.id)).length;
-      return `<button type="button" class="ad-tab" data-tab="${t.id}" aria-pressed="${t.id === tab}">${esc(t.label)}<span class="ad-count">${n}</span></button>`;
-    }).join("") + `<button type="button" class="ad-btn ad-btn--ghost ad-refresh" id="refresh">Refresh</button>`;
+      return `<button type="button" class="rv-tab" data-tab="${t.id}" aria-pressed="${t.id === tab}">${esc(t.label)}<span class="rv-count">${n}</span></button>`;
+    }).join("") + `<button type="button" class="rv-btn rv-btn--ghost rv-refresh" id="refresh">Refresh</button>`;
   }
   $("#tabs").addEventListener("click", (e) => {
     if (e.target.closest("#refresh")) { load(current && current.id).then(() => toast("Up to date")).catch((err) => toast(err.message, true)); return; }
@@ -146,33 +146,33 @@
   const thumb = (c, cls) => {
     const src = c.avatar_url ? publicPhoto(c.avatar_url) : signed.get(c.photo_path);
     const ini = (c.name || "?").split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
-    return src ? `<img class="${cls}" src="${esc(src)}" alt="" loading="lazy">` : `<span class="${cls} ad-mono">${esc(ini)}</span>`;
+    return src ? `<img class="${cls}" src="${esc(src)}" alt="" loading="lazy">` : `<span class="${cls} rv-mono">${esc(ini)}</span>`;
   };
   function renderList() {
     const rows = visible();
     $("#list").innerHTML = rows.length ? rows.map((c) => `
-      <button type="button" class="ad-row" data-id="${c.id}" aria-current="${current && current.id === c.id}">
-        ${thumb(c, "ad-row__img")}
-        <span class="ad-row__txt"><b>${esc(c.name)}</b><small>@${esc(c.handle)} · ${esc(c.city)}</small></span>
-        <span class="ad-row__n">${fmt(Math.max(c.ig_followers || 0, c.yt_subscribers || 0))}</span>
-      </button>`).join("") : `<p class="ad-muted ad-pad">Nobody here.</p>`;
+      <button type="button" class="rv-row" data-id="${c.id}" aria-current="${current && current.id === c.id}">
+        ${thumb(c, "rv-row__img")}
+        <span class="rv-row__txt"><b>${esc(c.name)}</b><small>@${esc(c.handle)} · ${esc(c.city)}</small></span>
+        <span class="rv-row__n">${fmt(Math.max(c.ig_followers || 0, c.yt_subscribers || 0))}</span>
+      </button>`).join("") : `<p class="rv-muted rv-pad">Nobody here.</p>`;
   }
   $("#list").addEventListener("click", (e) => { const b = e.target.closest("[data-id]"); if (b) open(b.dataset.id); });
 
   function renderEmpty() {
     current = null;
-    $("#detail").innerHTML = `<div class="ad-empty"><h2>${tab === "review" ? "All caught up." : "Nothing in this list."}</h2><p class="ad-muted">${tab === "review" ? "New registrations from join.html show up here." : ""}</p></div>`;
+    $("#detail").innerHTML = `<div class="rv-empty"><h2>${tab === "review" ? "All caught up." : "Nothing in this list."}</h2><p class="rv-muted">${tab === "review" ? "New registrations from join.html show up here." : ""}</p></div>`;
   }
 
   const age = (dob) => { if (!dob) return ""; const d = new Date(dob), n = new Date(); let a = n.getFullYear() - d.getFullYear(); if (n < new Date(n.getFullYear(), d.getMonth(), d.getDate())) a--; return a; };
   const list = (a) => (a && a.length ? a.map(esc).join(", ") : "—");
-  const fact = (k, v) => `<div class="ad-fact"><dt>${esc(k)}</dt><dd>${v || "—"}</dd></div>`;
+  const fact = (k, v) => `<div class="rv-fact"><dt>${esc(k)}</dt><dd>${v || "—"}</dd></div>`;
   const RATE = { reel: "Reel", story: "Story", post: "Post", collab: "Collab post", yt_short: "YouTube Short", yt_long: "YouTube video" };
 
   async function open(id) {
     const c = all.find((x) => x.id === id); if (!c) return;
     current = c;
-    $$(".ad-row").forEach((r) => r.setAttribute("aria-current", r.dataset.id === id));
+    $$(".rv-row").forEach((r) => r.setAttribute("aria-current", r.dataset.id === id));
     const p = c.private || {};
     const shots = [...(p.insights_paths || []), ...(p.yt_insights_paths || [])];
     const [orig] = await sign([c.photo_path]).catch(() => [""]);
@@ -184,53 +184,53 @@
     const live = c.status === "live" || c.status === "approved";
 
     $("#detail").innerHTML = `
-      <div class="ad-head">
-        ${thumb(c, "ad-head__img")}
+      <div class="rv-head">
+        ${thumb(c, "rv-head__img")}
         <div>
-          <span class="ad-status ad-status--${esc(c.status)}">${esc(STATUS[c.status] || c.status)}</span>
+          <span class="rv-status rv-status--${esc(c.status)}">${esc(STATUS[c.status] || c.status)}</span>
           <h1>${esc(c.name)}</h1>
-          <p class="ad-muted">@${esc(c.handle)} · ${esc(c.city)}${c.state ? ", " + esc(c.state) : ""} · registered ${esc(day(c.submitted_at))}${c.source === "google_form" ? " (Google Form)" : ""}</p>
+          <p class="rv-muted">@${esc(c.handle)} · ${esc(c.city)}${c.state ? ", " + esc(c.state) : ""} · registered ${esc(day(c.submitted_at))}${c.source === "google_form" ? " (Google Form)" : ""}</p>
         </div>
       </div>
 
-      <section class="ad-box ad-verify">
+      <section class="rv-box rv-verify">
         <h2>1. Check they're real</h2>
-        <p class="ad-muted">Follower counts are typed in by the creator. Open the profile and compare.</p>
-        <div class="ad-links">
-          <a class="ad-btn" href="https://www.instagram.com/${encodeURIComponent(c.handle)}/" target="_blank" rel="noopener noreferrer">Open Instagram @${esc(c.handle)}</a>
-          ${safeUrl(c.yt_link) ? `<a class="ad-btn" href="${esc(c.yt_link)}" target="_blank" rel="noopener noreferrer">Open YouTube</a>` : ""}
-          ${safeUrl(c.portfolio_link) ? `<a class="ad-btn" href="${esc(c.portfolio_link)}" target="_blank" rel="noopener noreferrer">Portfolio</a>` : ""}
-          ${safeUrl(c.other_link) ? `<a class="ad-btn" href="${esc(c.other_link)}" target="_blank" rel="noopener noreferrer">Other link</a>` : ""}
+        <p class="rv-muted">Follower counts are typed in by the creator. Open the profile and compare.</p>
+        <div class="rv-links">
+          <a class="rv-btn" href="https://www.instagram.com/${encodeURIComponent(c.handle)}/" target="_blank" rel="noopener noreferrer">Open Instagram @${esc(c.handle)}</a>
+          ${safeUrl(c.yt_link) ? `<a class="rv-btn" href="${esc(c.yt_link)}" target="_blank" rel="noopener noreferrer">Open YouTube</a>` : ""}
+          ${safeUrl(c.portfolio_link) ? `<a class="rv-btn" href="${esc(c.portfolio_link)}" target="_blank" rel="noopener noreferrer">Portfolio</a>` : ""}
+          ${safeUrl(c.other_link) ? `<a class="rv-btn" href="${esc(c.other_link)}" target="_blank" rel="noopener noreferrer">Other link</a>` : ""}
         </div>
-        <dl class="ad-facts">
+        <dl class="rv-facts">
           ${fact("Instagram followers (they said)", fmt(c.ig_followers))}
           ${fact("YouTube subscribers (they said)", c.yt_subscribers ? fmt(c.yt_subscribers) : "")}
           ${fact("Average views", esc(c.avg_views))}
           ${fact("Posts", esc(c.posts_consistently))}
           ${fact("Best posts", (c.best_posts || []).filter(safeUrl).map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">Post ${i + 1}</a>`).join(" · "))}
         </dl>
-        ${shotUrls.some(Boolean) ? `<h3>Insight screenshots</h3><div class="ad-shots">${shotUrls.filter(Boolean).map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer"><img src="${esc(u)}" alt="Insights screenshot" loading="lazy"></a>`).join("")}</div>` : ""}
+        ${shotUrls.some(Boolean) ? `<h3>Insight screenshots</h3><div class="rv-shots">${shotUrls.filter(Boolean).map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer"><img src="${esc(u)}" alt="Insights screenshot" loading="lazy"></a>`).join("")}</div>` : ""}
       </section>
 
-      <section class="ad-box">
+      <section class="rv-box">
         <h2>2. Photo for the site</h2>
         ${orig ? `
-          <div class="ad-crop">
-            <div class="ad-crop__frame" id="cropFrame" title="Drag to move"><img id="cropImg" alt="Uploaded photo" draggable="false"></div>
-            <div class="ad-crop__side">
+          <div class="rv-crop">
+            <div class="rv-crop__frame" id="cropFrame" title="Drag to move"><img id="cropImg" alt="Uploaded photo" draggable="false"></div>
+            <div class="rv-crop__side">
               <label>Zoom<input type="range" id="cropZoom" min="1" max="3" step="0.01" value="1"></label>
-              <p class="ad-muted">Drag the photo so the face sits in the upper half. The round version is cut from the middle.</p>
-              <button type="button" class="ad-btn ad-btn--dark" id="cropSave">${c.photo_url ? "Replace site photo" : "Use this crop"}</button>
-              ${c.photo_url ? `<p class="ad-muted">Now on the site:</p><div class="ad-now"><img src="${esc(publicPhoto(c.photo_url))}" alt=""><img class="round" src="${esc(publicPhoto(c.avatar_url))}" alt=""></div>` : `<p class="ad-warn">No site photo yet. Until you save one, the card shows their initials.</p>`}
-              <a class="ad-small" href="${esc(orig)}" target="_blank" rel="noopener noreferrer">Open the original</a>
+              <p class="rv-muted">Drag the photo so the face sits in the upper half. The round version is cut from the middle.</p>
+              <button type="button" class="rv-btn rv-btn--dark" id="cropSave">${c.photo_url ? "Replace site photo" : "Use this crop"}</button>
+              ${c.photo_url ? `<p class="rv-muted">Now on the site:</p><div class="rv-now"><img src="${esc(publicPhoto(c.photo_url))}" alt=""><img class="round" src="${esc(publicPhoto(c.avatar_url))}" alt=""></div>` : `<p class="rv-warn">No site photo yet. Until you save one, the card shows their initials.</p>`}
+              <a class="rv-small" href="${esc(orig)}" target="_blank" rel="noopener noreferrer">Open the original</a>
             </div>
-          </div>` : `<p class="ad-warn">No photo was uploaded.</p>`}
+          </div>` : `<p class="rv-warn">No photo was uploaded.</p>`}
       </section>
 
-      <section class="ad-box">
+      <section class="rv-box">
         <h2>3. Profile shown to brands</h2>
-        <p class="ad-muted">Fix spelling or numbers before publishing. Changes save to the live card straight away.</p>
-        <form class="ad-form" id="profileForm">
+        <p class="rv-muted">Fix spelling or numbers before publishing. Changes save to the live card straight away.</p>
+        <form class="rv-form" id="profileForm">
           <label>Name<input name="name" value="${esc(c.name)}" maxlength="80" required></label>
           <label>City<input name="city" value="${esc(c.city)}" maxlength="60" required></label>
           <label>State<input name="state" value="${esc(c.state || "")}" maxlength="60"></label>
@@ -240,10 +240,10 @@
           <label>Languages (comma separated)<input name="langs" value="${esc((c.langs || []).join(", "))}"></label>
           <label class="wide">About<textarea name="bio" rows="3" maxlength="600">${esc(c.bio || "")}</textarea></label>
           <label class="wide">Brands worked with<input name="brands" value="${esc(c.brands || "")}" maxlength="300"></label>
-          <label class="ad-check wide"><input type="checkbox" name="featured" ${c.featured ? "checked" : ""}> Feature at the top of Find a Creator</label>
-          <div class="wide"><button class="ad-btn" type="submit">Save profile</button></div>
+          <label class="rv-check wide"><input type="checkbox" name="featured" ${c.featured ? "checked" : ""}> Feature at the top of Find a Creator</label>
+          <div class="wide"><button class="rv-btn" type="submit">Save profile</button></div>
         </form>
-        <dl class="ad-facts">
+        <dl class="rv-facts">
           ${fact("Platforms", list(c.platforms))}
           ${fact("Makes", list(c.roles))}
           ${fact("Open to", list(c.collabs))}
@@ -255,13 +255,13 @@
         </dl>
       </section>
 
-      <section class="ad-box ad-private">
+      <section class="rv-box rv-private">
         <h2>Private: never shown on the site</h2>
-        <dl class="ad-facts">
+        <dl class="rv-facts">
           ${fact("Email", p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : "")}
           ${fact("Mobile", esc(p.phone))}
           ${fact("WhatsApp", waNum ? `<a href="https://wa.me/${esc(waNum)}" target="_blank" rel="noopener noreferrer">${esc(p.whatsapp || p.phone)}</a>` : "")}
-          ${fact("Age", a !== "" ? `${a}${a < 18 ? ' <b class="ad-flag">Under 18: guardian consent needed</b>' : ""}` : "")}
+          ${fact("Age", a !== "" ? `${a}${a < 18 ? ' <b class="rv-flag">Under 18: guardian consent needed</b>' : ""}` : "")}
           ${fact("Gender", esc(p.gender))}
           ${fact("Rates (₹)", Object.entries(p.rates || {}).map(([k, v]) => `${esc(RATE[k] || k)}: ${esc(v)}`).join("<br>"))}
           ${p.anything_else ? fact("Their note", esc(p.anything_else)) : ""}
@@ -269,19 +269,19 @@
         </dl>
       </section>
 
-      <section class="ad-box">
+      <section class="rv-box">
         <h2>Team notes</h2>
-        <pre class="ad-notes">${esc(c.ops_notes || "No notes yet.")}</pre>
+        <pre class="rv-notes">${esc(c.ops_notes || "No notes yet.")}</pre>
       </section>
 
-      <div class="ad-actions" id="actions">
-        <label class="ad-note">Note for the team (saved with the decision)<input id="note" maxlength="500" placeholder="e.g. Checked IG, numbers match"></label>
-        <div class="ad-actions__btns">
+      <div class="rv-actions" id="actions">
+        <label class="rv-note">Note for the team (saved with the decision)<input id="note" maxlength="500" placeholder="e.g. Checked IG, numbers match"></label>
+        <div class="rv-actions__btns">
           ${live
-            ? `<button type="button" class="ad-btn" data-status="paused">Take off the site</button>`
-            : `<button type="button" class="ad-btn ad-btn--primary" data-status="live">Approve &amp; publish</button>
-               ${c.status !== "needs_info" ? `<button type="button" class="ad-btn" data-status="needs_info">Ask for more info</button>` : `<button type="button" class="ad-btn" data-status="in_review">Back to review</button>`}
-               ${c.status !== "rejected" ? `<button type="button" class="ad-btn ad-btn--danger" data-status="rejected">Reject</button>` : ""}`}
+            ? `<button type="button" class="rv-btn" data-status="paused">Take off the site</button>`
+            : `<button type="button" class="rv-btn rv-btn--primary" data-status="live">Approve &amp; publish</button>
+               ${c.status !== "needs_info" ? `<button type="button" class="rv-btn" data-status="needs_info">Ask for more info</button>` : `<button type="button" class="rv-btn" data-status="in_review">Back to review</button>`}
+               ${c.status !== "rejected" ? `<button type="button" class="rv-btn rv-btn--danger" data-status="rejected">Reject</button>` : ""}`}
         </div>
       </div>`;
 

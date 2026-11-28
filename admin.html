@@ -12,42 +12,42 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/admin.css?v=2">
+  <link rel="stylesheet" href="assets/css/admin.css?v=3">
 </head>
 <body>
-<header class="ad-top">
-  <a class="ad-brand" href="/"><img src="assets/img/rt-logo.svg" alt="" width="30" height="30"><span>Creator review</span></a>
-  <div class="ad-who" id="who" hidden><span id="whoEmail"></span><button class="ad-btn ad-btn--ghost" id="signOut" type="button">Sign out</button></div>
+<header class="rv-top">
+  <a class="rv-brand" href="/"><img src="assets/img/rt-logo.svg" alt="" width="30" height="30"><span>Creator review</span></a>
+  <div class="rv-who" id="who" hidden><span id="whoEmail"></span><button class="rv-btn rv-btn--ghost" id="signOut" type="button">Sign out</button></div>
 </header>
 
 <main id="app">
   <!-- signed out -->
-  <section class="ad-login" id="login" hidden>
-    <form class="ad-card" id="loginForm" novalidate>
+  <section class="rv-login" id="login" hidden>
+    <form class="rv-card" id="loginForm" novalidate>
       <h1>Sign in to review creators</h1>
-      <p class="ad-muted">For the Right Team review team only. Ask the admin for an account.</p>
+      <p class="rv-muted">For the Right Team review team only. Ask the admin for an account.</p>
       <label>Email<input name="email" type="email" autocomplete="username" required></label>
       <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
-      <p class="ad-error" id="loginError" role="alert"></p>
-      <button class="ad-btn ad-btn--primary" type="submit">Sign in</button>
+      <p class="rv-error" id="loginError" role="alert"></p>
+      <button class="rv-btn rv-btn--primary" type="submit">Sign in</button>
     </form>
   </section>
 
   <!-- signed in -->
-  <section class="ad-shell" id="shell" hidden>
-    <nav class="ad-tabs" id="tabs" aria-label="Creator status"></nav>
-    <div class="ad-panes">
-      <aside class="ad-list" id="list" aria-label="Creators"></aside>
-      <article class="ad-detail" id="detail" aria-live="polite"></article>
+  <section class="rv-shell" id="shell" hidden>
+    <nav class="rv-tabs" id="tabs" aria-label="Creator status"></nav>
+    <div class="rv-panes">
+      <aside class="rv-list" id="list" aria-label="Creators"></aside>
+      <article class="rv-detail" id="detail" aria-live="polite"></article>
     </div>
   </section>
 
-  <p class="ad-config" id="noConfig" hidden>Supabase isn't connected: <code>onboarding.supabaseUrl</code> and <code>supabaseAnonKey</code> in <code>assets/js/content.js</code> are empty.</p>
+  <p class="rv-config" id="noConfig" hidden>Supabase isn't connected: <code>onboarding.supabaseUrl</code> and <code>supabaseAnonKey</code> in <code>assets/js/content.js</code> are empty.</p>
 </main>
 
-<div class="ad-toast" id="toast" role="status" hidden></div>
+<div class="rv-toast" id="toast" role="status" hidden></div>
 
 <script src="assets/js/content.js?v=40"></script>
-<script src="assets/js/admin.js?v=1"></script>
+<script src="assets/js/admin.js?v=2"></script>
 </body>
 </html>
