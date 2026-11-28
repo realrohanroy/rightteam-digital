@@ -1,5 +1,4 @@
-/* "Our international presence" — a Three.js dotted world map on a gently curved
-   surface. As the section scrolls through, arcs launch from Ahmedabad one after
+/* "Our international presence" — a Three.js dotted world map, laid flat. As the section scrolls through, arcs launch from Ahmedabad one after
    another, a glowing head runs along each, and the destination pulses and gets
    its label. Mapping must match tools/world_dots.mjs (KLON, KLAT, LON0). */
 import * as THREE from "three";
@@ -12,12 +11,11 @@ if (sec && stage && P && DOTS) init();
 
 function init() {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const KLON = 0.47, KLAT = 0.5, LON0 = 15, R = 1, DEG = Math.PI / 180;
+  const KLON = 0.47, KLAT = 0.58, LON0 = 15, DEG = Math.PI / 180;
   const NAVY = 0x0f2140, LIME = 0xc6ec4f;
-  const toVec = (lon, lat, r = R) => {
+  const toVec = (lon, lat) => {
     let L = lon; if (L - LON0 > 180) L -= 360; if (L - LON0 < -180) L += 360;
-    const th = (L - LON0) * KLON * DEG, ph = lat * KLAT * DEG;
-    return new THREE.Vector3(r * Math.cos(ph) * Math.sin(th), r * Math.sin(ph), r * Math.cos(ph) * Math.cos(th));
+    return new THREE.Vector3((L - LON0) * KLON * DEG, lat * KLAT * DEG, 0);
   };
 
   /* accessible list (the canvas itself is decorative) */
@@ -36,17 +34,13 @@ function init() {
   const camera = new THREE.PerspectiveCamera(30, 2, 0.1, 50);
   const world = new THREE.Group(); world.name = "world"; scene.add(world);
 
-  /* land dots: one instanced square per dot, laid flat on the surface */
+  /* land dots: one instanced square per dot on the flat map */
   const n = DOTS.length / 2;
-  const dotGeo = new THREE.PlaneGeometry(0.0078, 0.0078);
+  const dotGeo = new THREE.PlaneGeometry(0.009, 0.009);
   const dotMat = new THREE.MeshBasicMaterial({ color: NAVY, transparent: true, opacity: 0.34, depthWrite: false, side: THREE.DoubleSide });
   const dots = new THREE.InstancedMesh(dotGeo, dotMat, n); dots.name = "land-dots";
-  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), Z = new THREE.Vector3(0, 0, 1), one = new THREE.Vector3(1, 1, 1);
-  for (let i = 0; i < n; i++) {
-    const v = toVec(DOTS[i * 2], DOTS[i * 2 + 1]);
-    q.setFromUnitVectors(Z, v.clone().normalize());
-    dots.setMatrixAt(i, m.compose(v, q, one));
-  }
+  const m = new THREE.Matrix4();
+  for (let i = 0; i < n; i++) dots.setMatrixAt(i, m.makeTranslation(toVec(DOTS[i * 2], DOTS[i * 2 + 1])));
   world.add(dots);
 
   /* markers */
@@ -54,7 +48,7 @@ function init() {
   const coreGeo = new THREE.CircleGeometry(0.011, 24);
   const marker = (pos, color, coreColor) => {
     const g = new THREE.Group();
-    g.position.copy(pos); g.quaternion.setFromUnitVectors(Z, pos.clone().normalize());
+    g.position.copy(pos);
     const core = new THREE.Mesh(coreGeo, new THREE.MeshBasicMaterial({ color: coreColor, transparent: true }));
     const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.9, depthWrite: false }));
     core.position.z = ring.position.z = 0.002;
@@ -71,7 +65,9 @@ function init() {
   const arcs = P.places.map((p, i) => {
     const b = toVec(p.lon, p.lat);
     const len = originPos.distanceTo(b);
-    const mid = originPos.clone().add(b).multiplyScalar(0.5).normalize().multiplyScalar(R + 0.12 + len * 0.42);
+    // bow each arc up off the map and slightly toward the viewer
+    const mid = originPos.clone().add(b).multiplyScalar(0.5);
+    mid.y += 0.04 + len * 0.22; mid.z = 0.05 + len * 0.18;
     const curve = new THREE.QuadraticBezierCurve3(originPos.clone(), mid, b);
     const geo = new THREE.TubeGeometry(curve, SEG, 0.0042, RAD, false);
     const total = geo.index.count;
@@ -104,16 +100,16 @@ function init() {
     el.style.transform = `translate(${x}px, ${((1 - tmp.y) / 2) * h}px)`;
   };
 
-  /* framing: fit the whole curved map in the stage at any aspect */
+  /* framing: fit the whole flat map in the stage at any aspect */
   const resize = () => {
     const w = stage.clientWidth, h = stage.clientHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     const halfV = Math.tan((camera.fov * DEG) / 2);
-    const needH = 1.22, needW = 2.05; // map extent incl. arc headroom
+    const needH = 1.38, needW = 3.0, cy = 0.09; // map extent incl. arc headroom
     const d = Math.max(needH / (2 * halfV), needW / (2 * halfV * camera.aspect));
-    camera.position.set(0, 0.32, 0.72 + d);
-    camera.lookAt(0, 0.1, 0.55);
+    camera.position.set(0, cy, d);
+    camera.lookAt(0, cy, 0);
     camera.updateProjectionMatrix();
   };
   resize();
@@ -140,8 +136,8 @@ function init() {
     const time = clock.getElapsedTime();
     prog += (target - prog) * 0.12;
     tilt.x += (tilt.tx - tilt.x) * 0.06; tilt.y += (tilt.ty - tilt.y) * 0.06;
-    world.rotation.y = tilt.x + (reduce ? 0 : (prog - 0.5) * 0.1);
-    world.rotation.x = tilt.y;
+    world.rotation.y = tilt.x * 0.5 + (reduce ? 0 : (prog - 0.5) * 0.04);
+    world.rotation.x = tilt.y * 0.5;
     world.updateMatrixWorld();
     // origin pulse
     const pulse = reduce ? 0.5 : (time * 0.8) % 1;
